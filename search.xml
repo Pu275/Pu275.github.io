@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Rmarkdown里面的表格</title>
+    <url>/posts/1527658047/</url>
+    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
+]]></content>
+  </entry>
+  <entry>
     <title>139. 单词拆分</title>
     <url>/posts/1712133297/</url>
     <content><![CDATA[<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
@@ -8,12 +14,6 @@
 <p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
 <span id="more"></span>
 <p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Rmarkdown里面的表格</title>
-    <url>/posts/1527658047/</url>
-    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
 ]]></content>
   </entry>
   <entry>
@@ -83,6 +83,68 @@
       <categories>
         <category>排序</category>
       </categories>
+  </entry>
+  <entry>
+    <title>剑指 Offer 59 - I. 滑动窗口的最大值</title>
+    <url>/posts/2941832896/</url>
+    <content><![CDATA[<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<p>链接：<a href="https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/">https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/</a></p>
+<p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。</p>
+<span id="more"></span>
+<p><strong>示例:</strong></p>
+<p><img src="/posts/2941832896/image-20220223002214227.png" alt="image-20220223002214227"></p>
+<p><strong>提示：</strong></p>
+<p>你可以假设 <em>k</em> 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。</p>
+<h2 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h2>
+<h3 id="暴力法"><a class="markdownIt-Anchor" href="#暴力法"></a> 暴力法</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - k + <span class="number">1</span>):</span><br><span class="line">            res.append(<span class="built_in">max</span>(nums[i:i+k]))</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="维护一个队列"><a class="markdownIt-Anchor" href="#维护一个队列"></a> 维护一个队列</h3>
+<p>类似于 <strong>剑指 Offer 30. 包含min函数的栈</strong>，里面维护了一个记录最小值的栈。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/</a></p>
+<p>为什么需要一个队列：</p>
+<ul>
+<li>先进去的元素随着窗口往后先出去，只用来记录一些可能成为最大值的元素，不会比当前窗口更长</li>
+</ul>
+<p>每次滑动一格窗口，更新最大值候补队列，有以下可能：</p>
+<ol>
+<li>
+<p><strong>新元素肯定成为候补：</strong></p>
+<ol>
+<li>新元素大于上个窗口的最大值，直接清空队列并加入新元素（因为新元素之前的所有元素都不可能成为最大值了，新元素肯定比他们活得久）</li>
+<li>新元素小于上个窗口的最大值，他也需要加入队列（因为随着窗口往后移动，它总有一天会变成队首，所以它要作为候补加入）</li>
+</ol>
+<ul>
+<li>换句话说，队首元素一定是队列里最大的（不然新加入的会取而代之），每次移动被加入 result 的一定是队首。</li>
+</ul>
+</li>
+<li>
+<p><strong>上个窗口的首位元素要被滑过：</strong></p>
+<ol>
+<li>上个窗口的首尾元素就是上个窗口的最大值（队首），那么队首要被弹出</li>
+</ol>
+</li>
+<li>
+<p><strong>队列中已有的元素可能被新元素取代：</strong></p>
+<ol>
+<li>新元素可以把队列中从尾部到首部所有小于它的元素取代（因为新元素大于他们且活的更久）</li>
+</ol>
+</li>
+</ol>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        maxQueue = [nums[<span class="number">0</span>]]</span><br><span class="line">        <span class="comment"># 前k个不需要考虑首位弹出的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, k):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; maxQueue[<span class="number">0</span>]: <span class="comment"># 大的新元素直接清空</span></span><br><span class="line">                maxQueue = []</span><br><span class="line">            <span class="keyword">while</span> maxQueue <span class="keyword">and</span> maxQueue[-<span class="number">1</span>] &lt; nums[i]:  </span><br><span class="line">                <span class="comment"># 如果上一步清空就跳过</span></span><br><span class="line">                <span class="comment"># 加入新元素时取代一些旧的</span></span><br><span class="line">                maxQueue.pop()</span><br><span class="line">            maxQueue.append(nums[i])  <span class="comment"># 新元素一定会入队列</span></span><br><span class="line">        res.append(maxQueue[<span class="number">0</span>])  <span class="comment"># 前k个扫描完毕后提交一次最大值</span></span><br><span class="line">        <span class="comment"># 剩下的考虑首位出队列的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k, n):</span><br><span class="line">            <span class="built_in">print</span>(maxQueue)</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; maxQueue[<span class="number">0</span>]: <span class="comment"># 大的新元素直接清空</span></span><br><span class="line">                maxQueue = []</span><br><span class="line">            <span class="keyword">elif</span> nums[i - k] == maxQueue[<span class="number">0</span>]:  <span class="comment"># 首位是最大元需要弹出</span></span><br><span class="line">                maxQueue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">while</span> maxQueue <span class="keyword">and</span> maxQueue[-<span class="number">1</span>] &lt; nums[i]:</span><br><span class="line">                <span class="comment"># 如果上一步清空就跳过</span></span><br><span class="line">                <span class="comment"># 加入新元素时取代一些旧的</span></span><br><span class="line">                maxQueue.pop()</span><br><span class="line">            maxQueue.append(nums[i])  <span class="comment"># 新元素一定会入队列</span></span><br><span class="line">            res.append(maxQueue[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p>相似题目：</p>
+<ul>
+<li>
+<p><strong>剑指 Offer 59 - II. 队列的最大值</strong></p>
+<p><a href="https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/">https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/</a></p>
+</li>
+<li>
+<p><strong>剑指 Offer 30. 包含min函数的栈</strong></p>
+<p><a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/</a></p>
+</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>C++的指针</title>
@@ -166,68 +228,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p><strong>注意：</strong> 字符串变量虽然也是数组，但是可以直接交给 cout ，打印出来整个字符串（而不是首元素地址）</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *names[] = &#123;</span><br><span class="line">                   <span class="string">&quot;Zara Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Hina Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Nuha Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Sara Ali&quot;</span>,</span><br><span class="line">   			   &#125;;</span><br><span class="line">cout &lt;&lt; names[<span class="number">0</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
 <p>vector</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>剑指 Offer 59 - I. 滑动窗口的最大值</title>
-    <url>/posts/2941832896/</url>
-    <content><![CDATA[<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
-<p>链接：<a href="https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/">https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/</a></p>
-<p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。</p>
-<span id="more"></span>
-<p><strong>示例:</strong></p>
-<p><img src="/posts/2941832896/image-20220223002214227.png" alt="image-20220223002214227"></p>
-<p><strong>提示：</strong></p>
-<p>你可以假设 <em>k</em> 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。</p>
-<h2 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h2>
-<h3 id="暴力法"><a class="markdownIt-Anchor" href="#暴力法"></a> 暴力法</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - k + <span class="number">1</span>):</span><br><span class="line">            res.append(<span class="built_in">max</span>(nums[i:i+k]))</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h3 id="维护一个队列"><a class="markdownIt-Anchor" href="#维护一个队列"></a> 维护一个队列</h3>
-<p>类似于 <strong>剑指 Offer 30. 包含min函数的栈</strong>，里面维护了一个记录最小值的栈。</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/</a></p>
-<p>为什么需要一个队列：</p>
-<ul>
-<li>先进去的元素随着窗口往后先出去，只用来记录一些可能成为最大值的元素，不会比当前窗口更长</li>
-</ul>
-<p>每次滑动一格窗口，更新最大值候补队列，有以下可能：</p>
-<ol>
-<li>
-<p><strong>新元素肯定成为候补：</strong></p>
-<ol>
-<li>新元素大于上个窗口的最大值，直接清空队列并加入新元素（因为新元素之前的所有元素都不可能成为最大值了，新元素肯定比他们活得久）</li>
-<li>新元素小于上个窗口的最大值，他也需要加入队列（因为随着窗口往后移动，它总有一天会变成队首，所以它要作为候补加入）</li>
-</ol>
-<ul>
-<li>换句话说，队首元素一定是队列里最大的（不然新加入的会取而代之），每次移动被加入 result 的一定是队首。</li>
-</ul>
-</li>
-<li>
-<p><strong>上个窗口的首位元素要被滑过：</strong></p>
-<ol>
-<li>上个窗口的首尾元素就是上个窗口的最大值（队首），那么队首要被弹出</li>
-</ol>
-</li>
-<li>
-<p><strong>队列中已有的元素可能被新元素取代：</strong></p>
-<ol>
-<li>新元素可以把队列中从尾部到首部所有小于它的元素取代（因为新元素大于他们且活的更久）</li>
-</ol>
-</li>
-</ol>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        maxQueue = [nums[<span class="number">0</span>]]</span><br><span class="line">        <span class="comment"># 前k个不需要考虑首位弹出的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, k):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; maxQueue[<span class="number">0</span>]: <span class="comment"># 大的新元素直接清空</span></span><br><span class="line">                maxQueue = []</span><br><span class="line">            <span class="keyword">while</span> maxQueue <span class="keyword">and</span> maxQueue[-<span class="number">1</span>] &lt; nums[i]:  </span><br><span class="line">                <span class="comment"># 如果上一步清空就跳过</span></span><br><span class="line">                <span class="comment"># 加入新元素时取代一些旧的</span></span><br><span class="line">                maxQueue.pop()</span><br><span class="line">            maxQueue.append(nums[i])  <span class="comment"># 新元素一定会入队列</span></span><br><span class="line">        res.append(maxQueue[<span class="number">0</span>])  <span class="comment"># 前k个扫描完毕后提交一次最大值</span></span><br><span class="line">        <span class="comment"># 剩下的考虑首位出队列的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k, n):</span><br><span class="line">            <span class="built_in">print</span>(maxQueue)</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; maxQueue[<span class="number">0</span>]: <span class="comment"># 大的新元素直接清空</span></span><br><span class="line">                maxQueue = []</span><br><span class="line">            <span class="keyword">elif</span> nums[i - k] == maxQueue[<span class="number">0</span>]:  <span class="comment"># 首位是最大元需要弹出</span></span><br><span class="line">                maxQueue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">while</span> maxQueue <span class="keyword">and</span> maxQueue[-<span class="number">1</span>] &lt; nums[i]:</span><br><span class="line">                <span class="comment"># 如果上一步清空就跳过</span></span><br><span class="line">                <span class="comment"># 加入新元素时取代一些旧的</span></span><br><span class="line">                maxQueue.pop()</span><br><span class="line">            maxQueue.append(nums[i])  <span class="comment"># 新元素一定会入队列</span></span><br><span class="line">            res.append(maxQueue[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
-<p>相似题目：</p>
-<ul>
-<li>
-<p><strong>剑指 Offer 59 - II. 队列的最大值</strong></p>
-<p><a href="https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/">https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/</a></p>
-</li>
-<li>
-<p><strong>剑指 Offer 30. 包含min函数的栈</strong></p>
-<p><a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/</a></p>
-</li>
-</ul>
 ]]></content>
   </entry>
 </search>
