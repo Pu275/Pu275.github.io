@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>139. 单词拆分</title>
+    <url>/posts/1712133297/</url>
+    <content><![CDATA[<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
+<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
+<span id="more"></span>
+<p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Rmarkdown里面的表格</title>
+    <url>/posts/1527658047/</url>
+    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -25,7 +41,7 @@
       </categories>
   </entry>
   <entry>
-    <title>剑指Offer动态规划</title>
+    <title>堆排序</title>
     <url>/posts/2276098981/</url>
     <content><![CDATA[<h2 id="堆排序"><a class="markdownIt-Anchor" href="#堆排序"></a> 堆排序</h2>
 <h3 id="堆是什么"><a class="markdownIt-Anchor" href="#堆是什么"></a> 堆是什么</h3>
@@ -34,16 +50,29 @@
 <li>堆的每个结点都小于（或大于）父结点的值</li>
 </ol>
 <h3 id="堆排序是什么"><a class="markdownIt-Anchor" href="#堆排序是什么"></a> 堆排序是什么</h3>
-<p>堆排序的相对于选择排序的进步就是，下一次取最小（最大）值时能使用上一次的对比信息。</p>
+<ol>
+<li>构建大顶堆（根结点是最大元素的堆）</li>
+<li>交换根结点和最后一个结点，最大元素移到数组末尾固定下来</li>
+<li>继续重复构建前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个元素的大顶堆，直到只剩下根结点没有固定</li>
+</ol>
+<span id="more"></span>
+<h3 id="和选择排序的区别"><a class="markdownIt-Anchor" href="#和选择排序的区别"></a> 和选择排序的区别</h3>
+<p>选择排序的每轮迭代也是从剩下的元素中挑出最小的那个固定下来，堆排序的优点在于，每次迭代会利用到之前的信息，因为建堆完后的二叉树从上到下可以保证大体上是由大到小的，在每次首尾交换之后，重新恢复建堆只需要大约 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 次交换，相比选择排序需要扫描所有元素。</p>
+<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
 <h3 id="建堆"><a class="markdownIt-Anchor" href="#建堆"></a> 建堆</h3>
 <ol>
 <li>
 <p>从最后一个非叶子结点（父结点）开始，把它和它的左右结点（如果有）中最大的放到当前位置上。执行这个过程直到根结点</p>
 <ul>
-<li>如果根结点下标从 0 开始，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2i+2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></li>
-<li>如果根结点下标从 1 开始，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+<li>如果根结点下标从 0 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2i+2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></li>
+<li>如果根结点下标从 1 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
 </ul>
-<p>以上关系表明，</p>
+<p>以上关系表明，获取子结点的父亲的办法是：</p>
+<ul>
+<li>如果根结点下标从 0 开始记，当前结点减 1 整除 2（也就是，下标 1 版本需要减 2 再整除 2）</li>
+<li>如果根结点下标从 1 开始记，当前结点整除 2</li>
+</ul>
+<p>**备注：**数组长度 length：下标从 1 开始记</p>
 </li>
 </ol>
 <h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注</h3>
@@ -51,8 +80,154 @@
 <li></li>
 </ol>
 ]]></content>
-      <tags>
-        <tag>LeetCode</tag>
-      </tags>
+      <categories>
+        <category>排序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++的指针</title>
+    <url>/posts/3219915228/</url>
+    <content><![CDATA[<h3 id="指针是什么"><a class="markdownIt-Anchor" href="#指针是什么"></a> 指针是什么</h3>
+<ol>
+<li><strong>指针</strong>是值为内存位置的变量。</li>
+<li>每一个内存位置可使用连字号（&amp;）运算符访问。</li>
+</ol>
+<h3 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量</h3>
+<p>变量的两个维度：</p>
+<ol>
+<li>
+<p>变量的值 <strong>（使用变量本身访问）</strong></p>
+<ul>
+<li>简单的比如整数变量 <code>int a = 3;</code>，那么直接用 <code>a</code> 就可以取到这个<strong>数值</strong>；</li>
+<li>同样的道理，对于一个指针变量 <code>int *a</code>，<strong>它的值默认是内存中的某个地址</strong>，那么直接用 <code>a</code> 就可以取到这个地址（当然得到地址没什么用就是了）；</li>
+<li>稍微复杂一点的是数组变量 <code>int a[3] = &#123;1,2,3&#125;</code>，单独的变量 <code>a</code> 并不会返回数组 <code>&#123;1,2,3&#125;</code>，而是数组首元素的地址（数组变量类似指针变量，虽然可以用 <code>a[0]</code> 来取出元素 <code>1</code>，但单独的它只是一个地址）</li>
+</ul>
+</li>
+<li>
+<p>变量的地址 <strong>（使用连字号 &amp; 访问）</strong></p>
+<ul>
+<li>简单的比如整数变量 <code>int a = 3;</code>，用 <code>&amp;a</code> 可以取到该整数变量在内存中的<strong>地址</strong>；</li>
+<li>对于数组变量 <code>int a[3] = &#123;1,2,3&#125;</code>，用 <code>&amp;a[0]</code> 可以取到第 0 个元素在内存中的<strong>地址</strong>（其实它和数组变量 <code>a</code> 的值是相同的）；</li>
+<li>指针变量 <code>int *a</code> 也存在 <code>&amp;a</code> 的写法，意思是<strong>指针变量的指针</strong>，毕竟指针变量也是变量，也会在内存中有一个位置。</li>
+</ul>
+</li>
+</ol>
+<p>指针变量还有另外一个维度：</p>
+<ol>
+<li>
+<p>地址所在的值 <strong>（使用星号 * 访问）</strong></p>
+<ul>
+<li>
+<p>指针变量存在的一个重要意义就是，可以挪动它指向的地方，从而灵活的操作内存中的变量。</p>
+</li>
+<li>
+<p>下面的例子展示了，指针变量 p 是如何改变指向的位置并且读取位置上的值：</p>
+</li>
+<li>
+<pre class="highlight"><code class="c++"><span class="hljs-keyword">int</span> x[<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;;  <span class="hljs-comment">// 一个整数数组</span>
+<span class="hljs-keyword">int</span> *p;  <span class="hljs-comment">// 一个指针变量</span>
+p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// 让 p 指向 x[1] 的地址</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; *p &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 结果是：2（x[1]的值）</span>
+&lt;!--code￼<span class="hljs-number">0</span>--&gt;
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="数组指针"><a class="markdownIt-Anchor" href="#数组指针"></a> 数组指针</h3>
+<ol>
+<li>一个数组变量=数组首位元素的地址</li>
+</ol>
+<h4 id="容易搞错的地方"><a class="markdownIt-Anchor" href="#容易搞错的地方"></a> 容易搞错的地方</h4>
+<p>虽然数组变量本身很像一个指针变量（因为是第一个元素的地址），但是最好不要（大概也不能）当成指针变量来用</p>
+<p>可以逐个修改数组里面的元素，但是不能把其他地址的数组赋给已经有的数组变量了。</p>
+<p>另外，指针变量必须指向已经存在于内存的变量地址（右边必须是变量），下面的情况数组还没建立，无法赋值给指针变量。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *a = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;  <span class="comment">// 错误的写法</span></span><br></pre></td></tr></table></figure>
+<p>但是！字符串的场合又是可以的！因为右边字符串会先分配到内存，然后再是首位地址赋值给指针（所以为了避免混淆还是不要直接用数组/字符串赋值指针了吧）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *c = <span class="string">&quot;nihao&quot;</span>  <span class="comment">// 错误的写法</span></span><br><span class="line"><span class="comment">// warning: ISO C++11 does not allow conversion from string literal to &#x27;char *&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>总的来说，数组和字符串的地址应当是固定的，也就是说变量诞生到销毁指向的地址都是不应当改变的。</p>
+<p>我们知道，给指针变量赋值数组首地址有两种写法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">a = b;  <span class="comment">// 方法1</span></span><br><span class="line">a = &amp;b[<span class="number">0</span>] <span class="comment">// 方法2</span></span><br></pre></td></tr></table></figure>
+<h4 id="总结一些常见用法"><a class="markdownIt-Anchor" href="#总结一些常见用法"></a> 总结一些常见用法</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1, *p2;</span><br><span class="line"><span class="keyword">int</span> x[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;;</span><br><span class="line">p1 = &amp;x[<span class="number">0</span>];  <span class="comment">// 指向一个位置</span></span><br><span class="line">p2 = &amp;x[<span class="number">7</span>];</span><br><span class="line">*p1 = *(p2<span class="number">-1</span>);  <span class="comment">// *p1==7，赋值操作，*号取出来的变量</span></span><br></pre></td></tr></table></figure>
+<h3 id="类的指针"><a class="markdownIt-Anchor" href="#类的指针"></a> 类的指针</h3>
+<p>类的指针比较规范（不会出现数组和字符串那种奇奇怪怪的情况）</p>
+<p>在定义一个类的指针，首先需要一个实例化的类：</p>
+<h4 id="创建一个类"><a class="markdownIt-Anchor" href="#创建一个类"></a> 创建一个类</h4>
+<p><strong>string的特性</strong><br>
+说到string的特性，就不得不和<code>char *</code>类型的字符串进行对比：<br>
+（1）<code>char *</code>是一个指针，而string是一个类。string封装了<code>char *</code>，管理这个字符串，是一个<code>char *</code>型的容器。<br>
+（2）string封装了很多实用的成员方法。查找find，拷贝copy，删除delete，替换replace和插入insert等<br>
+（3）string不用考虑内存释放和越界问题。string管理<code>char *</code>所分配的内存。每一次string的复制，取值都由string类负责维护，不用担心复制越界和取值越界等。</p>
+<h4 id="字符串的数组c11已废弃"><a class="markdownIt-Anchor" href="#字符串的数组c11已废弃"></a> 字符串的数组（c++11已废弃）</h4>
+<p>字符串本身就是一个数组，所以字符串的数组应当是：<strong>指针变量的数组</strong></p>
+<p>更新：定义指针的时候不要直接用未分配内存的字符串，这种方法不要用</p>
+<p><strong>注意：</strong> 字符串变量虽然也是数组，但是可以直接交给 cout ，打印出来整个字符串（而不是首元素地址）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *names[] = &#123;</span><br><span class="line">                   <span class="string">&quot;Zara Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Hina Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Nuha Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Sara Ali&quot;</span>,</span><br><span class="line">   			   &#125;;</span><br><span class="line">cout &lt;&lt; names[<span class="number">0</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<p>vector</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>剑指 Offer 59 - I. 滑动窗口的最大值</title>
+    <url>/posts/2941832896/</url>
+    <content><![CDATA[<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<p>链接：<a href="https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/">https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/</a></p>
+<p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。</p>
+<span id="more"></span>
+<p><strong>示例:</strong></p>
+<p><img src="/posts/2941832896/image-20220223002214227.png" alt="image-20220223002214227"></p>
+<p><strong>提示：</strong></p>
+<p>你可以假设 <em>k</em> 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。</p>
+<h2 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h2>
+<h3 id="暴力法"><a class="markdownIt-Anchor" href="#暴力法"></a> 暴力法</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - k + <span class="number">1</span>):</span><br><span class="line">            res.append(<span class="built_in">max</span>(nums[i:i+k]))</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="维护一个队列"><a class="markdownIt-Anchor" href="#维护一个队列"></a> 维护一个队列</h3>
+<p>类似于 <strong>剑指 Offer 30. 包含min函数的栈</strong>，里面维护了一个记录最小值的栈。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/</a></p>
+<p>为什么需要一个队列：</p>
+<ul>
+<li>先进去的元素随着窗口往后先出去，只用来记录一些可能成为最大值的元素，不会比当前窗口更长</li>
+</ul>
+<p>每次滑动一格窗口，更新最大值候补队列，有以下可能：</p>
+<ol>
+<li>
+<p><strong>新元素肯定成为候补：</strong></p>
+<ol>
+<li>新元素大于上个窗口的最大值，直接清空队列并加入新元素（因为新元素之前的所有元素都不可能成为最大值了，新元素肯定比他们活得久）</li>
+<li>新元素小于上个窗口的最大值，他也需要加入队列（因为随着窗口往后移动，它总有一天会变成队首，所以它要作为候补加入）</li>
+</ol>
+<ul>
+<li>换句话说，队首元素一定是队列里最大的（不然新加入的会取而代之），每次移动被加入 result 的一定是队首。</li>
+</ul>
+</li>
+<li>
+<p><strong>上个窗口的首位元素要被滑过：</strong></p>
+<ol>
+<li>上个窗口的首尾元素就是上个窗口的最大值（队首），那么队首要被弹出</li>
+</ol>
+</li>
+<li>
+<p><strong>队列中已有的元素可能被新元素取代：</strong></p>
+<ol>
+<li>新元素可以把队列中从尾部到首部所有小于它的元素取代（因为新元素大于他们且活的更久）</li>
+</ol>
+</li>
+</ol>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res = []</span><br><span class="line">        maxQueue = [nums[<span class="number">0</span>]]</span><br><span class="line">        <span class="comment"># 前k个不需要考虑首位弹出的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, k):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; maxQueue[<span class="number">0</span>]: <span class="comment"># 大的新元素直接清空</span></span><br><span class="line">                maxQueue = []</span><br><span class="line">            <span class="keyword">while</span> maxQueue <span class="keyword">and</span> maxQueue[-<span class="number">1</span>] &lt; nums[i]:  </span><br><span class="line">                <span class="comment"># 如果上一步清空就跳过</span></span><br><span class="line">                <span class="comment"># 加入新元素时取代一些旧的</span></span><br><span class="line">                maxQueue.pop()</span><br><span class="line">            maxQueue.append(nums[i])  <span class="comment"># 新元素一定会入队列</span></span><br><span class="line">        res.append(maxQueue[<span class="number">0</span>])  <span class="comment"># 前k个扫描完毕后提交一次最大值</span></span><br><span class="line">        <span class="comment"># 剩下的考虑首位出队列的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k, n):</span><br><span class="line">            <span class="built_in">print</span>(maxQueue)</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; maxQueue[<span class="number">0</span>]: <span class="comment"># 大的新元素直接清空</span></span><br><span class="line">                maxQueue = []</span><br><span class="line">            <span class="keyword">elif</span> nums[i - k] == maxQueue[<span class="number">0</span>]:  <span class="comment"># 首位是最大元需要弹出</span></span><br><span class="line">                maxQueue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">while</span> maxQueue <span class="keyword">and</span> maxQueue[-<span class="number">1</span>] &lt; nums[i]:</span><br><span class="line">                <span class="comment"># 如果上一步清空就跳过</span></span><br><span class="line">                <span class="comment"># 加入新元素时取代一些旧的</span></span><br><span class="line">                maxQueue.pop()</span><br><span class="line">            maxQueue.append(nums[i])  <span class="comment"># 新元素一定会入队列</span></span><br><span class="line">            res.append(maxQueue[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p>相似题目：</p>
+<ul>
+<li>
+<p><strong>剑指 Offer 59 - II. 队列的最大值</strong></p>
+<p><a href="https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/">https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/</a></p>
+</li>
+<li>
+<p><strong>剑指 Offer 30. 包含min函数的栈</strong></p>
+<p><a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/</a></p>
+</li>
+</ul>
+]]></content>
   </entry>
 </search>
