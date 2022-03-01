@@ -18,6 +18,7 @@
 <span id="more"></span>
 <h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
 <h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
+<p>开头需要一行</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
 <ol>
 <li>
@@ -30,7 +31,13 @@
 <p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
 </li>
 <li>
-<p>使用一个值填充 vector：</p>
+<p>使用一个值填充 vector：（int 默认 0）</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
 </li>
 </ol>
 ]]></content>
