@@ -11,6 +11,42 @@
 ]]></content>
   </entry>
   <entry>
+    <title>C++的vector</title>
+    <url>/posts/415903961/</url>
+    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
+<p>vector 是一个动态大小的容器，具备很多功能。</p>
+<span id="more"></span>
+<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
+<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
+<p>开头需要一行</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>创建一个空 vector</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
+</li>
+<li>
+<p>使用一个值填充 vector：（int 默认 0）</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
+</li>
+</ol>
+<h4 id="访问一个-vector"><a class="markdownIt-Anchor" href="#访问一个-vector"></a> 访问一个 vector</h4>
+<p>定义一个迭代器</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;::iterator iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>C++的指针</title>
     <url>/posts/3219915228/</url>
     <content><![CDATA[<h3 id="指针是什么"><a class="markdownIt-Anchor" href="#指针是什么"></a> 指针是什么</h3>
@@ -95,42 +131,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
-    <title>C++的vector</title>
-    <url>/posts/415903961/</url>
-    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
-<p>vector 是一个动态大小的容器，具备很多功能。</p>
-<span id="more"></span>
-<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
-<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
-<p>开头需要一行</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>
-<p>创建一个空 vector</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
-</li>
-<li>
-<p>使用一个值填充 vector：（int 默认 0）</p>
- <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
-</li>
-</ol>
-<h4 id="访问一个-vector"><a class="markdownIt-Anchor" href="#访问一个-vector"></a> 访问一个 vector</h4>
-<p>定义一个迭代器</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;::iterator iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Rmarkdown里面的表格</title>
     <url>/posts/1527658047/</url>
     <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
@@ -145,7 +145,20 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p><img src="/posts/3603375374/image-20220301161408384.png" alt="image-20220301161408384"></p>
 <h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
 <p>主要思路是：通过二分法找到目标，考虑到数组里可能存在多个目标，需要分别二分查找到 <strong>目标的下界（数组里目标的最小下标）</strong> 和 <strong>目标的上界（数组里目标的最大下标）</strong>，然后把上下界相减补一即为目标的个数。</p>
-<h4 id="终止条件的判断"><a class="markdownIt-Anchor" href="#终止条件的判断"></a> 终止条件的判断</h4>
+<h4 id="目标下界查找"><a class="markdownIt-Anchor" href="#目标下界查找"></a> 目标下界查找</h4>
+<p>首先查找下界，回顾一般的二分查找一个数的思路，每次访问中间点的值，进行如下判断直到左右边界重叠（表示收缩边界完毕找到了）：</p>
+<ol>
+<li>如果大于目标，设为右边界 <code>j</code>；</li>
+<li>如果等于目标，直接返回找到；</li>
+<li>如果小于目标，设为左边界 <code>i</code>。</li>
+</ol>
+<p>回到问题，需要对二分查找进行扩展。情况一和情况三都不需要修改，因为此时还没找到目标值，可以放心的收缩边界。只有情况二的时候需要讨论，究竟是把中间点重设成左边界还是右边界？</p>
+<p>结论：应当是右边界。因为查找目标的下界是这样一个过程：我们要求左边界只要搜索到目标左隔壁元素（也就是小于目标最大那个值）就停止更新了（因为剩下的元素不可能再比目标小了），这种情况如果中间点的值等于目标，我们也要他去收缩右边界，不可以动左边界了。（最后返回左边界即为目标的下界）</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (i &lt;= j)&#123;</span><br><span class="line">    mid = i + (j - i) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums[mid] &gt;= target)</span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target)</span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">l = i;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 终止条件带等号，是因为每次更新边界都会在 mid 的基础上调整一位，</p>
+<p>举例：<code>nums = [0,0], target = 2, mid = 0</code>，如果终止条件不加等号，此时更新后的左右边界在 1 处重合，但此时找到的实际上含义是 <strong>数组里小于target且下标最大的元素</strong>，可是我们的最终找的是目标的下界（他应该是 <strong>数组里小于target最大的下标加一</strong>）。终止条件不加等号处理，会导致最后找出来的目标的上下界重合（而不是上界=下界-1，因为目标不再数组内）</p>
+<h4 id="下界查找例子"><a class="markdownIt-Anchor" href="#下界查找例子"></a> 下界查找例子</h4>
 <p>以 <code>nums = [5,7,7,8,8,10], target = 8</code> 为例：</p>
 <table>
 <thead>
@@ -160,12 +173,8 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 </thead>
 <tbody></tbody>
 </table>
-<p>首先查找下界，回顾二分查找的思路，每次访问中间点的值，进行如下判断直到左右边界重叠（表示收缩边界完毕找到了）：</p>
-<ol>
-<li>如果大于目标，设为右边界 <code>j</code>；</li>
-<li>如果等于目标，直接返回找到；</li>
-<li>如果小于目标，设为左边界 <code>i</code>。</li>
-</ol>
+<p>二分下标 <code>mid = 2</code>，<code>nums[mid] = 7</code>，根据情况三，左边界从 0 更新到 3：（左边界已经定下来了，不可能再更新了）</p>
+<p><strong>注意：</strong> 这里直接把左边界在 mid 的基础上加一，因为 mid 的值本身就小于 target，所以可以直接跳过排除。</p>
 <table>
 <thead>
 <tr>
@@ -179,7 +188,69 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 </thead>
 <tbody></tbody>
 </table>
-<p>二分下标 <code>mid = 2</code>，<code>nums[mid] = 7</code></p>
+<p>二分下标 <code>mid = 4</code>，<code>nums[mid] = 8</code>，根据情况二，右边界从 5 更新到 3：</p>
+<table>
+<thead>
+<tr>
+<th><s>5</s></th>
+<th><s>7</s></th>
+<th><s>7</s></th>
+<th><u>8</u></th>
+<th>8</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>可以看到此时左右边界重合，实质上查找已经结束，但还是需要迭代一次直到终止条件达到，返回左边界即可。</p>
+<h4 id="目标上界查找"><a class="markdownIt-Anchor" href="#目标上界查找"></a> 目标上界查找</h4>
+<p>上界的查找可以基于下界的思路，最终的目的是找到 <strong>target右侧最小的小标 - 1</strong>，换句话说它一定就是目标的上界了。</p>
+<p>需要修改的地方就是中间点等于目标的情况，这时是要收缩左边界，直到找到 **target右侧最小的小标 **。</p>
+<p>翻译成代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (i &lt; j)&#123;</span><br><span class="line">    mid = i + (j - i) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt;= target)</span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">r = i - <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>以 <code>nums = [5,7,7,8,8,10], target = 8</code> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>5</th>
+<th>7</th>
+<th>7</th>
+<th>8</th>
+<th>8</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>二分下标 <code>mid = 2</code>，<code>nums[mid] = 7</code>，根据情况三，左边界从 0 更新到 3：</p>
+<table>
+<thead>
+<tr>
+<th>5</th>
+<th>7</th>
+<th><u>7</u></th>
+<th>8</th>
+<th>8</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>二分下标 <code>mid = 4</code>，<code>nums[mid] = 8</code>，左边界从 3 更新到 5：</p>
+<table>
+<thead>
+<tr>
+<th><s>5</s></th>
+<th><s>7</s></th>
+<th><s>7</s></th>
+<th>8</th>
+<th><u>8</u></th>
+<th>10</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>可以看到此时左右边界重合，实质上查找已经结束，但还是需要迭代一次直到终止条件达到，返回左边界-1即可。</p>
 ]]></content>
   </entry>
   <entry>
