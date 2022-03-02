@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>121. 买卖股票的最佳时机</title>
+    <url>/posts/3068883604/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。</p>
+<p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/</a></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p><strong>定义状态：</strong> 定义一个二维数组 dp，行数是所有时刻即 prices 的长度，列数是 2，<strong>0 和 1</strong> 两个位置表示两种状态：</p>
+<p><strong>当 i 时刻处于 0 位置：</strong> 代表此时选择持有股票能带来的最大收益（或者说最低的开销）；</p>
+<p><strong>当 i 时刻处于 1 位置：</strong> 代表此时选择售出股票能带来的最大收益（前提是 i-1 时刻选择持有）。</p>
+<p><strong>注意：</strong>  <strong>选择持有</strong> 并不代表一定要在那个时刻真的持有，有下面几种情况：</p>
+<p>（1）上个时刻售出了，于是这个时刻只能买进新的（不管亏不亏），本题条件这种情况只可能发生在 i = 0 的时候；</p>
+<p>（2）上个时刻持有，但是这个时刻的价格更低更理想，于是更新当前时刻的最优开销为在此时买入；</p>
+<p>（3）上个时刻持有，但是这个时刻的价格高，不理想，便是维持继续持有，那么当前时刻的最优开销和上个时刻一致。</p>
+<p>同样的分析可以类推到 <strong>选择售出</strong> 上面</p>
+<h4 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = prices.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(n, vector&lt;<span class="keyword">int</span>&gt;(<span class="number">2</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = prices[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">min</span>(dp[i<span class="number">-1</span>][<span class="number">0</span>], prices[i]);</span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i<span class="number">-1</span>][<span class="number">1</span>], prices[i] - dp[i<span class="number">-1</span>][<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n<span class="number">-1</span>][<span class="number">1</span>];</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>139. 单词拆分</title>
     <url>/posts/1712133297/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -44,6 +65,12 @@
 <p>定义一个迭代器</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt;::iterator iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Rmarkdown里面的表格</title>
+    <url>/posts/1527658047/</url>
+    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
 ]]></content>
   </entry>
   <entry>
@@ -128,12 +155,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p>更新：定义指针的时候不要直接用未分配内存的字符串，这种方法不要用</p>
 <p><strong>注意：</strong> 字符串变量虽然也是数组，但是可以直接交给 cout ，打印出来整个字符串（而不是首元素地址）</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *names[] = &#123;</span><br><span class="line">                   <span class="string">&quot;Zara Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Hina Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Nuha Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Sara Ali&quot;</span>,</span><br><span class="line">   			   &#125;;</span><br><span class="line">cout &lt;&lt; names[<span class="number">0</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>Rmarkdown里面的表格</title>
-    <url>/posts/1527658047/</url>
-    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
 ]]></content>
   </entry>
   <entry>
