@@ -127,6 +127,12 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Rmarkdown里面的表格</title>
+    <url>/posts/1527658047/</url>
+    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
+]]></content>
+  </entry>
+  <entry>
     <title>C++的指针</title>
     <url>/posts/3219915228/</url>
     <content><![CDATA[<h3 id="指针是什么"><a class="markdownIt-Anchor" href="#指针是什么"></a> 指针是什么</h3>
@@ -211,9 +217,17 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
-    <title>Rmarkdown里面的表格</title>
-    <url>/posts/1527658047/</url>
-    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
+    <title>300. 最长递增子序列</title>
+    <url>/posts/3337128124/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
+<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
+<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
