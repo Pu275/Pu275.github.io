@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>139. 单词拆分</title>
-    <url>/posts/1712133297/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
-<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
-<span id="more"></span>
-<p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>买卖股票的最佳时机</title>
     <url>/posts/3068883604/</url>
     <content><![CDATA[<h2 id="买卖股票的最佳时机"><a class="markdownIt-Anchor" href="#买卖股票的最佳时机"></a> 买卖股票的最佳时机</h2>
@@ -91,6 +81,16 @@
 ]]></content>
   </entry>
   <entry>
+    <title>139. 单词拆分</title>
+    <url>/posts/1712133297/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
+<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
+<span id="more"></span>
+<p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>300. 最长递增子序列</title>
     <url>/posts/3337128124/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -102,6 +102,41 @@
 <p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
 <h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>887. 鸡蛋掉落</title>
+    <url>/posts/1142963852/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。</p>
+<p>已知存在楼层 f ，满足 0 &lt;= f &lt;= n ，任何从 <strong>高于</strong> f 的楼层落下的鸡蛋都会碎，从 f 楼层或比它低的楼层落下的鸡蛋都不会破。</p>
+<p>每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 &lt;= x &lt;= n）。如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎，则可以在之后的操作中 <strong>重复使用</strong> 这枚鸡蛋。</p>
+<p>请你计算并返回要确定 f <strong>确切的值</strong> 的 <strong>最小操作次数</strong> 是多少？</p>
+<span id="more"></span>
+<h3 id="解答超时了"><a class="markdownIt-Anchor" href="#解答超时了"></a> 解答（超时了）</h3>
+<p><strong>最小操作次数：</strong> 不管 f 取多少，我们采用的选取策略可以保证 <strong>多少次</strong> 以内定位到 f 的位置。也就是我们方法最差情况下消耗的次数（最好情况当然是 f 恰巧落在第一次选取的地方）</p>
+<p>问题类似二分查找，区别在于鸡蛋如果落入临界点右区间就会碎掉，虽然二分查找效率比较高，但是我们试错的机会有限，所以必须采取保守一点的策略，确保任何 f 的取值都能顺利找到。</p>
+<p><strong>注意：</strong> 只有鸡蛋在 i 和 i+1 层分别 <strong>不碎</strong> 和 <strong>碎</strong> 才能确定 f 的值（除非是 0 层 和 n层），所以大部分时候鸡蛋碎掉了标志着 f 找到。</p>
+<h4 id="一个鸡蛋的情况"><a class="markdownIt-Anchor" href="#一个鸡蛋的情况"></a> 一个鸡蛋的情况</h4>
+<p>如果只有一次机会，那么必须从 <strong>第一层</strong> 开始试验，一层一层往上直到碎掉。否则如果鸡蛋在中间某一层碎掉了，搜索就没办法继续了。所以 <strong>最小次数=n</strong>，可以看到为了防止鸡蛋破碎，查找的效率很低。</p>
+<h4 id="两个鸡蛋的情况"><a class="markdownIt-Anchor" href="#两个鸡蛋的情况"></a> 两个鸡蛋的情况</h4>
+<p>此时第一颗鸡蛋要从哪里起投就很复杂了，但至少我们知道：不管 <strong>1-楼层数</strong> 中间的哪个位置投下，只有两种结果（1）碎了（2）没碎。</p>
+<p>（1）碎了说明投放的地方太高，我们就用剩下的一颗鸡蛋去左区间根据 <strong>一个鸡蛋的情况</strong> 搜索；</p>
+<p>（2）没碎说明高度不够，我们就用剩下的两个鸡蛋去右区间迭代 <strong>两个鸡蛋的情况</strong> 搜索。</p>
+<p>不管是（1）还是（2）都是已经解决的子问题，所以就可以转化成动态规划，最终 i 位置消耗的次数取（1）和（2）中较大的那个（因为考虑的是最坏情况）加上一（本次操作也要算上），我们需要计算 <strong>1-楼层数</strong> 间全部的可能，取次数最小的那个投放点即可。（这样导致时间消耗大）</p>
+<p><strong>定义动态规划的状态：</strong> 在 <strong>i 个鸡蛋</strong> 的情况下，解决 <strong>j 层楼层</strong> 的问题的 <strong>最小操作次数</strong></p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> minNum = n;</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// k</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// N</span></span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;  <span class="comment">// 只有一个鸡蛋</span></span><br><span class="line">                    dp[i][j] = j;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                minNum = n;  <span class="comment">// 每次恢复 minNum</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= j; ++k)&#123;  <span class="comment">// 遍历取楼层 1-j，取次数最小的那个 k</span></span><br><span class="line">                    cur = <span class="built_in">max</span>(dp[i<span class="number">-1</span>][k<span class="number">-1</span>], dp[i][j-k]) + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (cur &lt; minNum) minNum = cur;</span><br><span class="line">                &#125;</span><br><span class="line">                dp[i][j] = minNum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[k][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解答优化版"><a class="markdownIt-Anchor" href="#解答优化版"></a> 解答（优化版）</h3>
+<p><strong>新的动态规划状态：</strong>  在 <strong>i 个鸡蛋</strong> 的情况下，解决 <strong>j 次操作</strong> 可以求解到的 <strong>最大楼层数</strong></p>
+<h4 id="以两个鸡蛋的情况为例"><a class="markdownIt-Anchor" href="#以两个鸡蛋的情况为例"></a> 以两个鸡蛋的情况为例</h4>
+<p>上个解答我们知道，投一个鸡蛋分为（1）碎了（2）没碎 两种结果，考虑在新的状态下，剩余 j 个次数，投第一个鸡蛋：</p>
+<p>（1）碎了，投太高了，剩下一个鸡蛋去探索 <strong>j-1</strong> 次最多到达多少层；</p>
+<p>（1）没碎，投太低了，剩下两个鸡蛋去探索 <strong>j-1</strong> 次最多到达多少层；</p>
+<p>那么两个鸡蛋可以覆盖的层数就是 <strong>（1）+（2）+ 1</strong></p>
+<p>不用管 <strong>第一个鸡蛋投在哪一层</strong>，可以把（1）和（2）看成是一个移动窗口，中心点在投的那层，当窗口通过移动中心点能够覆盖全部 N 层的时候，说明此时的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong> 达到要求了。我们要做的就是从最简单的情况，不断推导到题目给定的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong>。</p>
+<h3 id="代码-2"><a class="markdownIt-Anchor" href="#代码-2"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// 最多 N 次肯定可以完成 N 层</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// 从一个鸡蛋考虑到k个</span></span><br><span class="line">            dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + dp[i][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[k][j] &gt;= n) <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -139,32 +174,6 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
 <p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>C++的string</title>
-    <url>/posts/2635778603/</url>
-    <content><![CDATA[<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::string</span><br></pre></td></tr></table></figure>
-<h3 id="初始化"><a class="markdownIt-Anchor" href="#初始化"></a> 初始化</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">string s3 = s2;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(s3)</span></span>;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(<span class="number">5</span>, <span class="string">&#x27;a&#x27;</span>)</span></span>;  <span class="comment">// n 个重复的 char</span></span><br></pre></td></tr></table></figure>
-<p><strong>拷贝初始化：</strong> 用等于号初始化，右边的 string 是先初始化出来，再赋值拷贝给左边的。</p>
-<p><strong>直接初始化：</strong> 直接括号初始化。</p>
-<h3 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s[n];</span><br><span class="line">s1 + s2;  <span class="comment">// 合并</span></span><br><span class="line">s.<span class="built_in">empty</span>();</span><br><span class="line">s.<span class="built_in">length</span>();</span><br><span class="line">s1 == s2;   <span class="comment">// 判断值相等</span></span><br><span class="line"><span class="built_in">getline</span>(is, s);  <span class="comment">// is: in stream, \n</span></span><br><span class="line">is &gt;&gt; s;  <span class="comment">// \s</span></span><br></pre></td></tr></table></figure>
-<h4 id="输入运算符"><a class="markdownIt-Anchor" href="#输入运算符"></a> &gt;&gt; 输入运算符</h4>
-<p>前面的输入 is 一直到空格停止，赋值给后面的变量 s</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cin &gt;&gt; s1 &gt;&gt; s2;</span><br></pre></td></tr></table></figure>
-<p>一个输入运算符赋值一次，所以如果 cin 是 “Hello World”，那么 s1 和 s2 分别被赋值 “Hello” 和 “World”。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (cin &gt;&gt; s) &#123;&#125;  \\ 每次读取一个单词</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;&#125;  \\ 每次读取一行</span><br></pre></td></tr></table></figure>
-<h3 id="转换"><a class="markdownIt-Anchor" href="#转换"></a> 转换</h3>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">stoi  <span class="regexp">//</span> 转成 int</span><br><span class="line">stof  <span class="regexp">//</span> 转成 float</span><br><span class="line">stod  <span class="regexp">//</span> 转成 float</span><br><span class="line">to_string  <span class="regexp">//</span> 其他类型转成 string</span><br><span class="line">(char*)string.data();  <span class="regexp">//</span> string转化成char数组</span><br><span class="line">(char*)string.c_str();  <span class="regexp">//</span> 同上</span><br></pre></td></tr></table></figure>
-<h3 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h3>
-<p><strong>split：</strong> string 没有提供 split</p>
-<p><strong>std::string::npos：</strong> 和 string.find 配套使用，如果没找到返回的就是 npos。如果 using 了 std 命名空间，那么只需要 string::pos 即可。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">split</span><span class="params">(<span class="keyword">const</span> string &amp;s, string delimiter)</span> </span>&#123;</span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    string to_split = s;  <span class="comment">// 拷贝</span></span><br><span class="line">    <span class="keyword">int</span> pos = to_split.<span class="built_in">find</span>(delimiter);  <span class="comment">// find找到的是最前面的delimiter位置</span></span><br><span class="line">    <span class="keyword">int</span> delimiter_size = delimiter.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">while</span> (pos != std::string::npos) &#123;  <span class="comment">// npos</span></span><br><span class="line">        res.<span class="built_in">push_back</span>(to_split.<span class="built_in">substr</span>(<span class="number">0</span>, pos));</span><br><span class="line">        to_split = to_split.<span class="built_in">substr</span>(pos + delimiter.<span class="built_in">length</span>(), to_split.<span class="built_in">length</span>() - <span class="number">1</span>);</span><br><span class="line">        pos = to_split.<span class="built_in">find</span>(delimiter);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="built_in">push_back</span>(to_split);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">split</span>(<span class="string">&quot;123,234&quot;</span>, <span class="string">&quot;,&quot;</span>);  <span class="comment">// char* 会被自动转化成string</span></span><br></pre></td></tr></table></figure>
-<p>如果 delimiter 是单个字符，把字符串转换成 stringstream，然后用 getline 也可以。不过 getline 的第三个参数 delimiter 需要是 char。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="function">stringstream <span class="title">is</span><span class="params">(str_to_split)</span></span>;</span><br><span class="line">string s;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(is, s, <span class="string">&#x27;,&#x27;</span>)) &#123;&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -222,7 +231,7 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 </ol>
 <h3 id="数组指针"><a class="markdownIt-Anchor" href="#数组指针"></a> 数组指针</h3>
 <ol>
-<li>一个数组变量=数组首位元素的地址</li>
+<li>在赋值的时候，一个数组变量=数组首位元素的地址（这里是隐式转换的结果，数组变量在赋值给指针的时候自动变成首位地址）</li>
 </ol>
 <h4 id="容易搞错的地方"><a class="markdownIt-Anchor" href="#容易搞错的地方"></a> 容易搞错的地方</h4>
 <p>虽然数组变量本身很像一个指针变量（因为是第一个元素的地址），但是最好不要（大概也不能）当成指针变量来用</p>
@@ -253,17 +262,49 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <h3 id="类的指针"><a class="markdownIt-Anchor" href="#类的指针"></a> 类的指针</h3>
 <p>类的指针比较规范（不会出现数组和字符串那种奇奇怪怪的情况）</p>
 <p>在定义一个类的指针，首先需要一个实例化的类：</p>
-<h4 id="创建一个类"><a class="markdownIt-Anchor" href="#创建一个类"></a> 创建一个类</h4>
-<p><strong>string的特性</strong><br>
-说到string的特性，就不得不和<code>char *</code>类型的字符串进行对比：<br>
-（1）<code>char *</code>是一个指针，而string是一个类。string封装了<code>char *</code>，管理这个字符串，是一个<code>char *</code>型的容器。<br>
-（2）string封装了很多实用的成员方法。查找find，拷贝copy，删除delete，替换replace和插入insert等<br>
-（3）string不用考虑内存释放和越界问题。string管理<code>char *</code>所分配的内存。每一次string的复制，取值都由string类负责维护，不用担心复制越界和取值越界等。</p>
+<h4 id="用-new-为类分配内存"><a class="markdownIt-Anchor" href="#用-new-为类分配内存"></a> 用 new 为类分配内存</h4>
+<p>new 创建的对象返回指针：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt;* p = <span class="keyword">new</span> vector&lt;<span class="keyword">int</span>&gt;();</span><br></pre></td></tr></table></figure>
+<p>使用箭头运算符访问成员变量：</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-tag">-</span>&gt;<span class="selector-tag">size</span>();</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-tag">-</span>&gt;<span class="selector-tag">empty</span>();</span><br><span class="line">(*p)<span class="selector-class">.empty</span>();  <span class="comment">// 等价于解开后的点运算符</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> new 对应的操作是 delete，但是 delete 只是清空指向的内存，指针本身并没有置空 nullptr，</p>
 <h4 id="字符串的数组c11已废弃"><a class="markdownIt-Anchor" href="#字符串的数组c11已废弃"></a> 字符串的数组（c++11已废弃）</h4>
 <p>字符串本身就是一个数组，所以字符串的数组应当是：<strong>指针变量的数组</strong></p>
 <p>更新：定义指针的时候不要直接用未分配内存的字符串，这种方法不要用</p>
 <p><strong>注意：</strong> 字符串变量虽然也是数组，但是可以直接交给 cout ，打印出来整个字符串（而不是首元素地址）</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *names[] = &#123;</span><br><span class="line">                   <span class="string">&quot;Zara Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Hina Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Nuha Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Sara Ali&quot;</span>,</span><br><span class="line">   			   &#125;;</span><br><span class="line">cout &lt;&lt; names[<span class="number">0</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>C++的string</title>
+    <url>/posts/2635778603/</url>
+    <content><![CDATA[<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::string</span><br></pre></td></tr></table></figure>
+<h3 id="初始化"><a class="markdownIt-Anchor" href="#初始化"></a> 初始化</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;abc&quot;</span>;  <span class="comment">// char* 自动转换，这是 string 定义的转换</span></span><br><span class="line">string s3 = s2;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(s3)</span></span>;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(<span class="number">5</span>, <span class="string">&#x27;a&#x27;</span>)</span></span>;  <span class="comment">// n 个重复的 char</span></span><br></pre></td></tr></table></figure>
+<p><strong>拷贝初始化：</strong> 用等于号初始化，右边的 string 是先初始化出来，再赋值拷贝给左边的。</p>
+<p><strong>直接初始化：</strong> 直接括号初始化。</p>
+<h3 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s[n];</span><br><span class="line">s1 + s2;  <span class="comment">// 合并</span></span><br><span class="line">s.<span class="built_in">empty</span>();</span><br><span class="line">s.<span class="built_in">length</span>();</span><br><span class="line">s1 == s2;   <span class="comment">// 判断值相等</span></span><br><span class="line"><span class="built_in">getline</span>(is, s);  <span class="comment">// is: in stream, \n</span></span><br><span class="line">is &gt;&gt; s;  <span class="comment">// \s</span></span><br></pre></td></tr></table></figure>
+<h4 id="输入运算符"><a class="markdownIt-Anchor" href="#输入运算符"></a> &gt;&gt; 输入运算符</h4>
+<p>前面的输入 is 一直到空格停止，赋值给后面的变量 s</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cin &gt;&gt; s1 &gt;&gt; s2;</span><br></pre></td></tr></table></figure>
+<p>一个输入运算符赋值一次，所以如果 cin 是 “Hello World”，那么 s1 和 s2 分别被赋值 “Hello” 和 “World”。</p>
+<p>cin 读入失败以后，自动转换成布尔值 false，退出循环</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (cin &gt;&gt; s) &#123;&#125;  \\ 每次读取一个单词</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;&#125;  \\ 每次读取一行</span><br></pre></td></tr></table></figure>
+<h3 id="转换"><a class="markdownIt-Anchor" href="#转换"></a> 转换</h3>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">stoi  <span class="regexp">//</span> 转成 int</span><br><span class="line">stof  <span class="regexp">//</span> 转成 float</span><br><span class="line">stod  <span class="regexp">//</span> 转成 float</span><br><span class="line">to_string  <span class="regexp">//</span> 其他类型转成 string</span><br><span class="line">(char*)string.data();  <span class="regexp">//</span> string转化成char数组</span><br><span class="line">(char*)string.c_str();  <span class="regexp">//</span> 同上</span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h3>
+<p><strong>split：</strong> string 没有提供 split</p>
+<p><strong>std::string::npos：</strong> 和 string.find 配套使用，如果没找到返回的就是 npos。如果 using 了 std 命名空间，那么只需要 string::pos 即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">split</span><span class="params">(<span class="keyword">const</span> string &amp;s, string delimiter)</span> </span>&#123;</span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    string to_split = s;  <span class="comment">// 拷贝</span></span><br><span class="line">    <span class="keyword">int</span> pos = to_split.<span class="built_in">find</span>(delimiter);  <span class="comment">// find找到的是最前面的delimiter位置</span></span><br><span class="line">    <span class="keyword">int</span> delimiter_size = delimiter.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">while</span> (pos != std::string::npos) &#123;  <span class="comment">// npos</span></span><br><span class="line">        res.<span class="built_in">push_back</span>(to_split.<span class="built_in">substr</span>(<span class="number">0</span>, pos));</span><br><span class="line">        to_split = to_split.<span class="built_in">substr</span>(pos + delimiter.<span class="built_in">length</span>(), to_split.<span class="built_in">length</span>() - <span class="number">1</span>);</span><br><span class="line">        pos = to_split.<span class="built_in">find</span>(delimiter);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="built_in">push_back</span>(to_split);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">split</span>(<span class="string">&quot;123,234&quot;</span>, <span class="string">&quot;,&quot;</span>);  <span class="comment">// char* 会被自动转化成string</span></span><br></pre></td></tr></table></figure>
+<p>如果 delimiter 是单个字符，把字符串转换成 stringstream，然后用 getline 也可以。不过 getline 的第三个参数 delimiter 需要是 char。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="function">stringstream <span class="title">is</span><span class="params">(str_to_split)</span></span>;</span><br><span class="line">string s;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(is, s, <span class="string">&#x27;,&#x27;</span>)) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>string的特性</strong></p>
+<p>说到string的特性，就不得不和<code>char *</code>类型的字符串进行对比：<br>
+（1）<code>char *</code>是一个指针，而string是一个类。string封装了<code>char *</code>，管理这个字符串，是一个<code>char *</code>型的容器。<br>
+（2）string封装了很多实用的成员方法。查找find，拷贝copy，删除delete，替换replace和插入insert等<br>
+（3）string不用考虑内存释放和越界问题。string管理<code>char *</code>所分配的内存。每一次string的复制，取值都由string类负责维护，不用担心复制越界和取值越界等。</p>
 ]]></content>
   </entry>
   <entry>
@@ -412,50 +453,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
-    <title>堆排序</title>
-    <url>/posts/2276098981/</url>
-    <content><![CDATA[<h2 id="堆排序"><a class="markdownIt-Anchor" href="#堆排序"></a> 堆排序</h2>
-<h3 id="堆是什么"><a class="markdownIt-Anchor" href="#堆是什么"></a> 堆是什么</h3>
-<ol>
-<li>堆是完全二叉树</li>
-<li>堆的每个结点都小于（或大于）父结点的值</li>
-</ol>
-<h3 id="堆排序是什么"><a class="markdownIt-Anchor" href="#堆排序是什么"></a> 堆排序是什么</h3>
-<ol>
-<li>构建大顶堆（根结点是最大元素的堆）</li>
-<li>交换根结点和最后一个结点，最大元素移到数组末尾固定下来</li>
-<li>继续重复构建前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个元素的大顶堆，直到只剩下根结点没有固定</li>
-</ol>
-<span id="more"></span>
-<h3 id="和选择排序的区别"><a class="markdownIt-Anchor" href="#和选择排序的区别"></a> 和选择排序的区别</h3>
-<p>选择排序的每轮迭代也是从剩下的元素中挑出最小的那个固定下来，堆排序的优点在于，每次迭代会利用到之前的信息，因为建堆完后的二叉树从上到下可以保证大体上是由大到小的，在每次首尾交换之后，重新恢复建堆只需要大约 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 次交换，相比选择排序需要扫描所有元素。</p>
-<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
-<h3 id="建堆"><a class="markdownIt-Anchor" href="#建堆"></a> 建堆</h3>
-<ol>
-<li>
-<p>从最后一个非叶子结点（父结点）开始，把它和它的左右结点（如果有）中最大的放到当前位置上。执行这个过程直到根结点</p>
-<ul>
-<li>如果根结点下标从 0 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2i+2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></li>
-<li>如果根结点下标从 1 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
-</ul>
-<p>以上关系表明，获取子结点的父亲的办法是：</p>
-<ul>
-<li>如果根结点下标从 0 开始记，当前结点减 1 整除 2（也就是，下标 1 版本需要减 2 再整除 2）</li>
-<li>如果根结点下标从 1 开始记，当前结点整除 2</li>
-</ul>
-<p><strong>备注：</strong> 数组长度 length：下标从 1 开始记</p>
-</li>
-</ol>
-<h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注</h3>
-<ol>
-<li></li>
-</ol>
-]]></content>
-      <categories>
-        <category>排序</category>
-      </categories>
-  </entry>
-  <entry>
     <title>剑指 Offer 59 - I. 滑动窗口的最大值</title>
     <url>/posts/2941832896/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -516,6 +513,50 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 </li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>堆排序</title>
+    <url>/posts/2276098981/</url>
+    <content><![CDATA[<h2 id="堆排序"><a class="markdownIt-Anchor" href="#堆排序"></a> 堆排序</h2>
+<h3 id="堆是什么"><a class="markdownIt-Anchor" href="#堆是什么"></a> 堆是什么</h3>
+<ol>
+<li>堆是完全二叉树</li>
+<li>堆的每个结点都小于（或大于）父结点的值</li>
+</ol>
+<h3 id="堆排序是什么"><a class="markdownIt-Anchor" href="#堆排序是什么"></a> 堆排序是什么</h3>
+<ol>
+<li>构建大顶堆（根结点是最大元素的堆）</li>
+<li>交换根结点和最后一个结点，最大元素移到数组末尾固定下来</li>
+<li>继续重复构建前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个元素的大顶堆，直到只剩下根结点没有固定</li>
+</ol>
+<span id="more"></span>
+<h3 id="和选择排序的区别"><a class="markdownIt-Anchor" href="#和选择排序的区别"></a> 和选择排序的区别</h3>
+<p>选择排序的每轮迭代也是从剩下的元素中挑出最小的那个固定下来，堆排序的优点在于，每次迭代会利用到之前的信息，因为建堆完后的二叉树从上到下可以保证大体上是由大到小的，在每次首尾交换之后，重新恢复建堆只需要大约 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 次交换，相比选择排序需要扫描所有元素。</p>
+<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
+<h3 id="建堆"><a class="markdownIt-Anchor" href="#建堆"></a> 建堆</h3>
+<ol>
+<li>
+<p>从最后一个非叶子结点（父结点）开始，把它和它的左右结点（如果有）中最大的放到当前位置上。执行这个过程直到根结点</p>
+<ul>
+<li>如果根结点下标从 0 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2i+2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></li>
+<li>如果根结点下标从 1 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+<p>以上关系表明，获取子结点的父亲的办法是：</p>
+<ul>
+<li>如果根结点下标从 0 开始记，当前结点减 1 整除 2（也就是，下标 1 版本需要减 2 再整除 2）</li>
+<li>如果根结点下标从 1 开始记，当前结点整除 2</li>
+</ul>
+<p><strong>备注：</strong> 数组长度 length：下标从 1 开始记</p>
+</li>
+</ol>
+<h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注</h3>
+<ol>
+<li></li>
+</ol>
+]]></content>
+      <categories>
+        <category>排序</category>
+      </categories>
   </entry>
   <entry>
     <title>面试速成</title>
