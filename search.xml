@@ -91,20 +91,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>300. 最长递增子序列</title>
-    <url>/posts/3337128124/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
-<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
-<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
-<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
     <title>887. 鸡蛋掉落</title>
     <url>/posts/1142963852/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -137,6 +123,43 @@
 <p>不用管 <strong>第一个鸡蛋投在哪一层</strong>，可以把（1）和（2）看成是一个移动窗口，中心点在投的那层，当窗口通过移动中心点能够覆盖全部 N 层的时候，说明此时的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong> 达到要求了。我们要做的就是从最简单的情况，不断推导到题目给定的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong>。</p>
 <h3 id="代码-2"><a class="markdownIt-Anchor" href="#代码-2"></a> 代码</h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// 最多 N 次肯定可以完成 N 层</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// 从一个鸡蛋考虑到k个</span></span><br><span class="line">            dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + dp[i][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[k][j] &gt;= n) <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>C++的vector</title>
+    <url>/posts/415903961/</url>
+    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
+<p>vector 是一个动态大小的容器，具备很多功能。</p>
+<span id="more"></span>
+<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
+<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
+<p>开头需要一行</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>创建一个空 vector</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
+</li>
+<li>
+<p>使用一个值填充 vector：（int 默认 0）</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
+</li>
+</ol>
+<h4 id="访问一个-vector"><a class="markdownIt-Anchor" href="#访问一个-vector"></a> 访问一个 vector</h4>
+<p>定义一个迭代器</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
+<p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
 ]]></content>
   </entry>
   <entry>
@@ -236,43 +259,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p>更新：定义指针的时候不要直接用未分配内存的字符串，这种方法不要用</p>
 <p><strong>注意：</strong> 字符串变量虽然也是数组，但是可以直接交给 cout ，打印出来整个字符串（而不是首元素地址）</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *names[] = &#123;</span><br><span class="line">                   <span class="string">&quot;Zara Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Hina Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Nuha Ali&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Sara Ali&quot;</span>,</span><br><span class="line">   			   &#125;;</span><br><span class="line">cout &lt;&lt; names[<span class="number">0</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>C++的vector</title>
-    <url>/posts/415903961/</url>
-    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
-<p>vector 是一个动态大小的容器，具备很多功能。</p>
-<span id="more"></span>
-<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
-<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
-<p>开头需要一行</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>
-<p>创建一个空 vector</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
-</li>
-<li>
-<p>使用一个值填充 vector：（int 默认 0）</p>
- <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
-</li>
-</ol>
-<h4 id="访问一个-vector"><a class="markdownIt-Anchor" href="#访问一个-vector"></a> 访问一个 vector</h4>
-<p>定义一个迭代器</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
-<p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
 ]]></content>
   </entry>
   <entry>
@@ -604,6 +590,20 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p><strong>GBDT：</strong></p>
 <p><strong>RF：</strong></p>
 <p><strong>Adaboost</strong>：</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>300. 最长递增子序列</title>
+    <url>/posts/3337128124/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
+<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
+<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
 </search>
