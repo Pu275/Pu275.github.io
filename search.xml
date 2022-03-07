@@ -548,7 +548,7 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
     <title>接雨水</title>
     <url>/posts/1726193520/</url>
     <content><![CDATA[<p>两个接雨水题目，都用双指针做。</p>
-<h4 id="11-盛最多水的容器"><a class="markdownIt-Anchor" href="#11-盛最多水的容器"></a> 11. 盛最多水的容器</h4>
+<h3 id="11-盛最多水的容器"><a class="markdownIt-Anchor" href="#11-盛最多水的容器"></a> 11. 盛最多水的容器</h3>
 <p>给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。</p>
 <p>找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
 <p>返回容器可以储存的最大水量。</p>
@@ -561,7 +561,7 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = height.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> h = <span class="built_in">min</span>(height[<span class="number">0</span>], height[j]);</span><br><span class="line">        maxNum = h * (j - i);</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height[j] &lt; height[i]) &#123;</span><br><span class="line">                --j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            h = <span class="built_in">min</span>(height[i], height[j]);</span><br><span class="line">            <span class="keyword">if</span> ((j - i) * h &gt; maxNum) maxNum = (j - i) * h;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="42-接雨水"><a class="markdownIt-Anchor" href="#42-接雨水"></a> 42. 接雨水</h3>
 <p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code> 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
-<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png" alt="img">
+<img src="/posts/1726193520/image-20220307213203323.png" alt="image-20220307213203323" style="zoom:50%;">
 <blockquote>
 <p>输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]<br>
 输出：6<br>
