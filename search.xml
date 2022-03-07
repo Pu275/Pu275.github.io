@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>139. 单词拆分</title>
-    <url>/posts/1712133297/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
-<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
-<span id="more"></span>
-<p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>300. 最长递增子序列</title>
-    <url>/posts/3337128124/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
-<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
-<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
-<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
     <title>买卖股票的最佳时机</title>
     <url>/posts/3068883604/</url>
     <content><![CDATA[<h2 id="买卖股票的最佳时机"><a class="markdownIt-Anchor" href="#买卖股票的最佳时机"></a> 买卖股票的最佳时机</h2>
@@ -105,40 +81,27 @@
 ]]></content>
   </entry>
   <entry>
-    <title>C++的vector</title>
-    <url>/posts/415903961/</url>
-    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
-<p>vector 是一个动态大小的容器，具备很多功能。</p>
+    <title>139. 单词拆分</title>
+    <url>/posts/1712133297/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
+<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
 <span id="more"></span>
-<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
-<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
-<p>开头需要一行</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>
-<p>创建一个空 vector</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
-</li>
-<li>
-<p>使用一个值填充 vector：（int 默认 0）</p>
- <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
-</li>
-</ol>
-<h4 id="访问一个-vector"><a class="markdownIt-Anchor" href="#访问一个-vector"></a> 访问一个 vector</h4>
-<p>定义一个迭代器</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
-<p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
+<p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>300. 最长递增子序列</title>
+    <url>/posts/3337128124/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
+<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
+<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -174,6 +137,43 @@
 <p>不用管 <strong>第一个鸡蛋投在哪一层</strong>，可以把（1）和（2）看成是一个移动窗口，中心点在投的那层，当窗口通过移动中心点能够覆盖全部 N 层的时候，说明此时的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong> 达到要求了。我们要做的就是从最简单的情况，不断推导到题目给定的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong>。</p>
 <h3 id="代码-2"><a class="markdownIt-Anchor" href="#代码-2"></a> 代码</h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// 最多 N 次肯定可以完成 N 层</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// 从一个鸡蛋考虑到k个</span></span><br><span class="line">            dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + dp[i][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[k][j] &gt;= n) <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>C++的vector</title>
+    <url>/posts/415903961/</url>
+    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
+<p>vector 是一个动态大小的容器，具备很多功能。</p>
+<span id="more"></span>
+<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
+<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
+<p>开头需要一行</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>创建一个空 vector</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
+</li>
+<li>
+<p>使用一个值填充 vector：（int 默认 0）</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
+</li>
+</ol>
+<h4 id="访问一个-vector"><a class="markdownIt-Anchor" href="#访问一个-vector"></a> 访问一个 vector</h4>
+<p>定义一个迭代器</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
+<p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
 ]]></content>
   </entry>
   <entry>
@@ -362,64 +362,23 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
-    <title>堆排序</title>
-    <url>/posts/2276098981/</url>
-    <content><![CDATA[<h2 id="堆排序"><a class="markdownIt-Anchor" href="#堆排序"></a> 堆排序</h2>
-<h3 id="堆是什么"><a class="markdownIt-Anchor" href="#堆是什么"></a> 堆是什么</h3>
-<ol>
-<li>堆是完全二叉树</li>
-<li>堆的每个结点都小于（或大于）父结点的值</li>
-</ol>
-<h3 id="堆排序是什么"><a class="markdownIt-Anchor" href="#堆排序是什么"></a> 堆排序是什么</h3>
-<ol>
-<li>构建大顶堆（根结点是最大元素的堆）</li>
-<li>交换根结点和最后一个结点，最大元素移到数组末尾固定下来</li>
-<li>继续重复构建前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个元素的大顶堆，直到只剩下根结点没有固定</li>
-</ol>
+    <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
+    <url>/posts/2263724427/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/</a></p>
 <span id="more"></span>
-<h3 id="和选择排序的区别"><a class="markdownIt-Anchor" href="#和选择排序的区别"></a> 和选择排序的区别</h3>
-<p>选择排序的每轮迭代也是从剩下的元素中挑出最小的那个固定下来，堆排序的优点在于，每次迭代会利用到之前的信息，因为建堆完后的二叉树从上到下可以保证大体上是由大到小的，在每次首尾交换之后，重新恢复建堆只需要大约 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 次交换，相比选择排序需要扫描所有元素。</p>
-<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
-<h3 id="建堆"><a class="markdownIt-Anchor" href="#建堆"></a> 建堆</h3>
+<h3 id="解答队列"><a class="markdownIt-Anchor" href="#解答队列"></a> 解答（队列）</h3>
+<p>遍历一遍字符串即可，不断的往队列添加字符并记录最大长度。</p>
+<p>还要确保队列里面都是没有重复的字符，做法是一旦下一位出现了重复的字符 s，就要截掉队列前半部分，直到队列没有那个 s，再加入下一位 s。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        deque&lt;<span class="keyword">char</span>&gt; cur;</span><br><span class="line">        <span class="keyword">char</span> curString;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; n) &#123;</span><br><span class="line">            curString = s[i];</span><br><span class="line">            <span class="comment">// 每次加新元素判断已经存在</span></span><br><span class="line">            <span class="comment">// 存在的话去掉头部元素直到没有重复元素</span></span><br><span class="line">            <span class="keyword">while</span> (!cur.<span class="built_in">empty</span>() &amp;&amp; <span class="built_in">find</span>(cur.<span class="built_in">begin</span>(), cur.<span class="built_in">end</span>(), curString) != cur.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                cur.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            cur.<span class="built_in">push_back</span>(curString);</span><br><span class="line">            <span class="keyword">if</span> (cur.<span class="built_in">size</span>() &gt; maxLen) maxLen = cur.<span class="built_in">size</span>();  <span class="comment">// 更新最大长度</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解答动态规划"><a class="markdownIt-Anchor" href="#解答动态规划"></a> 解答（动态规划）</h3>
+<p>思路和队列法类似，<code>dp[i]</code> 表示以 <strong>第 i 个字符</strong> 为结尾的最长无重复字符串的长度，分为两种情况：</p>
 <ol>
-<li>
-<p>从最后一个非叶子结点（父结点）开始，把它和它的左右结点（如果有）中最大的放到当前位置上。执行这个过程直到根结点</p>
-<ul>
-<li>如果根结点下标从 0 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2i+2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></li>
-<li>如果根结点下标从 1 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
-</ul>
-<p>以上关系表明，获取子结点的父亲的办法是：</p>
-<ul>
-<li>如果根结点下标从 0 开始记，当前结点减 1 整除 2（也就是，下标 1 版本需要减 2 再整除 2）</li>
-<li>如果根结点下标从 1 开始记，当前结点整除 2</li>
-</ul>
-<p><strong>备注：</strong> 数组长度 length：下标从 1 开始记</p>
-</li>
+<li>如果扫描 <code>dp[i-1]</code> 的字符串（也就是 <strong>第 i -1个字符</strong> 为结尾的目标字符串）里面没有 <code>s[i]</code>，此时直接把 <code>s[i]</code> 加入候补字符串，所以 <code>dp[i] = dp[i-1] + 1</code>；</li>
+<li>如果扫描 <code>dp[i-1]</code> 的字符串发现了已经有  <code>s[i]</code> 在里面（发生重复），那么就要记录下重复点的位置，更新重复点之后直到 i 位置的子字符串才是 i 位置的长度。（首先 i-1 位置是确保没有重复的，那么排除了里面和 <code>s[i]</code> 重复的，剩下的即可计入 i 位置的长度）。</li>
 </ol>
-<h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注</h3>
-<ol>
-<li></li>
-</ol>
-]]></content>
-      <categories>
-        <category>排序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>面试速成</title>
-    <url>/posts/2499817694/</url>
-    <content><![CDATA[<p>来不及了，速成决策树</p>
-<h3 id="决策树"><a class="markdownIt-Anchor" href="#决策树"></a> 决策树</h3>
-<h3 id="cart"><a class="markdownIt-Anchor" href="#cart"></a> CART</h3>
-<p>Classification And Regression Tree (CART)，顾名思义，又可以回归又可以分类</p>
-<p>树结构，每次分裂记录：（1）哪个特征（2）分裂点（3）输出值。终止条件到达后，结点变为叶子，里面的值是 y 的 <strong>均值（回归）</strong> 或者 <strong>概率（分类）</strong>。预测的时候对每个输入样本走一遍遍历</p>
-<h3 id="gbdt"><a class="markdownIt-Anchor" href="#gbdt"></a> GBDT</h3>
-<p>boosting 用在 CART 树上面</p>
-<p>输出就是一层层的模型输出值加权，分类输出概率（取大的作为类别），回归直接输出预测值</p>
-<p><strong>CART：</strong></p>
-<p><strong>GBDT：</strong></p>
-<p><strong>RF：</strong></p>
-<p><strong>Adaboost</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> curMax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> update;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            update = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt; i - dp[i<span class="number">-1</span>] - <span class="number">1</span>; j--) &#123;  <span class="comment">// dp[i-1]状态是否含有 s[i]</span></span><br><span class="line">                <span class="keyword">if</span> (s[j] == s[i]) &#123;  <span class="comment">// 更新长度</span></span><br><span class="line">                    dp[i] = i - j;</span><br><span class="line">                    update = <span class="literal">true</span>;  <span class="comment">// 发现有重复</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!update) &#123;</span><br><span class="line">                dp[i] = dp[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; curMax) curMax = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> curMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -542,6 +501,50 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
+    <title>堆排序</title>
+    <url>/posts/2276098981/</url>
+    <content><![CDATA[<h2 id="堆排序"><a class="markdownIt-Anchor" href="#堆排序"></a> 堆排序</h2>
+<h3 id="堆是什么"><a class="markdownIt-Anchor" href="#堆是什么"></a> 堆是什么</h3>
+<ol>
+<li>堆是完全二叉树</li>
+<li>堆的每个结点都小于（或大于）父结点的值</li>
+</ol>
+<h3 id="堆排序是什么"><a class="markdownIt-Anchor" href="#堆排序是什么"></a> 堆排序是什么</h3>
+<ol>
+<li>构建大顶堆（根结点是最大元素的堆）</li>
+<li>交换根结点和最后一个结点，最大元素移到数组末尾固定下来</li>
+<li>继续重复构建前 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 个元素的大顶堆，直到只剩下根结点没有固定</li>
+</ol>
+<span id="more"></span>
+<h3 id="和选择排序的区别"><a class="markdownIt-Anchor" href="#和选择排序的区别"></a> 和选择排序的区别</h3>
+<p>选择排序的每轮迭代也是从剩下的元素中挑出最小的那个固定下来，堆排序的优点在于，每次迭代会利用到之前的信息，因为建堆完后的二叉树从上到下可以保证大体上是由大到小的，在每次首尾交换之后，重新恢复建堆只需要大约 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 次交换，相比选择排序需要扫描所有元素。</p>
+<h2 id="算法"><a class="markdownIt-Anchor" href="#算法"></a> 算法</h2>
+<h3 id="建堆"><a class="markdownIt-Anchor" href="#建堆"></a> 建堆</h3>
+<ol>
+<li>
+<p>从最后一个非叶子结点（父结点）开始，把它和它的左右结点（如果有）中最大的放到当前位置上。执行这个过程直到根结点</p>
+<ul>
+<li>如果根结点下标从 0 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2i+2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></li>
+<li>如果根结点下标从 1 开始记，当前结点如果是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>，那么它的左结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span></span></span></span>，右结点是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+<p>以上关系表明，获取子结点的父亲的办法是：</p>
+<ul>
+<li>如果根结点下标从 0 开始记，当前结点减 1 整除 2（也就是，下标 1 版本需要减 2 再整除 2）</li>
+<li>如果根结点下标从 1 开始记，当前结点整除 2</li>
+</ul>
+<p><strong>备注：</strong> 数组长度 length：下标从 1 开始记</p>
+</li>
+</ol>
+<h3 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注</h3>
+<ol>
+<li></li>
+</ol>
+]]></content>
+      <categories>
+        <category>排序</category>
+      </categories>
+  </entry>
+  <entry>
     <title>接雨水</title>
     <url>/posts/1726193520/</url>
     <content><![CDATA[<p>两个接雨水题目，都用双指针做。</p>
@@ -553,7 +556,7 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p>链接：<a href="https://leetcode-cn.com/problems/container-with-most-water/">https://leetcode-cn.com/problems/container-with-most-water/</a></p>
 <img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img" style="zoom:67%;">
 <span id="more"></span>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> ### 解答</h3>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
 <p>双指针法，根据木桶原理，当前容量取决于 <strong>间隔 * 短板长度</strong> ，为了使容量尽可能往大的方向前进，不可能先动长板（因为高度被短板制约），所以每次指针在短板处移动一格，并记录一下当前容量和最大容量。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = height.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> h = <span class="built_in">min</span>(height[<span class="number">0</span>], height[j]);</span><br><span class="line">        maxNum = h * (j - i);</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height[j] &lt; height[i]) &#123;</span><br><span class="line">                --j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            h = <span class="built_in">min</span>(height[i], height[j]);</span><br><span class="line">            <span class="keyword">if</span> ((j - i) * h &gt; maxNum) maxNum = (j - i) * h;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="42-接雨水"><a class="markdownIt-Anchor" href="#42-接雨水"></a> 42. 接雨水</h3>
@@ -635,23 +638,20 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
-    <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
-    <url>/posts/2263724427/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/</a></p>
-<span id="more"></span>
-<h3 id="解答队列"><a class="markdownIt-Anchor" href="#解答队列"></a> 解答（队列）</h3>
-<p>遍历一遍字符串即可，不断的往队列添加字符并记录最大长度。</p>
-<p>还要确保队列里面都是没有重复的字符，做法是一旦下一位出现了重复的字符 s，就要截掉队列前半部分，直到队列没有那个 s，再加入下一位 s。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        deque&lt;<span class="keyword">char</span>&gt; cur;</span><br><span class="line">        <span class="keyword">char</span> curString;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; n) &#123;</span><br><span class="line">            curString = s[i];</span><br><span class="line">            <span class="comment">// 每次加新元素判断已经存在</span></span><br><span class="line">            <span class="comment">// 存在的话去掉头部元素直到没有重复元素</span></span><br><span class="line">            <span class="keyword">while</span> (!cur.<span class="built_in">empty</span>() &amp;&amp; <span class="built_in">find</span>(cur.<span class="built_in">begin</span>(), cur.<span class="built_in">end</span>(), curString) != cur.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                cur.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            cur.<span class="built_in">push_back</span>(curString);</span><br><span class="line">            <span class="keyword">if</span> (cur.<span class="built_in">size</span>() &gt; maxLen) maxLen = cur.<span class="built_in">size</span>();  <span class="comment">// 更新最大长度</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="解答动态规划"><a class="markdownIt-Anchor" href="#解答动态规划"></a> 解答（动态规划）</h3>
-<p>思路和队列法类似，<code>dp[i]</code> 表示以 <strong>第 i 个字符</strong> 为结尾的最长无重复字符串的长度，分为两种情况：</p>
-<ol>
-<li>如果扫描 <code>dp[i-1]</code> 的字符串（也就是 <strong>第 i -1个字符</strong> 为结尾的目标字符串）里面没有 <code>s[i]</code>，此时直接把 <code>s[i]</code> 加入候补字符串，所以 <code>dp[i] = dp[i-1] + 1</code>；</li>
-<li>如果扫描 <code>dp[i-1]</code> 的字符串发现了已经有  <code>s[i]</code> 在里面（发生重复），那么就要记录下重复点的位置，更新重复点之后直到 i 位置的子字符串才是 i 位置的长度。（首先 i-1 位置是确保没有重复的，那么排除了里面和 <code>s[i]</code> 重复的，剩下的即可计入 i 位置的长度）。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> curMax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> update;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            update = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt; i - dp[i<span class="number">-1</span>] - <span class="number">1</span>; j--) &#123;  <span class="comment">// dp[i-1]状态是否含有 s[i]</span></span><br><span class="line">                <span class="keyword">if</span> (s[j] == s[i]) &#123;  <span class="comment">// 更新长度</span></span><br><span class="line">                    dp[i] = i - j;</span><br><span class="line">                    update = <span class="literal">true</span>;  <span class="comment">// 发现有重复</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!update) &#123;</span><br><span class="line">                dp[i] = dp[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; curMax) curMax = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> curMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    <title>面试速成</title>
+    <url>/posts/2499817694/</url>
+    <content><![CDATA[<p>来不及了，速成决策树</p>
+<h3 id="决策树"><a class="markdownIt-Anchor" href="#决策树"></a> 决策树</h3>
+<h3 id="cart"><a class="markdownIt-Anchor" href="#cart"></a> CART</h3>
+<p>Classification And Regression Tree (CART)，顾名思义，又可以回归又可以分类</p>
+<p>树结构，每次分裂记录：（1）哪个特征（2）分裂点（3）输出值。终止条件到达后，结点变为叶子，里面的值是 y 的 <strong>均值（回归）</strong> 或者 <strong>概率（分类）</strong>。预测的时候对每个输入样本走一遍遍历</p>
+<h3 id="gbdt"><a class="markdownIt-Anchor" href="#gbdt"></a> GBDT</h3>
+<p>boosting 用在 CART 树上面</p>
+<p>输出就是一层层的模型输出值加权，分类输出概率（取大的作为类别），回归直接输出预测值</p>
+<p><strong>CART：</strong></p>
+<p><strong>GBDT：</strong></p>
+<p><strong>RF：</strong></p>
+<p><strong>Adaboost</strong>：</p>
 ]]></content>
   </entry>
 </search>
