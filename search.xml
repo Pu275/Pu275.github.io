@@ -279,16 +279,17 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p>引用也可以解决地址拷贝的问题（另一个方法是指针），引用变量就是 a 的替身</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span>&amp; b = a;</span><br><span class="line">b = <span class="number">2</span>;  <span class="comment">// a 也跟着变成 2</span></span><br></pre></td></tr></table></figure>
 <h4 id="传参的时候用引用"><a class="markdownIt-Anchor" href="#传参的时候用引用"></a> 传参的时候用引用</h4>
-<p>函数传参进来，默认是值拷贝，也就是函数内部我们的变量做了任何改动都影响不到外面的了</p>
+<p>函数传参进来，默认是值拷贝，从调用的地方把值复制一遍传给函数。函数内部对我们的变量做了任何改动都影响不到外面的本体了</p>
 <p>如果我们需要在函数里面影响到传进来的参数本身（比如修改数组的成员），就要把形参改成引用。</p>
 <p><strong>swap的例子：</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>&amp; a, <span class="keyword">int</span>&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp;</span><br><span class="line">    tmp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>等价于</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span>* b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp;</span><br><span class="line">    tmp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>修改数组元素的例子：</strong></p>
-<p>传入数组的引用，返回元素的引用。</p>
+<p>函数传入一个数组的引用，返回数组某个元素的引用。</p>
 <p><strong>注意：</strong> 函数类型也是引用，引用的定义必须有等号初始化（不能空引用）。传参的时候也必须是</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 错误写法，即使返回引用，也修改不到原来的nums</span></span><br><span class="line"><span class="comment">// int&amp; setValue(vector&lt;int&gt; nums, int i) &#123;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">setValue</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; x = nums[i];</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; nums = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">setValue</span>(nums, <span class="number">0</span>) = <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 错误写法，即使返回引用，也修改不到原来的nums</span></span><br><span class="line"><span class="comment">// int&amp; setValue(vector&lt;int&gt; nums, int i) &#123;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">setValue</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; x = nums[i];</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; nums = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">setValue</span>(nums, <span class="number">0</span>) = <span class="number">8</span>;  <span class="comment">// 返回引用就可以修改这个元素啦</span></span><br></pre></td></tr></table></figure>
+<p>总之，引用就是为了解决传参和出参总是产生副本的问题。（ <strong>从值传递变成引用传递</strong> ）</p>
 <p>当返回一个引用时，要注意被引用的对象不能超出作用域。所以返回一个对局部变量的引用是不合法的，但是，可以返回一个对静态变量的引用。</p>
 ]]></content>
   </entry>
@@ -320,6 +321,9 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <h3 id="string作为参数"><a class="markdownIt-Anchor" href="#string作为参数"></a> string作为参数</h3>
 <p>即使调用函数给的是 “123212” 这种，也会自动识别转换为 string。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(string x)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">func</span>(<span class="string">&quot;1234&quot;</span>);  <span class="comment">// 这样是可以的</span></span><br></pre></td></tr></table></figure>
+<p>但是如果形参是这样的，又不行了</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fuc</span><span class="params">(string&amp; x)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; x;</span><br><span class="line">&#125;  </span><br><span class="line"><span class="built_in">func</span>(<span class="string">&quot;1234&quot;</span>);  <span class="comment">// 报错 const char [4] 不能自动转成 string</span></span><br></pre></td></tr></table></figure>
+<p>看来，“1232” 这种实际上是 <strong>const char []</strong> 类型的</p>
 <p><strong>string的特性</strong></p>
 <p>string 和<code>char *</code>类型的字符串进行对比：<br>
 （1）<code>char *</code>是一个指针，而string是一个类。string封装了<code>char *</code>，管理这个字符串，是一个<code>char *</code>型的容器。<br>
@@ -330,7 +334,8 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
   <entry>
     <title>C++的类</title>
     <url>/posts/2545696309/</url>
-    <content><![CDATA[<p>整理基本用法</p>
+    <content><![CDATA[<p>c++类的一些基本用法</p>
+<span id="more"></span>
 <h3 id="实例成员"><a class="markdownIt-Anchor" href="#实例成员"></a> 实例成员</h3>
 <p>把 A 当成结构体来用：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">3</span>;</span><br><span class="line">&#125;;  <span class="comment">// 结尾有分号</span></span><br></pre></td></tr></table></figure>
@@ -352,7 +357,17 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <h3 id="拷贝构造函数"><a class="markdownIt-Anchor" href="#拷贝构造函数"></a> 拷贝构造函数</h3>
 <p>和构造函数的区别就是，它需要传入一个 const 版本的实例化的自己的引用</p>
 <p>定义了这个函数，就可以 <strong>类名(实例名)</strong> 初始化一个新的类。</p>
+<p>拷贝构造函数发生的情形：</p>
+<p>1、对象被值传递的传参进函数（引用传递就不会调用拷贝构造函数了）</p>
+<p>2、对象被返回为值出函数（返回类型是引用不会调用拷贝）</p>
+<p>3、初始化新的对象时</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">A</span>() &#123;&#125;</span><br><span class="line">        <span class="built_in">A</span>(<span class="keyword">const</span> A&amp; a) &#123;  <span class="comment">// 这个传入 const 类名引用 参数名 的就是拷贝构造函数</span></span><br><span class="line">            x = a.x;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line">A a;</span><br><span class="line">a.x = <span class="number">100</span>;</span><br><span class="line"><span class="function">A <span class="title">b</span><span class="params">(a)</span></span>;</span><br><span class="line">cout &lt;&lt; b.x;</span><br></pre></td></tr></table></figure>
+<p>为什么加 const：加不加差不多，但是可以防止意外的修改。（拷贝的过程只读即可）</p>
+<p>为什么要加引用呢，如果直接传类本身进 <strong>拷贝构造函数</strong>，会触发函数传参规则的 <strong>值传递拷贝</strong>，导致再次调用 <strong>拷贝构造函数</strong>，形成无限递归了。</p>
+<h3 id="public-和-private"><a class="markdownIt-Anchor" href="#public-和-private"></a> public 和 private</h3>
+<p>public、private（还有protected）的目的主要是为了继承</p>
+<p><strong>public：</strong> 类里面全部可以互通，大家都有读写权限。</p>
+<p><strong>private：</strong> 只有类函数的 <strong>里面</strong> 可以拿到 private 变量与函数的操作（读写）权限，其他情况都是无权限的（省得用户乱改）</p>
 ]]></content>
   </entry>
   <entry>
