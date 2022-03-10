@@ -2,7 +2,7 @@
 title: 分类
 date: 2022-03-10 17:28:56
 ---
-<p><strong>排序</strong> </p>
+<p><strong><a  class="post-title-link" href = "/categories/排序/">排序</a></strong> </p>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/2276098981/"
             itemprop="url"><span itemprop="name">--  堆排序</span></a></div><br /><p><strong>LeetCode</strong> </p>
