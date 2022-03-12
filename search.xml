@@ -508,6 +508,11 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
+    <title>二叉树的遍历</title>
+    <url>/posts/3930489296/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>不简单的排序</title>
     <url>/posts/1704803221/</url>
     <content><![CDATA[<p>本篇包含：</p>
@@ -534,11 +539,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       <categories>
         <category>排序</category>
       </categories>
-  </entry>
-  <entry>
-    <title>二叉树的遍历</title>
-    <url>/posts/3930489296/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
