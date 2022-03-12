@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>105. 从前序与中序遍历序列构造二叉树</title>
+    <url>/posts/2058783557/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。</p>
+<blockquote>
+<p>输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]<br>
+输出: [3,9,20,null,null,15,7]</p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>任何遍历数组，可以分成三部分（1）根结点（2）左子树（3）右子树</p>
+<ol>
+<li>先序遍历的第一个元素是根结点</li>
+<li>中序遍历根结点左边是左子树，右边是右子树</li>
+<li>先序遍历第二个元素后面依次是左子树、右子树，根据中序遍历得到的左子树长度，可以反推先序遍历的左子树、右子树</li>
+<li>已经知道左子树、右子树的位置了，对他们迭代上述过程</li>
+</ol>
+<p><strong>注意：</strong> 类似二分查找，先序遍历告诉我们根结点，在中序遍历里面找到根结点（可以用哈希表），然后迭代左右两边。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; index;  <span class="comment">// 记录中序遍历的每个结点的位置</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findNode</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> preLeft, <span class="keyword">int</span> preRight, <span class="keyword">int</span> inLeft, <span class="keyword">int</span> inRight)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// left、right记录当前正在参与迭代的子树</span></span><br><span class="line">        <span class="keyword">if</span> (preLeft &gt; preRight) <span class="keyword">return</span> <span class="literal">nullptr</span>;  <span class="comment">// 子树长度为空的情况返回空指针</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(preorder[preLeft]);</span><br><span class="line">        <span class="keyword">int</span> inRoot = index[preorder[preLeft]];  <span class="comment">// 根结点在中序遍历的位置</span></span><br><span class="line">        <span class="keyword">int</span> preLeftLen = inRoot - inLeft;  <span class="comment">// 左子树的长度</span></span><br><span class="line">        root-&gt;left = <span class="built_in">findNode</span>(preorder, inorder, preLeft + <span class="number">1</span>, preLeft + preLeftLen, inLeft, inRoot - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">findNode</span>(preorder, inorder, preLeft + preLeftLen + <span class="number">1</span>, preRight, inRoot + <span class="number">1</span>, inRight);</span><br><span class="line">        <span class="keyword">return</span> root;  <span class="comment">// 记得返回自己</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> n = inorder.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            index[inorder[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">findNode</span>(preorder, inorder, <span class="number">0</span>, n<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="相关题目"><a class="markdownIt-Anchor" href="#相关题目"></a> 相关题目</h3>
+<p><strong>106. 从中序与后序遍历序列构造二叉树</strong></p>
+<p>后序的根结点在末尾，其他没区别</p>
+<p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a></p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>买卖股票的最佳时机</title>
     <url>/posts/3068883604/</url>
     <content><![CDATA[<h2 id="买卖股票的最佳时机"><a class="markdownIt-Anchor" href="#买卖股票的最佳时机"></a> 买卖股票的最佳时机</h2>
@@ -82,35 +111,6 @@
       <categories>
         <category>LeetCode</category>
         <category>动态规划</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>105. 从前序与中序遍历序列构造二叉树</title>
-    <url>/posts/2058783557/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。</p>
-<blockquote>
-<p>输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]<br>
-输出: [3,9,20,null,null,15,7]</p>
-</blockquote>
-<p>链接：<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>任何遍历数组，可以分成三部分（1）根结点（2）左子树（3）右子树</p>
-<ol>
-<li>先序遍历的第一个元素是根结点</li>
-<li>中序遍历根结点左边是左子树，右边是右子树</li>
-<li>先序遍历第二个元素后面依次是左子树、右子树，根据中序遍历得到的左子树长度，可以反推先序遍历的左子树、右子树</li>
-<li>已经知道左子树、右子树的位置了，对他们迭代上述过程</li>
-</ol>
-<p><strong>注意：</strong> 类似二分查找，先序遍历告诉我们根结点，在中序遍历里面找到根结点（可以用哈希表），然后迭代左右两边。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; index;  <span class="comment">// 记录中序遍历的每个结点的位置</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findNode</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> preLeft, <span class="keyword">int</span> preRight, <span class="keyword">int</span> inLeft, <span class="keyword">int</span> inRight)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// left、right记录当前正在参与迭代的子树</span></span><br><span class="line">        <span class="keyword">if</span> (preLeft &gt; preRight) <span class="keyword">return</span> <span class="literal">nullptr</span>;  <span class="comment">// 子树长度为空的情况返回空指针</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(preorder[preLeft]);</span><br><span class="line">        <span class="keyword">int</span> inRoot = index[preorder[preLeft]];  <span class="comment">// 根结点在中序遍历的位置</span></span><br><span class="line">        <span class="keyword">int</span> preLeftLen = inRoot - inLeft;  <span class="comment">// 左子树的长度</span></span><br><span class="line">        root-&gt;left = <span class="built_in">findNode</span>(preorder, inorder, preLeft + <span class="number">1</span>, preLeft + preLeftLen, inLeft, inRoot - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">findNode</span>(preorder, inorder, preLeft + preLeftLen + <span class="number">1</span>, preRight, inRoot + <span class="number">1</span>, inRight);</span><br><span class="line">        <span class="keyword">return</span> root;  <span class="comment">// 记得返回自己</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> n = inorder.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            index[inorder[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">findNode</span>(preorder, inorder, <span class="number">0</span>, n<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="相关题目"><a class="markdownIt-Anchor" href="#相关题目"></a> 相关题目</h3>
-<p><strong>106. 从中序与后序遍历序列构造二叉树</strong></p>
-<p>后序的根结点在末尾，其他没区别</p>
-<p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
@@ -220,30 +220,6 @@
       <categories>
         <category>C++</category>
       </categories>
-  </entry>
-  <entry>
-    <title>C++的STL容器</title>
-    <url>/posts/364802778/</url>
-    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>push：</strong> 推入元素</p>
-<p><strong>top：</strong> 获取堆顶元素</p>
-<p><strong>pop：</strong> 删除堆顶元素</p>
-<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>front：</strong> 获取第一个元素</p>
-<p><strong>pop：</strong> 第一个元素删掉</p>
-<p><strong>back：</strong> 获取最后一个元素</p>
-<p><strong>push：</strong> 尾巴加一个</p>
-<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
-<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
-<p><strong>push_back：</strong> 从后面加元素</p>
-<p><strong>push_front：</strong> 从前面加元素</p>
-<p><strong>pop_back：</strong> 从后面删除元素</p>
-<p><strong>pop_front：</strong> 从前面删除元素</p>
-<p>empty、clear 也有</p>
-]]></content>
   </entry>
   <entry>
     <title>C++的指针(和引用)</title>
@@ -362,6 +338,33 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;&amp; <span class="title">mulValue</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: nums) p *= i;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>总之，引用就是为了解决传参和出参总是产生副本的问题。（ <strong>从值传递变成引用传递</strong> ）</p>
 <p>当返回一个引用时，要注意被引用的对象不能超出作用域。所以不要返回局部对象的引用，但是，可以返回一个对静态变量的引用。</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++的STL容器</title>
+    <url>/posts/364802778/</url>
+    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>push：</strong> 推入元素</p>
+<p><strong>top：</strong> 获取堆顶元素</p>
+<p><strong>pop：</strong> 删除堆顶元素</p>
+<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>front：</strong> 获取第一个元素</p>
+<p><strong>pop：</strong> 第一个元素删掉</p>
+<p><strong>back：</strong> 获取最后一个元素</p>
+<p><strong>push：</strong> 尾巴加一个</p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
+<p><strong>push_back：</strong> 从后面加元素</p>
+<p><strong>push_front：</strong> 从前面加元素</p>
+<p><strong>pop_back：</strong> 从后面删除元素</p>
+<p><strong>pop_front：</strong> 从前面删除元素</p>
+<p>empty、clear 也有</p>
 ]]></content>
       <categories>
         <category>C++</category>
