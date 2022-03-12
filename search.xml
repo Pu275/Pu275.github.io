@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>105. 从前序与中序遍历序列构造二叉树</title>
-    <url>/posts/2058783557/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。</p>
-<blockquote>
-<p>输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]<br>
-输出: [3,9,20,null,null,15,7]</p>
-</blockquote>
-<p>链接：<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>任何遍历数组，可以分成三部分（1）根结点（2）左子树（3）右子树</p>
-<ol>
-<li>先序遍历的第一个元素是根结点</li>
-<li>中序遍历根结点左边是左子树，右边是右子树</li>
-<li>先序遍历第二个元素后面依次是左子树、右子树，根据中序遍历得到的左子树长度，可以反推先序遍历的左子树、右子树</li>
-<li>已经知道左子树、右子树的位置了，对他们迭代上述过程</li>
-</ol>
-<p><strong>注意：</strong> 类似二分查找，先序遍历告诉我们根结点，在中序遍历里面找到根结点（可以用哈希表），然后迭代左右两边。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; index;  <span class="comment">// 记录中序遍历的每个结点的位置</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findNode</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> preLeft, <span class="keyword">int</span> preRight, <span class="keyword">int</span> inLeft, <span class="keyword">int</span> inRight)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// left、right记录当前正在参与迭代的子树</span></span><br><span class="line">        <span class="keyword">if</span> (preLeft &gt; preRight) <span class="keyword">return</span> <span class="literal">nullptr</span>;  <span class="comment">// 子树长度为空的情况返回空指针</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(preorder[preLeft]);</span><br><span class="line">        <span class="keyword">int</span> inRoot = index[preorder[preLeft]];  <span class="comment">// 根结点在中序遍历的位置</span></span><br><span class="line">        <span class="keyword">int</span> preLeftLen = inRoot - inLeft;  <span class="comment">// 左子树的长度</span></span><br><span class="line">        root-&gt;left = <span class="built_in">findNode</span>(preorder, inorder, preLeft + <span class="number">1</span>, preLeft + preLeftLen, inLeft, inRoot - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">findNode</span>(preorder, inorder, preLeft + preLeftLen + <span class="number">1</span>, preRight, inRoot + <span class="number">1</span>, inRight);</span><br><span class="line">        <span class="keyword">return</span> root;  <span class="comment">// 记得返回自己</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> n = inorder.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            index[inorder[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">findNode</span>(preorder, inorder, <span class="number">0</span>, n<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="相关题目"><a class="markdownIt-Anchor" href="#相关题目"></a> 相关题目</h3>
-<p><strong>106. 从中序与后序遍历序列构造二叉树</strong></p>
-<p>后序的根结点在末尾，其他没区别</p>
-<p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>买卖股票的最佳时机</title>
     <url>/posts/3068883604/</url>
     <content><![CDATA[<h2 id="买卖股票的最佳时机"><a class="markdownIt-Anchor" href="#买卖股票的最佳时机"></a> 买卖股票的最佳时机</h2>
@@ -114,17 +85,29 @@
       </categories>
   </entry>
   <entry>
-    <title>300. 最长递增子序列</title>
-    <url>/posts/3337128124/</url>
+    <title>105. 从前序与中序遍历序列构造二叉树</title>
+    <url>/posts/2058783557/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
-<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
-<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
+<p>给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。</p>
+<blockquote>
+<p>输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]<br>
+输出: [3,9,20,null,null,15,7]</p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
 <h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
-<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>任何遍历数组，可以分成三部分（1）根结点（2）左子树（3）右子树</p>
+<ol>
+<li>先序遍历的第一个元素是根结点</li>
+<li>中序遍历根结点左边是左子树，右边是右子树</li>
+<li>先序遍历第二个元素后面依次是左子树、右子树，根据中序遍历得到的左子树长度，可以反推先序遍历的左子树、右子树</li>
+<li>已经知道左子树、右子树的位置了，对他们迭代上述过程</li>
+</ol>
+<p><strong>注意：</strong> 类似二分查找，先序遍历告诉我们根结点，在中序遍历里面找到根结点（可以用哈希表），然后迭代左右两边。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; index;  <span class="comment">// 记录中序遍历的每个结点的位置</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findNode</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">int</span> preLeft, <span class="keyword">int</span> preRight, <span class="keyword">int</span> inLeft, <span class="keyword">int</span> inRight)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// left、right记录当前正在参与迭代的子树</span></span><br><span class="line">        <span class="keyword">if</span> (preLeft &gt; preRight) <span class="keyword">return</span> <span class="literal">nullptr</span>;  <span class="comment">// 子树长度为空的情况返回空指针</span></span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(preorder[preLeft]);</span><br><span class="line">        <span class="keyword">int</span> inRoot = index[preorder[preLeft]];  <span class="comment">// 根结点在中序遍历的位置</span></span><br><span class="line">        <span class="keyword">int</span> preLeftLen = inRoot - inLeft;  <span class="comment">// 左子树的长度</span></span><br><span class="line">        root-&gt;left = <span class="built_in">findNode</span>(preorder, inorder, preLeft + <span class="number">1</span>, preLeft + preLeftLen, inLeft, inRoot - <span class="number">1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">findNode</span>(preorder, inorder, preLeft + preLeftLen + <span class="number">1</span>, preRight, inRoot + <span class="number">1</span>, inRight);</span><br><span class="line">        <span class="keyword">return</span> root;  <span class="comment">// 记得返回自己</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; preorder, vector&lt;<span class="keyword">int</span>&gt;&amp; inorder)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> n = inorder.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            index[inorder[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">findNode</span>(preorder, inorder, <span class="number">0</span>, n<span class="number">-1</span>, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="相关题目"><a class="markdownIt-Anchor" href="#相关题目"></a> 相关题目</h3>
+<p><strong>106. 从中序与后序遍历序列构造二叉树</strong></p>
+<p>后序的根结点在末尾，其他没区别</p>
+<p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -138,6 +121,23 @@
 <p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
 <span id="more"></span>
 <p><img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379"></p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>300. 最长递增子序列</title>
+    <url>/posts/3337128124/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
+<p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p><img src="/posts/3337128124/image-20220303014532879.png" alt="image-20220303014532879"></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p><strong>注意：</strong> 题目要求的是子序列，不要求顺序上是连续的。这样每次加入新元素的时候，前面的所有元素都有可能重新加入（或者退出）目标子序列，比如前面是 <code>[1,2,3,7,5]</code>，后面加入 6 的话，最优子序列就更新成 <code>[1,2,3,5,6]</code>。</p>
+<p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -220,6 +220,30 @@
       <categories>
         <category>C++</category>
       </categories>
+  </entry>
+  <entry>
+    <title>C++的STL容器</title>
+    <url>/posts/364802778/</url>
+    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>push：</strong> 推入元素</p>
+<p><strong>top：</strong> 获取堆顶元素</p>
+<p><strong>pop：</strong> 删除堆顶元素</p>
+<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>front：</strong> 获取第一个元素</p>
+<p><strong>pop：</strong> 第一个元素删掉</p>
+<p><strong>back：</strong> 获取最后一个元素</p>
+<p><strong>push：</strong> 尾巴加一个</p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
+<p><strong>push_back：</strong> 从后面加元素</p>
+<p><strong>push_front：</strong> 从前面加元素</p>
+<p><strong>pop_back：</strong> 从后面删除元素</p>
+<p><strong>pop_front：</strong> 从前面删除元素</p>
+<p>empty、clear 也有</p>
+]]></content>
   </entry>
   <entry>
     <title>C++的指针(和引用)</title>
@@ -342,30 +366,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       <categories>
         <category>C++</category>
       </categories>
-  </entry>
-  <entry>
-    <title>C++的STL容器</title>
-    <url>/posts/364802778/</url>
-    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>push：</strong> 推入元素</p>
-<p><strong>top：</strong> 获取堆顶元素</p>
-<p><strong>pop：</strong> 删除堆顶元素</p>
-<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>front：</strong> 获取第一个元素</p>
-<p><strong>pop：</strong> 第一个元素删掉</p>
-<p><strong>back：</strong> 获取最后一个元素</p>
-<p><strong>push：</strong> 尾巴加一个</p>
-<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
-<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
-<p><strong>push_back：</strong> 从后面加元素</p>
-<p><strong>push_front：</strong> 从前面加元素</p>
-<p><strong>pop_back：</strong> 从后面删除元素</p>
-<p><strong>pop_front：</strong> 从前面删除元素</p>
-<p>empty、clear 也有</p>
-]]></content>
   </entry>
   <entry>
     <title>C++的string</title>
@@ -536,6 +536,34 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
     <title>二叉树的遍历</title>
     <url>/posts/3930489296/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
+    <url>/posts/2263724427/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/</a></p>
+<span id="more"></span>
+<h3 id="解答队列"><a class="markdownIt-Anchor" href="#解答队列"></a> 解答（队列）</h3>
+<p>遍历一遍字符串即可，不断的往队列添加字符并记录最大长度。</p>
+<p>还要确保队列里面都是没有重复的字符，做法是一旦下一位出现了重复的字符 s，就要截掉队列前半部分，直到队列没有那个 s，再加入下一位 s。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        deque&lt;<span class="keyword">char</span>&gt; cur;</span><br><span class="line">        <span class="keyword">char</span> curString;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; n) &#123;</span><br><span class="line">            curString = s[i];</span><br><span class="line">            <span class="comment">// 每次加新元素判断已经存在</span></span><br><span class="line">            <span class="comment">// 存在的话去掉头部元素直到没有重复元素</span></span><br><span class="line">            <span class="keyword">while</span> (!cur.<span class="built_in">empty</span>() &amp;&amp; <span class="built_in">find</span>(cur.<span class="built_in">begin</span>(), cur.<span class="built_in">end</span>(), curString) != cur.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                cur.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            cur.<span class="built_in">push_back</span>(curString);</span><br><span class="line">            <span class="keyword">if</span> (cur.<span class="built_in">size</span>() &gt; maxLen) maxLen = cur.<span class="built_in">size</span>();  <span class="comment">// 更新最大长度</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解答动态规划"><a class="markdownIt-Anchor" href="#解答动态规划"></a> 解答（动态规划）</h3>
+<p>思路和队列法类似，<code>dp[i]</code> 表示以 <strong>第 i 个字符</strong> 为结尾的最长无重复字符串的长度，分为两种情况：</p>
+<ol>
+<li>如果扫描 <code>dp[i-1]</code> 的字符串（也就是 <strong>第 i -1个字符</strong> 为结尾的目标字符串）里面没有 <code>s[i]</code>，此时直接把 <code>s[i]</code> 加入候补字符串，所以 <code>dp[i] = dp[i-1] + 1</code>；</li>
+<li>如果扫描 <code>dp[i-1]</code> 的字符串发现了已经有  <code>s[i]</code> 在里面（发生重复），那么就要记录下重复点的位置，更新重复点之后直到 i 位置的子字符串才是 i 位置的长度。（首先 i-1 位置是确保没有重复的，那么排除了里面和 <code>s[i]</code> 重复的，剩下的即可计入 i 位置的长度）。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> curMax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> update;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            update = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt; i - dp[i<span class="number">-1</span>] - <span class="number">1</span>; j--) &#123;  <span class="comment">// dp[i-1]状态是否含有 s[i]</span></span><br><span class="line">                <span class="keyword">if</span> (s[j] == s[i]) &#123;  <span class="comment">// 更新长度</span></span><br><span class="line">                    dp[i] = i - j;</span><br><span class="line">                    update = <span class="literal">true</span>;  <span class="comment">// 发现有重复</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!update) &#123;</span><br><span class="line">                dp[i] = dp[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; curMax) curMax = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> curMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="后续"><a class="markdownIt-Anchor" href="#后续"></a> 后续</h3>
+<p>本人在面试中再次做错了。。。。</p>
+<h4 id="队列法"><a class="markdownIt-Anchor" href="#队列法"></a> 队列法</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        q = []</span><br><span class="line">        curMax = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">while</span> s[i] <span class="keyword">in</span> q:</span><br><span class="line">                q.pop(<span class="number">0</span>)</span><br><span class="line">            q.append(s[i])</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(q) &gt; curMax:</span><br><span class="line">                curMax = <span class="built_in">len</span>(q)</span><br><span class="line">        <span class="keyword">return</span> curMax</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+        <category>动态规划</category>
+      </categories>
   </entry>
   <entry>
     <title>剑指 Offer 53 - I. 在排序数组中查找数字 I</title>
@@ -738,34 +766,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
-    <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
-    <url>/posts/2263724427/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/</a></p>
-<span id="more"></span>
-<h3 id="解答队列"><a class="markdownIt-Anchor" href="#解答队列"></a> 解答（队列）</h3>
-<p>遍历一遍字符串即可，不断的往队列添加字符并记录最大长度。</p>
-<p>还要确保队列里面都是没有重复的字符，做法是一旦下一位出现了重复的字符 s，就要截掉队列前半部分，直到队列没有那个 s，再加入下一位 s。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        deque&lt;<span class="keyword">char</span>&gt; cur;</span><br><span class="line">        <span class="keyword">char</span> curString;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; n) &#123;</span><br><span class="line">            curString = s[i];</span><br><span class="line">            <span class="comment">// 每次加新元素判断已经存在</span></span><br><span class="line">            <span class="comment">// 存在的话去掉头部元素直到没有重复元素</span></span><br><span class="line">            <span class="keyword">while</span> (!cur.<span class="built_in">empty</span>() &amp;&amp; <span class="built_in">find</span>(cur.<span class="built_in">begin</span>(), cur.<span class="built_in">end</span>(), curString) != cur.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                cur.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            cur.<span class="built_in">push_back</span>(curString);</span><br><span class="line">            <span class="keyword">if</span> (cur.<span class="built_in">size</span>() &gt; maxLen) maxLen = cur.<span class="built_in">size</span>();  <span class="comment">// 更新最大长度</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="解答动态规划"><a class="markdownIt-Anchor" href="#解答动态规划"></a> 解答（动态规划）</h3>
-<p>思路和队列法类似，<code>dp[i]</code> 表示以 <strong>第 i 个字符</strong> 为结尾的最长无重复字符串的长度，分为两种情况：</p>
-<ol>
-<li>如果扫描 <code>dp[i-1]</code> 的字符串（也就是 <strong>第 i -1个字符</strong> 为结尾的目标字符串）里面没有 <code>s[i]</code>，此时直接把 <code>s[i]</code> 加入候补字符串，所以 <code>dp[i] = dp[i-1] + 1</code>；</li>
-<li>如果扫描 <code>dp[i-1]</code> 的字符串发现了已经有  <code>s[i]</code> 在里面（发生重复），那么就要记录下重复点的位置，更新重复点之后直到 i 位置的子字符串才是 i 位置的长度。（首先 i-1 位置是确保没有重复的，那么排除了里面和 <code>s[i]</code> 重复的，剩下的即可计入 i 位置的长度）。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> curMax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">bool</span> update;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            update = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt; i - dp[i<span class="number">-1</span>] - <span class="number">1</span>; j--) &#123;  <span class="comment">// dp[i-1]状态是否含有 s[i]</span></span><br><span class="line">                <span class="keyword">if</span> (s[j] == s[i]) &#123;  <span class="comment">// 更新长度</span></span><br><span class="line">                    dp[i] = i - j;</span><br><span class="line">                    update = <span class="literal">true</span>;  <span class="comment">// 发现有重复</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!update) &#123;</span><br><span class="line">                dp[i] = dp[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; curMax) curMax = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> curMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="后续"><a class="markdownIt-Anchor" href="#后续"></a> 后续</h3>
-<p>本人在面试中再次做错了。。。。</p>
-<h4 id="队列法"><a class="markdownIt-Anchor" href="#队列法"></a> 队列法</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        q = []</span><br><span class="line">        curMax = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">while</span> s[i] <span class="keyword">in</span> q:</span><br><span class="line">                q.pop(<span class="number">0</span>)</span><br><span class="line">            q.append(s[i])</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(q) &gt; curMax:</span><br><span class="line">                curMax = <span class="built_in">len</span>(q)</span><br><span class="line">        <span class="keyword">return</span> curMax</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>动态规划</category>
-      </categories>
-  </entry>
-  <entry>
     <title>机器学习评估指标</title>
     <url>/posts/4266880316/</url>
     <content><![CDATA[<h3 id="评估指标"><a class="markdownIt-Anchor" href="#评估指标"></a> 评估指标</h3>
@@ -878,6 +878,35 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
       <categories>
         <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>简单的排序</title>
+    <url>/posts/2810482356/</url>
+    <content><![CDATA[<p>本篇包含：</p>
+<ul>
+<li>冒泡排序</li>
+<li>选择排序</li>
+<li>插入排序</li>
+<li>希尔排序</li>
+</ul>
+<span id="more"></span>
+<h3 id="冒泡排序"><a class="markdownIt-Anchor" href="#冒泡排序"></a> 冒泡排序</h3>
+<p>思路：每轮把最大元素放到尾巴，如果某一轮没有发生交换，说明已经有序，停止。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">bool</span> isSorted = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        isSorted = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n - i - <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j+<span class="number">1</span>] &lt; nums[j]) &#123;  <span class="comment">// 大的换到后面去</span></span><br><span class="line">                <span class="built_in">swap</span>(nums[j], nums[j+<span class="number">1</span>]);</span><br><span class="line">                isSorted = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isSorted) <span class="keyword">return</span> nums;  <span class="comment">// 没有发生交换表明排序完成</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="选择排序"><a class="markdownIt-Anchor" href="#选择排序"></a> 选择排序</h3>
+<p>思路：每次把最小元素放到头上</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> minIndex;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j] &lt; nums[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">swap</span>(nums[i], nums[minIndex]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序"><a class="markdownIt-Anchor" href="#插入排序"></a> 插入排序</h3>
+<p>思路：从头开始，按照顺序，每次加入一个新元素，把它交换到合适的位置</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j<span class="number">-1</span>] &lt; nums[j]) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[j<span class="number">-1</span>], nums[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="希尔排序"><a class="markdownIt-Anchor" href="#希尔排序"></a> 希尔排序</h3>
+<p>思路：插入排序的增强版，分而治之。比如，[1, 2, 3, 4, 5] 分成 [1, 3, 5] 和 [2, 4] 两部分分别插入排序，然后合起来再来一次插入排序</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">shellSort</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> gap = n / <span class="number">2</span>;  <span class="comment">// gap 表示子序列每隔 gap 个取一个</span></span><br><span class="line">    <span class="keyword">while</span> (gap &gt;= <span class="number">1</span>) &#123;  <span class="comment">// gap = 1 的时候就是普通插入排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = gap; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; gap<span class="number">-1</span>; j -= gap) &#123;  <span class="comment">// 子序列的插入排序</span></span><br><span class="line">                <span class="keyword">if</span> (nums[j-gap] &lt; nums[j]) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">swap</span>(nums[j-gap], nums[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        gap /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> j 的范围要防止小于 0（参考gap = 1的插入排序时候，j &gt; 0）。gap 取为二分之一比较好处理下标。</p>
+]]></content>
+      <categories>
+        <category>排序</category>
       </categories>
   </entry>
   <entry>
@@ -1030,35 +1059,6 @@ x = \frac{e^{f(x)}}{1 + e^{f(x)}}
 ]]></content>
       <categories>
         <category>机器学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>简单的排序</title>
-    <url>/posts/2810482356/</url>
-    <content><![CDATA[<p>本篇包含：</p>
-<ul>
-<li>冒泡排序</li>
-<li>选择排序</li>
-<li>插入排序</li>
-<li>希尔排序</li>
-</ul>
-<span id="more"></span>
-<h3 id="冒泡排序"><a class="markdownIt-Anchor" href="#冒泡排序"></a> 冒泡排序</h3>
-<p>思路：每轮把最大元素放到尾巴，如果某一轮没有发生交换，说明已经有序，停止。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">bool</span> isSorted = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        isSorted = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n - i - <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j+<span class="number">1</span>] &lt; nums[j]) &#123;  <span class="comment">// 大的换到后面去</span></span><br><span class="line">                <span class="built_in">swap</span>(nums[j], nums[j+<span class="number">1</span>]);</span><br><span class="line">                isSorted = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isSorted) <span class="keyword">return</span> nums;  <span class="comment">// 没有发生交换表明排序完成</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="选择排序"><a class="markdownIt-Anchor" href="#选择排序"></a> 选择排序</h3>
-<p>思路：每次把最小元素放到头上</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> minIndex;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        minIndex = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j] &lt; nums[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">swap</span>(nums[i], nums[minIndex]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="插入排序"><a class="markdownIt-Anchor" href="#插入排序"></a> 插入排序</h3>
-<p>思路：从头开始，按照顺序，每次加入一个新元素，把它交换到合适的位置</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j<span class="number">-1</span>] &lt; nums[j]) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[j<span class="number">-1</span>], nums[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="希尔排序"><a class="markdownIt-Anchor" href="#希尔排序"></a> 希尔排序</h3>
-<p>思路：插入排序的增强版，分而治之。比如，[1, 2, 3, 4, 5] 分成 [1, 3, 5] 和 [2, 4] 两部分分别插入排序，然后合起来再来一次插入排序</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">shellSort</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> gap = n / <span class="number">2</span>;  <span class="comment">// gap 表示子序列每隔 gap 个取一个</span></span><br><span class="line">    <span class="keyword">while</span> (gap &gt;= <span class="number">1</span>) &#123;  <span class="comment">// gap = 1 的时候就是普通插入排序</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = gap; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; gap<span class="number">-1</span>; j -= gap) &#123;  <span class="comment">// 子序列的插入排序</span></span><br><span class="line">                <span class="keyword">if</span> (nums[j-gap] &lt; nums[j]) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="built_in">swap</span>(nums[j-gap], nums[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        gap /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> j 的范围要防止小于 0（参考gap = 1的插入排序时候，j &gt; 0）。gap 取为二分之一比较好处理下标。</p>
-]]></content>
-      <categories>
-        <category>排序</category>
       </categories>
   </entry>
 </search>
