@@ -222,33 +222,6 @@
       </categories>
   </entry>
   <entry>
-    <title>C++的STL容器</title>
-    <url>/posts/364802778/</url>
-    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>push：</strong> 推入元素</p>
-<p><strong>top：</strong> 获取堆顶元素</p>
-<p><strong>pop：</strong> 删除堆顶元素</p>
-<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>front：</strong> 获取第一个元素</p>
-<p><strong>pop：</strong> 第一个元素删掉</p>
-<p><strong>back：</strong> 获取最后一个元素</p>
-<p><strong>push：</strong> 尾巴加一个</p>
-<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
-<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
-<p><strong>push_back：</strong> 从后面加元素</p>
-<p><strong>push_front：</strong> 从前面加元素</p>
-<p><strong>pop_back：</strong> 从后面删除元素</p>
-<p><strong>pop_front：</strong> 从前面删除元素</p>
-<p>empty、clear 也有</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C++的指针(和引用)</title>
     <url>/posts/3219915228/</url>
     <content><![CDATA[<h3 id="指针是什么"><a class="markdownIt-Anchor" href="#指针是什么"></a> 指针是什么</h3>
@@ -365,6 +338,33 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;&amp; <span class="title">mulValue</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: nums) p *= i;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>总之，引用就是为了解决传参和出参总是产生副本的问题。（ <strong>从值传递变成引用传递</strong> ）</p>
 <p>当返回一个引用时，要注意被引用的对象不能超出作用域。所以不要返回局部对象的引用，但是，可以返回一个对静态变量的引用。</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++的STL容器</title>
+    <url>/posts/364802778/</url>
+    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>push：</strong> 推入元素</p>
+<p><strong>top：</strong> 获取堆顶元素</p>
+<p><strong>pop：</strong> 删除堆顶元素</p>
+<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>front：</strong> 获取第一个元素</p>
+<p><strong>pop：</strong> 第一个元素删掉</p>
+<p><strong>back：</strong> 获取最后一个元素</p>
+<p><strong>push：</strong> 尾巴加一个</p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
+<p><strong>push_back：</strong> 从后面加元素</p>
+<p><strong>push_front：</strong> 从前面加元素</p>
+<p><strong>pop_back：</strong> 从后面删除元素</p>
+<p><strong>pop_front：</strong> 从前面删除元素</p>
+<p>empty、clear 也有</p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -508,11 +508,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
-    <title>二叉树的遍历</title>
-    <url>/posts/3930489296/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>不简单的排序</title>
     <url>/posts/1704803221/</url>
     <content><![CDATA[<p>本篇包含：</p>
@@ -539,6 +534,11 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       <categories>
         <category>排序</category>
       </categories>
+  </entry>
+  <entry>
+    <title>二叉树的遍历</title>
+    <url>/posts/3930489296/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
