@@ -30,28 +30,6 @@
       </categories>
   </entry>
   <entry>
-    <title>108. 将有序数组转换为二叉搜索树</title>
-    <url>/posts/388202331/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
-<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
-<p><strong>109. 有序链表转换二叉搜索树</strong></p>
-<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
-<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
-<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
-<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
-<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>111. 二叉树的最小深度</title>
     <url>/posts/4124547255/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -97,6 +75,28 @@
 <h3 id="解答二"><a class="markdownIt-Anchor" href="#解答二"></a> 解答二</h3>
 <p>考虑所有分支共用一个路径 vector，节约空间。每次结束分支的探索，就回溯路径。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPath</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;left-&gt;val);  <span class="comment">// 探索左分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;left, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;right-&gt;val);  <span class="comment">// 探索右分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;right, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">getPath</span>(root, targetSum);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>108. 将有序数组转换为二叉搜索树</title>
+    <url>/posts/388202331/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
+<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
+<p><strong>109. 有序链表转换二叉搜索树</strong></p>
+<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
+<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -344,6 +344,33 @@
       </categories>
   </entry>
   <entry>
+    <title>C++的STL容器</title>
+    <url>/posts/364802778/</url>
+    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>push：</strong> 推入元素</p>
+<p><strong>top：</strong> 获取堆顶元素</p>
+<p><strong>pop：</strong> 删除堆顶元素</p>
+<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>front：</strong> 获取第一个元素</p>
+<p><strong>pop：</strong> 第一个元素删掉</p>
+<p><strong>back：</strong> 获取最后一个元素</p>
+<p><strong>push：</strong> 尾巴加一个</p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
+<p><strong>push_back：</strong> 从后面加元素</p>
+<p><strong>push_front：</strong> 从前面加元素</p>
+<p><strong>pop_back：</strong> 从后面删除元素</p>
+<p><strong>pop_front：</strong> 从前面删除元素</p>
+<p>empty、clear 也有</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C++的指针(和引用)</title>
     <url>/posts/3219915228/</url>
     <content><![CDATA[<h3 id="指针是什么"><a class="markdownIt-Anchor" href="#指针是什么"></a> 指针是什么</h3>
@@ -460,33 +487,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;&amp; <span class="title">mulValue</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p: nums) p *= i;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>总之，引用就是为了解决传参和出参总是产生副本的问题。（ <strong>从值传递变成引用传递</strong> ）</p>
 <p>当返回一个引用时，要注意被引用的对象不能超出作用域。所以不要返回局部对象的引用，但是，可以返回一个对静态变量的引用。</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++的STL容器</title>
-    <url>/posts/364802778/</url>
-    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>push：</strong> 推入元素</p>
-<p><strong>top：</strong> 获取堆顶元素</p>
-<p><strong>pop：</strong> 删除堆顶元素</p>
-<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>front：</strong> 获取第一个元素</p>
-<p><strong>pop：</strong> 第一个元素删掉</p>
-<p><strong>back：</strong> 获取最后一个元素</p>
-<p><strong>push：</strong> 尾巴加一个</p>
-<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
-<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
-<p><strong>push_back：</strong> 从后面加元素</p>
-<p><strong>push_front：</strong> 从前面加元素</p>
-<p><strong>pop_back：</strong> 从后面删除元素</p>
-<p><strong>pop_front：</strong> 从前面删除元素</p>
-<p>empty、clear 也有</p>
 ]]></content>
       <categories>
         <category>C++</category>
