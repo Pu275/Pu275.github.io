@@ -30,6 +30,28 @@
       </categories>
   </entry>
   <entry>
+    <title>108. 将有序数组转换为二叉搜索树</title>
+    <url>/posts/388202331/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
+<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
+<p><strong>109. 有序链表转换二叉搜索树</strong></p>
+<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
+<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>111. 二叉树的最小深度</title>
     <url>/posts/4124547255/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -81,22 +103,20 @@
       </categories>
   </entry>
   <entry>
-    <title>108. 将有序数组转换为二叉搜索树</title>
-    <url>/posts/388202331/</url>
+    <title>139. 单词拆分</title>
+    <url>/posts/1712133297/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
-<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
-<p><strong>109. 有序链表转换二叉搜索树</strong></p>
-<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
-<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
-<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
-<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
-<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
+<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
+<span id="more"></span>
+<img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379" style="zoom: 50%;">
+<h3 id="解答动态规划"><a class="markdownIt-Anchor" href="#解答动态规划"></a> 解答（动态规划）</h3>
+<p>bool 型 dp ，表示当前位置以前的子字符串是否可以被 worddict 里面的词语表出</p>
+<p>如果当前的子字符串小于词典里的词，那是不可能了。当前位置=当前词语个位置前的状态+当前词语能否匹配。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> w: wordDict) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dp[i] == <span class="literal">true</span>) <span class="keyword">break</span>;  <span class="comment">// 如果当前位置可以被表出就往后一位</span></span><br><span class="line">                <span class="keyword">if</span> (w.<span class="built_in">length</span>() &lt;= i) &#123;</span><br><span class="line">                    <span class="comment">// 判断词语能否表出 i 位置以前的子字符串</span></span><br><span class="line">                    dp[i] = dp[i-w.<span class="built_in">length</span>()] &amp;&amp; (s.<span class="built_in">substr</span>(i-w.<span class="built_in">length</span>(), w.<span class="built_in">length</span>()) == w);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解答动态规划2"><a class="markdownIt-Anchor" href="#解答动态规划2"></a> 解答（动态规划2）</h3>
+<p>类似的思路，考虑用 i 位置往前的子字符串去字典里查找，找到了再考虑结合以前的状态。两种方法的效率取决于字符串和字典哪个大</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            string word = s.<span class="built_in">substr</span>(i-j, j);</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">find</span>(wordDict.<span class="built_in">begin</span>(), wordDict.<span class="built_in">end</span>(), word) != wordDict.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                dp[i] = dp[i] || dp[i - word.<span class="built_in">length</span>()];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -184,26 +204,6 @@
       <categories>
         <category>LeetCode</category>
         <category>动态规划</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>139. 单词拆分</title>
-    <url>/posts/1712133297/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。</p>
-<p><strong>注意：</strong> 不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
-<span id="more"></span>
-<img src="/posts/1712133297/image-20220223154658379.png" alt="image-20220223154658379" style="zoom: 50%;">
-<h3 id="解答动态规划"><a class="markdownIt-Anchor" href="#解答动态规划"></a> 解答（动态规划）</h3>
-<p>bool 型 dp ，表示当前位置以前的子字符串是否可以被 worddict 里面的词语表出</p>
-<p>如果当前的子字符串小于词典里的词，那是不可能了。当前位置=当前词语个位置前的状态+当前词语能否匹配。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> w: wordDict) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dp[i] == <span class="literal">true</span>) <span class="keyword">break</span>;  <span class="comment">// 如果当前位置可以被表出就往后一位</span></span><br><span class="line">                <span class="keyword">if</span> (w.<span class="built_in">length</span>() &lt;= i) &#123;</span><br><span class="line">                    <span class="comment">// 判断词语能否表出 i 位置以前的子字符串</span></span><br><span class="line">                    dp[i] = dp[i-w.<span class="built_in">length</span>()] &amp;&amp; (s.<span class="built_in">substr</span>(i-w.<span class="built_in">length</span>(), w.<span class="built_in">length</span>()) == w);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="解答动态规划2"><a class="markdownIt-Anchor" href="#解答动态规划2"></a> 解答（动态规划2）</h3>
-<p>类似的思路，考虑用 i 位置往前的子字符串去字典里查找，找到了再考虑结合以前的状态。两种方法的效率取决于字符串和字典哪个大</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            string word = s.<span class="built_in">substr</span>(i-j, j);</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">find</span>(wordDict.<span class="built_in">begin</span>(), wordDict.<span class="built_in">end</span>(), word) != wordDict.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                dp[i] = dp[i] || dp[i - word.<span class="built_in">length</span>()];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
@@ -344,33 +344,6 @@
       </categories>
   </entry>
   <entry>
-    <title>C++的STL容器</title>
-    <url>/posts/364802778/</url>
-    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>push：</strong> 推入元素</p>
-<p><strong>top：</strong> 获取堆顶元素</p>
-<p><strong>pop：</strong> 删除堆顶元素</p>
-<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>front：</strong> 获取第一个元素</p>
-<p><strong>pop：</strong> 第一个元素删掉</p>
-<p><strong>back：</strong> 获取最后一个元素</p>
-<p><strong>push：</strong> 尾巴加一个</p>
-<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
-<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
-<p><strong>push_back：</strong> 从后面加元素</p>
-<p><strong>push_front：</strong> 从前面加元素</p>
-<p><strong>pop_back：</strong> 从后面删除元素</p>
-<p><strong>pop_front：</strong> 从前面删除元素</p>
-<p>empty、clear 也有</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C++的指针(和引用)</title>
     <url>/posts/3219915228/</url>
     <content><![CDATA[<h3 id="指针是什么"><a class="markdownIt-Anchor" href="#指针是什么"></a> 指针是什么</h3>
@@ -493,6 +466,33 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
+    <title>C++的STL容器</title>
+    <url>/posts/364802778/</url>
+    <content><![CDATA[<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>push：</strong> 推入元素</p>
+<p><strong>top：</strong> 获取堆顶元素</p>
+<p><strong>pop：</strong> 删除堆顶元素</p>
+<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>front：</strong> 获取第一个元素</p>
+<p><strong>pop：</strong> 第一个元素删掉</p>
+<p><strong>back：</strong> 获取最后一个元素</p>
+<p><strong>push：</strong> 尾巴加一个</p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
+<p><strong>push_back：</strong> 从后面加元素</p>
+<p><strong>push_front：</strong> 从前面加元素</p>
+<p><strong>pop_back：</strong> 从后面删除元素</p>
+<p><strong>pop_front：</strong> 从前面删除元素</p>
+<p>empty、clear 也有</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C++的string</title>
     <url>/posts/2635778603/</url>
     <content><![CDATA[<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h3>
@@ -590,6 +590,24 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
+    <title>pybind入门</title>
+    <url>/posts/1086231276/</url>
+    <content><![CDATA[<h3 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始</h3>
+<p>安装</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">pip</span> install pybind<span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p>官方示例</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pybind11/pybind11.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> py = pybind11;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i + j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(example, m) &#123;</span><br><span class="line">    m.<span class="built_in">doc</span>() = <span class="string">&quot;pybind11 example plugin&quot;</span>; <span class="comment">// optional module docstring</span></span><br><span class="line"></span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;add&quot;</span>, &amp;add, <span class="string">&quot;A function that adds two numbers&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译命令（macos）</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">c++ -O3 -Wall -shared -std=c++<span class="number">11</span> -undefined dynamic_lookup <span class="constructor">$(<span class="params">python3</span> -<span class="params">m</span> <span class="params">pybind11</span> --<span class="params">includes</span>)</span> example.cpp -o example<span class="constructor">$(<span class="params">python3</span>-<span class="params">config</span> --<span class="params">extension</span>-<span class="params">suffix</span>)</span></span><br></pre></td></tr></table></figure>
+<p><strong>c++：</strong> clang++</p>
+<p><strong>python3 -m pybind11 --includes：</strong> pybind 头文件目录</p>
+<p><strong>example$(python3-config --extension-suffix)：</strong> 尾巴，长这样：.cpython-37m-darwin.so</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>jupyter服务器配置</title>
     <url>/posts/103313547/</url>
     <content><![CDATA[<h3 id="生成配置文件"><a class="markdownIt-Anchor" href="#生成配置文件"></a> 生成配置文件</h3>
@@ -615,21 +633,24 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
   </entry>
   <entry>
-    <title>pybind入门</title>
-    <url>/posts/1086231276/</url>
-    <content><![CDATA[<h3 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始</h3>
-<p>安装</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">pip</span> install pybind<span class="number">11</span></span><br></pre></td></tr></table></figure>
-<p>官方示例</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pybind11/pybind11.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> py = pybind11;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i + j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(example, m) &#123;</span><br><span class="line">    m.<span class="built_in">doc</span>() = <span class="string">&quot;pybind11 example plugin&quot;</span>; <span class="comment">// optional module docstring</span></span><br><span class="line"></span><br><span class="line">    m.<span class="built_in">def</span>(<span class="string">&quot;add&quot;</span>, &amp;add, <span class="string">&quot;A function that adds two numbers&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>编译命令（macos）</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">c++ -O3 -Wall -shared -std=c++<span class="number">11</span> -undefined dynamic_lookup <span class="constructor">$(<span class="params">python3</span> -<span class="params">m</span> <span class="params">pybind11</span> --<span class="params">includes</span>)</span> example.cpp -o example<span class="constructor">$(<span class="params">python3</span>-<span class="params">config</span> --<span class="params">extension</span>-<span class="params">suffix</span>)</span></span><br></pre></td></tr></table></figure>
-<p><strong>c++：</strong> clang++</p>
-<p><strong>python3 -m pybind11 --includes：</strong> pybind 头文件目录</p>
-<p><strong>example$(python3-config --extension-suffix)：</strong> 尾巴，长这样：.cpython-37m-darwin.so</p>
+    <title>二叉树的遍历</title>
+    <url>/posts/3930489296/</url>
+    <content><![CDATA[<h3 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h3>
+<p>广度优先，就跟看文章一样遍历。使用队列模拟层的概念</p>
+<p>第一层：根结点</p>
+<p>第二层：根结点的左右子结点</p>
+<p>第三层：根结点的孙子结点们…</p>
+<p><strong>注意：</strong> 因为取出当前层的结点的同时，会有后续层的结点加入队列，所以每次取的数目需要事先固定。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelOrderBottom</span>(TreeNode* root) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;  <span class="comment">// 先进先出</span></span><br><span class="line">    q.<span class="built_in">push</span>(root);  <span class="comment">// 第一层是根结点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> n = q.<span class="built_in">size</span>();  <span class="comment">// 取出当前层的结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            TreeNode* cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            tmp.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;left);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="前中后序遍历"><a class="markdownIt-Anchor" href="#前中后序遍历"></a> 前中后序遍历</h3>
+<p>区分前中后：根结点（中）的位置，前序遍历：中左右；中序遍历：左中右；后序遍历：左右中</p>
+<p>这个规则对二叉树的任何子树（子结构）都是有效的，举例来说中序遍历，起点是二叉树左的不能再左的那个结点；后序遍历也是左的不能再左；前序遍历起点是根的不能再根（就是根结点）</p>
+<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
+<p>顺序左右中，递归法，用一个共享 vector 存放路径</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;left);  <span class="comment">// 左子树</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;right);  <span class="comment">// 右子树</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);  <span class="comment">// 中间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> path;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>C++</category>
+        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
@@ -658,27 +679,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 ]]></content>
       <categories>
         <category>排序</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>二叉树的遍历</title>
-    <url>/posts/3930489296/</url>
-    <content><![CDATA[<h3 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h3>
-<p>广度优先，就跟看文章一样遍历。使用队列模拟层的概念</p>
-<p>第一层：根结点</p>
-<p>第二层：根结点的左右子结点</p>
-<p>第三层：根结点的孙子结点们…</p>
-<p><strong>注意：</strong> 因为取出当前层的结点的同时，会有后续层的结点加入队列，所以每次取的数目需要事先固定。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelOrderBottom</span>(TreeNode* root) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;  <span class="comment">// 先进先出</span></span><br><span class="line">    q.<span class="built_in">push</span>(root);  <span class="comment">// 第一层是根结点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> n = q.<span class="built_in">size</span>();  <span class="comment">// 取出当前层的结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            TreeNode* cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            tmp.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;left);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="前中后序遍历"><a class="markdownIt-Anchor" href="#前中后序遍历"></a> 前中后序遍历</h3>
-<p>区分前中后：根结点（中）的位置，前序遍历：中左右；中序遍历：左中右；后序遍历：左右中</p>
-<p>这个规则对二叉树的任何子树（子结构）都是有效的，举例来说中序遍历，起点是二叉树左的不能再左的那个结点；后序遍历也是左的不能再左；前序遍历起点是根的不能再根（就是根结点）</p>
-<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
-<p>顺序左右中，递归法，用一个共享 vector 存放路径</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;left);  <span class="comment">// 左子树</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;right);  <span class="comment">// 右子树</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);  <span class="comment">// 中间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> path;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
