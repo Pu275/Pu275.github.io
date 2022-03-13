@@ -77,18 +77,9 @@
       </categories>
   </entry>
   <entry>
-    <title></title>
-    <url>/posts/0/</url>
-    <content><![CDATA[<hr>
-<p>title: 112.路径总和<br>
-date: 2022-03-12 20:46:58<br>
-tags:<br>
-categories:</p>
-<ul>
-<li>[LeetCode]</li>
-</ul>
-<hr>
-<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+    <title>112.路径总和</title>
+    <url>/posts/3650164630/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
 <p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
 <p>叶子节点 是指没有子节点的节点。</p>
 <p><a href="https://leetcode-cn.com/problems/path-sum/">https://leetcode-cn.com/problems/path-sum/</a></p>
@@ -107,6 +98,9 @@ categories:</p>
 <p>考虑所有分支共用一个路径 vector，节约空间。每次结束分支的探索，就回溯路径。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPath</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;left-&gt;val);  <span class="comment">// 探索左分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;left, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;right-&gt;val);  <span class="comment">// 探索右分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;right, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">getPath</span>(root, targetSum);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
   </entry>
   <entry>
     <title>买卖股票的最佳时机</title>
@@ -590,6 +584,12 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
+    <title>Rmarkdown里面的表格</title>
+    <url>/posts/1527658047/</url>
+    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
+]]></content>
+  </entry>
+  <entry>
     <title>jupyter服务器配置</title>
     <url>/posts/103313547/</url>
     <content><![CDATA[<h3 id="生成配置文件"><a class="markdownIt-Anchor" href="#生成配置文件"></a> 生成配置文件</h3>
@@ -659,12 +659,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       <categories>
         <category>排序</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Rmarkdown里面的表格</title>
-    <url>/posts/1527658047/</url>
-    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
-]]></content>
   </entry>
   <entry>
     <title>二叉树的遍历</title>
