@@ -31,6 +31,9 @@ date: 2022-03-10 17:28:56
             <a class="post-title-link" href="/posts/1555299937/"
             itemprop="url"><span itemprop="name">--  46. 全排列</span></a></div>
 <div class="post-meta-container">
+            <a class="post-title-link" href="/posts/600333799/"
+            itemprop="url"><span itemprop="name">--  474. 一和零</span></a></div>
+<div class="post-meta-container">
             <a class="post-title-link" href="/posts/1142963852/"
             itemprop="url"><span itemprop="name">--  887. 鸡蛋掉落</span></a></div>
 <div class="post-meta-container">
@@ -64,11 +67,17 @@ date: 2022-03-10 17:28:56
             <a class="post-title-link" href="/posts/285962043/"
             itemprop="url"><span itemprop="name">--  随机数LeetCode题目</span></a></div><br /><p><strong><a  class="post-title-link" href = "/categories/动态规划/">动态规划</a></strong> </p>
 <div class="post-meta-container">
+            <a class="post-title-link" href="/posts/600333799/"
+            itemprop="url"><span itemprop="name">--  474. 一和零</span></a></div>
+<div class="post-meta-container">
             <a class="post-title-link" href="/posts/2263724427/"
             itemprop="url"><span itemprop="name">--  剑指 Offer 48. 最长不含重复字符的子字符串</span></a></div>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/3068883604/"
             itemprop="url"><span itemprop="name">--  买卖股票的最佳时机</span></a></div><br /><p><strong><a  class="post-title-link" href = "/categories/C++/">C++</a></strong> </p>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/180734941/"
+            itemprop="url"><span itemprop="name">--  C++的Eigen库</span></a></div>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/364802778/"
             itemprop="url"><span itemprop="name">--  C++的STL容器</span></a></div>
@@ -104,7 +113,13 @@ date: 2022-03-10 17:28:56
             itemprop="url"><span itemprop="name">--  机器学习面试速成</span></a></div>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/4266880316/"
-            itemprop="url"><span itemprop="name">--  机器学习评估指标</span></a></div><br /><style>
+            itemprop="url"><span itemprop="name">--  机器学习评估指标</span></a></div>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/3154353656/"
+            itemprop="url"><span itemprop="name">--  一个仿照sklearn的SGDClassifier</span></a></div>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/2856566164/"
+            itemprop="url"><span itemprop="name">--  有限混合模型</span></a></div><br /><style>
       strong {
         font-size: 20px;
         }
