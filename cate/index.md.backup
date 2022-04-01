@@ -85,6 +85,9 @@ date: 2022-03-10 17:28:56
             <a class="post-title-link" href="/posts/2545696309/"
             itemprop="url"><span itemprop="name">--  C++的类</span></a></div>
 <div class="post-meta-container">
+            <a class="post-title-link" href="/posts/4121263569/"
+            itemprop="url"><span itemprop="name">--  C++的模板</span></a></div>
+<div class="post-meta-container">
             <a class="post-title-link" href="/posts/2635778603/"
             itemprop="url"><span itemprop="name">--  C++的string</span></a></div>
 <div class="post-meta-container">
@@ -98,7 +101,13 @@ date: 2022-03-10 17:28:56
             itemprop="url"><span itemprop="name">--  C++的指针(和引用)</span></a></div>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/1086231276/"
-            itemprop="url"><span itemprop="name">--  pybind入门</span></a></div><br /><p><strong><a  class="post-title-link" href = "/categories/排序/">排序</a></strong> </p>
+            itemprop="url"><span itemprop="name">--  pybind入门</span></a></div>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/285962043/"
+            itemprop="url"><span itemprop="name">--  随机数LeetCode题目</span></a></div>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/1600458028/"
+            itemprop="url"><span itemprop="name">--  一个仿照numpy的矩阵类</span></a></div><br /><p><strong><a  class="post-title-link" href = "/categories/排序/">排序</a></strong> </p>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/1704803221/"
             itemprop="url"><span itemprop="name">--  不简单的排序</span></a></div>
@@ -119,7 +128,10 @@ date: 2022-03-10 17:28:56
             itemprop="url"><span itemprop="name">--  一个仿照sklearn的SGDClassifier</span></a></div>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/2856566164/"
-            itemprop="url"><span itemprop="name">--  有限混合模型</span></a></div><br /><style>
+            itemprop="url"><span itemprop="name">--  有限混合模型</span></a></div><br /><p><strong><a  class="post-title-link" href = "/categories/Python/">Python</a></strong> </p>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/3617097176/"
+            itemprop="url"><span itemprop="name">--  Python引用计数</span></a></div><br /><style>
       strong {
         font-size: 20px;
         }
