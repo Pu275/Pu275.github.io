@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://puhan.top/posts/3426048063/</loc>
+    <loc>https://puhan.top/cate/index.html</loc>
+    
+    <lastmod>2022-04-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://puhan.top/posts/3238586417/</loc>
     
     <lastmod>2022-04-04</lastmod>
     
@@ -22,7 +31,16 @@
   <url>
     <loc>https://puhan.top/posts/505932064/</loc>
     
-    <lastmod>2022-04-03</lastmod>
+    <lastmod>2022-04-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://puhan.top/posts/3426048063/</loc>
+    
+    <lastmod>2022-04-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -47,25 +65,7 @@
   </url>
   
   <url>
-    <loc>https://puhan.top/cate/index.html</loc>
-    
-    <lastmod>2022-04-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://puhan.top/posts/4266880316/</loc>
-    
-    <lastmod>2022-04-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://puhan.top/posts/3238586417/</loc>
     
     <lastmod>2022-04-01</lastmod>
     
@@ -439,14 +439,14 @@
   </url>
   
   <url>
-    <loc>https://puhan.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://puhan.top/categories/Python/</loc>
     <lastmod>2022-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://puhan.top/categories/Python/</loc>
+    <loc>https://puhan.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2022-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
