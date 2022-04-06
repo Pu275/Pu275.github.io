@@ -140,7 +140,13 @@ date: 2022-03-10 17:28:56
             itemprop="url"><span itemprop="name">--  有限混合模型</span></a></div><br /><p><strong><a  class="post-title-link" href = "/categories/Python/">Python</a></strong> </p>
 <div class="post-meta-container">
             <a class="post-title-link" href="/posts/3617097176/"
-            itemprop="url"><span itemprop="name">--  Python引用计数</span></a></div><br /><style>
+            itemprop="url"><span itemprop="name">--  Python引用计数</span></a></div>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/505932064/"
+            itemprop="url"><span itemprop="name">--  python杂谈</span></a></div>
+<div class="post-meta-container">
+            <a class="post-title-link" href="/posts/3406163397/"
+            itemprop="url"><span itemprop="name">--  pytorch基础</span></a></div><br /><style>
       strong {
         font-size: 20px;
         }
