@@ -1505,31 +1505,6 @@ Loss^{(t)} &amp; = \sum_{i=1}^{n}[\varepsilon_i^{(t-1)}-f^{(t)}(x_i)]^2 + \Omega
       </categories>
   </entry>
   <entry>
-    <title>jupyter服务器配置</title>
-    <url>/posts/103313547/</url>
-    <content><![CDATA[<h3 id="生成配置文件"><a class="markdownIt-Anchor" href="#生成配置文件"></a> 生成配置文件</h3>
-<p>在当前用户的主目录下面创建 jupyter 设置文件，以后该用户启动远程 notebook 都是默认这个设置</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
-<p>路径是：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">/home/$</span><span class="bash">&#123;USER&#125;/.jupyter/jupyter_notebook_config.py</span></span><br></pre></td></tr></table></figure>
-<p>启动 server 的命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook --ip=0.0.0.0</span><br></pre></td></tr></table></figure>
-<p>查看正在运行的 notebook：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook list</span><br></pre></td></tr></table></figure>
-<h4 id="需要注意的一些配置"><a class="markdownIt-Anchor" href="#需要注意的一些配置"></a> 需要注意的一些配置</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c.NotebookApp.custom_display_url = <span class="string">&#x27;&#x27;</span>  <span class="comment"># 可以把默认的 127 的本地 ip 修改成外网 ip</span></span><br><span class="line">c.NotebookApp.token = <span class="string">&#x27;&#x27;</span>  <span class="comment"># 固定 notebook 网址的后缀，也可以作为登录密码</span></span><br><span class="line">c.FileContentsManager.delete_to_trash = <span class="literal">False</span>  <span class="comment"># 把jupyter的回收站取消，不然垃圾一直堆在垃圾箱</span></span><br></pre></td></tr></table></figure>
-<h3 id="多用户"><a class="markdownIt-Anchor" href="#多用户"></a> 多用户</h3>
-<p>jupyter 默认端口是 8888，也就是远程可以通过 ip:8888 的方式访问到 notebook。如果有第二个用户创建 notebook，那么就会自动分配一个新的端口给它，比如 8889，从而实现多用户。</p>
-<p>也可以手动分配端口</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook --ip=0.0.0.0 --port=8889</span><br></pre></td></tr></table></figure>
-<p>打开 jupyter 文档，上面说：</p>
-<blockquote>
-<p><strong>This is not the multi-user server you are looking for</strong>. This document describes how you can run a public server with a single user. This should only be done by someone who wants remote access to their personal machine. Even so, doing this requires a thorough understanding of the set-ups limitations and security implications. If you allow multiple users to access a notebook server as it is described in this document, their commands may collide, clobber and overwrite each other.</p>
-</blockquote>
-<p>意思是说，jupyter notebook 远程服务器适合个人用户（悲）多用户请用 jupyterhub。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>pybind入门</title>
     <url>/posts/1086231276/</url>
     <content><![CDATA[<p>pybind11 是一个用来给 C++ 代码绑定到 Python 的工具</p>
@@ -1618,6 +1593,31 @@ Loss^{(t)} &amp; = \sum_{i=1}^{n}[\varepsilon_i^{(t-1)}-f^{(t)}(x_i)]^2 + \Omega
       <categories>
         <category>C++</category>
       </categories>
+  </entry>
+  <entry>
+    <title>jupyter服务器配置</title>
+    <url>/posts/103313547/</url>
+    <content><![CDATA[<h3 id="生成配置文件"><a class="markdownIt-Anchor" href="#生成配置文件"></a> 生成配置文件</h3>
+<p>在当前用户的主目录下面创建 jupyter 设置文件，以后该用户启动远程 notebook 都是默认这个设置</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+<p>路径是：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">/home/$</span><span class="bash">&#123;USER&#125;/.jupyter/jupyter_notebook_config.py</span></span><br></pre></td></tr></table></figure>
+<p>启动 server 的命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook --ip=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>查看正在运行的 notebook：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook list</span><br></pre></td></tr></table></figure>
+<h4 id="需要注意的一些配置"><a class="markdownIt-Anchor" href="#需要注意的一些配置"></a> 需要注意的一些配置</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c.NotebookApp.custom_display_url = <span class="string">&#x27;&#x27;</span>  <span class="comment"># 可以把默认的 127 的本地 ip 修改成外网 ip</span></span><br><span class="line">c.NotebookApp.token = <span class="string">&#x27;&#x27;</span>  <span class="comment"># 固定 notebook 网址的后缀，也可以作为登录密码</span></span><br><span class="line">c.FileContentsManager.delete_to_trash = <span class="literal">False</span>  <span class="comment"># 把jupyter的回收站取消，不然垃圾一直堆在垃圾箱</span></span><br></pre></td></tr></table></figure>
+<h3 id="多用户"><a class="markdownIt-Anchor" href="#多用户"></a> 多用户</h3>
+<p>jupyter 默认端口是 8888，也就是远程可以通过 ip:8888 的方式访问到 notebook。如果有第二个用户创建 notebook，那么就会自动分配一个新的端口给它，比如 8889，从而实现多用户。</p>
+<p>也可以手动分配端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">jupyter notebook --ip=0.0.0.0 --port=8889</span><br></pre></td></tr></table></figure>
+<p>打开 jupyter 文档，上面说：</p>
+<blockquote>
+<p><strong>This is not the multi-user server you are looking for</strong>. This document describes how you can run a public server with a single user. This should only be done by someone who wants remote access to their personal machine. Even so, doing this requires a thorough understanding of the set-ups limitations and security implications. If you allow multiple users to access a notebook server as it is described in this document, their commands may collide, clobber and overwrite each other.</p>
+</blockquote>
+<p>意思是说，jupyter notebook 远程服务器适合个人用户（悲）多用户请用 jupyterhub。</p>
+]]></content>
   </entry>
   <entry>
     <title>python备忘录</title>
