@@ -2296,40 +2296,6 @@ H_{gini}(Q_m, \theta)
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>接雨水</title>
-    <url>/posts/1726193520/</url>
-    <content><![CDATA[<p>两个接雨水题目，都用双指针做。</p>
-<h3 id="11-盛最多水的容器"><a class="markdownIt-Anchor" href="#11-盛最多水的容器"></a> 11. 盛最多水的容器</h3>
-<p>给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。</p>
-<p>找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
-<p>返回容器可以储存的最大水量。</p>
-<p>说明：你不能倾斜容器。</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/container-with-most-water/">https://leetcode-cn.com/problems/container-with-most-water/</a></p>
-<img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img" style="zoom:67%;">
-<span id="more"></span>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>双指针法，根据木桶原理，当前容量取决于 <strong>间隔 * 短板长度</strong> ，为了使容量尽可能往大的方向前进，不可能先动长板（因为高度被短板制约），所以每次指针在短板处移动一格，并记录一下当前容量和最大容量。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = height.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> h = <span class="built_in">min</span>(height[<span class="number">0</span>], height[j]);</span><br><span class="line">        maxNum = h * (j - i);</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height[j] &lt; height[i]) &#123;</span><br><span class="line">                --j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            h = <span class="built_in">min</span>(height[i], height[j]);</span><br><span class="line">            <span class="keyword">if</span> ((j - i) * h &gt; maxNum) maxNum = (j - i) * h;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="42-接雨水"><a class="markdownIt-Anchor" href="#42-接雨水"></a> 42. 接雨水</h3>
-<p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code> 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
-<img src="/posts/1726193520/image-20220307213203323.png" alt="image-20220307213203323" style="zoom:50%;">
-<blockquote>
-<p>输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]<br>
-输出：6<br>
-解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。</p>
-</blockquote>
-<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
-<p>同样是木桶原理，只不过这里木板本身会占用桶内的体积（上一题木板是没有体积的），所以容量的计算要随着指针前进一起，前进的方向还是跟着短板走，下一块板可能有两种情况：</p>
-<p>（1）比短板矮，说明可以接水，容量加上 <strong>短板高度 - 下一块板高度</strong>；</p>
-<p>（2）比短板高，重新决定哪块是短板。</p>
-<p>如果左右指针高度一样，随便哪个方向都行。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = height.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> leftLength = height[<span class="number">0</span>];  <span class="comment">// 左右板长度</span></span><br><span class="line">        <span class="keyword">int</span> rightLength = height[n<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height[i] &lt; height[j]) &#123;  <span class="comment">// 短板在左边</span></span><br><span class="line">                ++i;</span><br><span class="line">                <span class="keyword">if</span> (height[i] &gt; leftLength) &#123;</span><br><span class="line">                    leftLength = height[i];  <span class="comment">// 更新左板长度</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    ans += leftLength - height[i];  <span class="comment">// 可以加雨水</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;  <span class="comment">// 短板在右边</span></span><br><span class="line">                --j;</span><br><span class="line">                <span class="keyword">if</span> (height[j] &gt; rightLength) &#123;</span><br><span class="line">                    rightLength = height[j];  <span class="comment">// 更新右板长度 </span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    ans += rightLength - height[j];  <span class="comment">// 可以加雨水</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>快排的几种写法</title>
     <url>/posts/1295475365/</url>
     <content><![CDATA[<p>快速排序已然成为必考题</p>
@@ -2363,6 +2329,40 @@ H_{gini}(Q_m, \theta)
 ]]></content>
       <categories>
         <category>排序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>接雨水</title>
+    <url>/posts/1726193520/</url>
+    <content><![CDATA[<p>两个接雨水题目，都用双指针做。</p>
+<h3 id="11-盛最多水的容器"><a class="markdownIt-Anchor" href="#11-盛最多水的容器"></a> 11. 盛最多水的容器</h3>
+<p>给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。</p>
+<p>找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
+<p>返回容器可以储存的最大水量。</p>
+<p>说明：你不能倾斜容器。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/container-with-most-water/">https://leetcode-cn.com/problems/container-with-most-water/</a></p>
+<img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="img" style="zoom:67%;">
+<span id="more"></span>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>双指针法，根据木桶原理，当前容量取决于 <strong>间隔 * 短板长度</strong> ，为了使容量尽可能往大的方向前进，不可能先动长板（因为高度被短板制约），所以每次指针在短板处移动一格，并记录一下当前容量和最大容量。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = height.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> h = <span class="built_in">min</span>(height[<span class="number">0</span>], height[j]);</span><br><span class="line">        maxNum = h * (j - i);</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height[j] &lt; height[i]) &#123;</span><br><span class="line">                --j;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            h = <span class="built_in">min</span>(height[i], height[j]);</span><br><span class="line">            <span class="keyword">if</span> ((j - i) * h &gt; maxNum) maxNum = (j - i) * h;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="42-接雨水"><a class="markdownIt-Anchor" href="#42-接雨水"></a> 42. 接雨水</h3>
+<p>给定 <code>n</code> 个非负整数表示每个宽度为 <code>1</code> 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<img src="/posts/1726193520/image-20220307213203323.png" alt="image-20220307213203323" style="zoom:50%;">
+<blockquote>
+<p>输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]<br>
+输出：6<br>
+解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。</p>
+</blockquote>
+<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
+<p>同样是木桶原理，只不过这里木板本身会占用桶内的体积（上一题木板是没有体积的），所以容量的计算要随着指针前进一起，前进的方向还是跟着短板走，下一块板可能有两种情况：</p>
+<p>（1）比短板矮，说明可以接水，容量加上 <strong>短板高度 - 下一块板高度</strong>；</p>
+<p>（2）比短板高，重新决定哪块是短板。</p>
+<p>如果左右指针高度一样，随便哪个方向都行。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = height.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> leftLength = height[<span class="number">0</span>];  <span class="comment">// 左右板长度</span></span><br><span class="line">        <span class="keyword">int</span> rightLength = height[n<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height[i] &lt; height[j]) &#123;  <span class="comment">// 短板在左边</span></span><br><span class="line">                ++i;</span><br><span class="line">                <span class="keyword">if</span> (height[i] &gt; leftLength) &#123;</span><br><span class="line">                    leftLength = height[i];  <span class="comment">// 更新左板长度</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    ans += leftLength - height[i];  <span class="comment">// 可以加雨水</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;  <span class="comment">// 短板在右边</span></span><br><span class="line">                --j;</span><br><span class="line">                <span class="keyword">if</span> (height[j] &gt; rightLength) &#123;</span><br><span class="line">                    rightLength = height[j];  <span class="comment">// 更新右板长度 </span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    ans += rightLength - height[j];  <span class="comment">// 可以加雨水</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
