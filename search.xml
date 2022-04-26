@@ -849,6 +849,80 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
+    <title>C++的STL容器</title>
+    <url>/posts/364802778/</url>
+    <content><![CDATA[<h2 id="容器"><a class="markdownIt-Anchor" href="#容器"></a> 容器</h2>
+<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br><span class="line">stack&lt;A&gt; x2;</span><br><span class="line">x2.<span class="built_in">push</span>(<span class="built_in">A</span>(<span class="number">3</span>));</span><br><span class="line">x2.<span class="built_in">emplace</span>(<span class="built_in">A</span>(<span class="number">3</span>));</span><br><span class="line">x2.<span class="built_in">emplace</span>(<span class="number">3</span>);  <span class="comment">// 好的用法</span></span><br></pre></td></tr></table></figure>
+<p><strong>push：</strong> 推入元素</p>
+<p><strong>top：</strong> 获取堆顶元素</p>
+<p><strong>pop：</strong> 删除堆顶元素</p>
+<p><strong>emplace：</strong> 传入对象的时候等价 push，传入参数是调用构造函数，而不是拷贝构造函数，可以节省内存</p>
+<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
+<p><strong>front：</strong> 获取第一个元素</p>
+<p><strong>pop：</strong> 第一个元素删掉</p>
+<p><strong>back：</strong> 获取最后一个元素</p>
+<p><strong>push：</strong> 尾巴加一个</p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素。没有 top！</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
+<p><strong>push_back：</strong> 从后面加元素</p>
+<p><strong>push_front：</strong> 从前面加元素</p>
+<p><strong>pop_back：</strong> 从后面删除元素</p>
+<p><strong>pop_front：</strong> 从前面删除元素</p>
+<p>empty、clear 也有</p>
+<h3 id="array"><a class="markdownIt-Anchor" href="#array"></a> array</h3>
+<p>类似原生数组，固定长度</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line">array&lt;<span class="keyword">int</span>, 3&gt; x1;  <span class="comment">// 1D</span></span><br><span class="line">array&lt;array&lt;<span class="keyword">int</span>, 3&gt;, 3&gt; x1;  <span class="comment">// 2D</span></span><br></pre></td></tr></table></figure>
+<h3 id="list"><a class="markdownIt-Anchor" href="#list"></a> list</h3>
+<p>支持插入和移除的链表，不支持随机访问（因为链表内存是不连续的）。list 的优势是插入操作不会导致扩容，也就不会有 vector 因为扩容发生的拷贝。所以 list 适合存放复杂的数据。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line">std::list&lt;<span class="keyword">int</span>&gt; l = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">l.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">l.<span class="built_in">front</span>();</span><br><span class="line">l.<span class="built_in">back</span>();</span><br><span class="line">l.<span class="built_in">pop_back</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="pair"><a class="markdownIt-Anchor" href="#pair"></a> pair</h3>
+<p>pair 是 tuple 的特例，只有一对元素，类型可以不同</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line">std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; p1 &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="function">std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line">p1.first;</span><br></pre></td></tr></table></figure>
+<p><strong>first、second：</strong> 可以修改元素<br>
+<strong>std::get&lt;0&gt;：</strong> 也可以通过 std::get&lt;下标&gt; 来访问</p>
+<h4 id="作为函数返回值"><a class="markdownIt-Anchor" href="#作为函数返回值"></a> 作为函数返回值</h4>
+<p>使用 tie 解开 pair</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">int</span> x, y;</span><br><span class="line">std::<span class="built_in">tie</span>(x, y) = <span class="built_in">get</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="tuple"><a class="markdownIt-Anchor" href="#tuple"></a> tuple</h3>
+<p>和 pair 差不多，元素数目不受限，获取元素只能通过 std::get&lt;0&gt;。</p>
+<h3 id="unordered_map"><a class="markdownIt-Anchor" href="#unordered_map"></a> unordered_map</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; x1;</span><br><span class="line">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; x2 &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line"><span class="function">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">x3</span><span class="params">(x2)</span></span>;</span><br><span class="line"><span class="function">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">x3</span><span class="params">(x2.begin(), x2.end())</span></span>;</span><br><span class="line">x2[<span class="number">1</span>] = <span class="number">500</span>;  <span class="comment">// 方括号可以访问赋值</span></span><br></pre></td></tr></table></figure>
+<p><strong>insert：</strong> 插入，但不会覆盖已有的 value<br>
+<strong>first、second：</strong> key 和 value</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p: x1) cout &lt;&lt; p.second;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p = x1.<span class="built_in">begin</span>(); p != x1.<span class="built_in">end</span>(); ++p) cout &lt;&lt; p-&gt;second;</span><br></pre></td></tr></table></figure>
+<p><strong>begin()、end()：</strong> 迭代器</p>
+<h5 id="查找-key"><a class="markdownIt-Anchor" href="#查找-key"></a> 查找 key</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">x1.<span class="built_in">find</span>(key) != x1.<span class="built_in">end</span>()  <span class="comment">// 表示找到一个key</span></span><br></pre></td></tr></table></figure>
+<h4 id="自定义-key"><a class="markdownIt-Anchor" href="#自定义-key"></a> 自定义 key</h4>
+<p>如果想用自己的类作为 key，需要为 key 指定 <strong>hash 函数</strong> 和 <strong>相等运算</strong></p>
+<p>unordered_map 默认调用 std::hash 作为哈希函数，std::string 拥有自己的 std::hash 重载版本，所以可以直接作为 key。</p>
+<p>感觉很麻烦，也可以直接用类指针作为 key</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">A a;</span><br><span class="line">unordered_map&lt;A*, <span class="keyword">int</span>&gt; dict &#123;&#123;&amp;a, <span class="number">3</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="unordered_set"><a class="markdownIt-Anchor" href="#unordered_set"></a> unordered_set</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line">unordered_set&lt;<span class="keyword">int</span>&gt; s1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 列表初始化</span></span><br></pre></td></tr></table></figure>
+<p>用法类似 vector</p>
+<h3 id="priority_queue"><a class="markdownIt-Anchor" href="#priority_queue"></a> priority_queue</h3>
+<p><strong>优先队列：</strong> 任何时候弹出的都是优先级最高的元素（有点抽象）其实就是最大元素最先出来，即使他不是最早进去的</p>
+<p><strong>堆：</strong> 采用树形结构实现优先队列的手段，大顶堆的插入只需要 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>N</mi></mrow><annotation encoding="application/x-tex">log_2N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 次交换即可选出最大元素</p>
+<p>使用堆实现优先队列包含两个问题（1）插入元素如何重新堆化（2）弹出元素如何重新堆化</p>
+<p>（1）在尾部加入元素，往上不断的比较他的父结点（下标 (i - 1) / 2），比到合适的交换即可。（不一定要一次次交换上去）</p>
+<p>（2）删除头部元素：把末尾元素放到堆顶，然后从头部做一次向下筛选即可。（除了头部以外，其他保留着堆序）</p>
+<p>C++里面优先队列当做堆使用就行，默认大顶堆</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; q1;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, less&lt;<span class="keyword">int</span>&gt; &gt; big;  <span class="comment">// 大顶堆，默认</span></span><br><span class="line">priority_queue &lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; small;  <span class="comment">// 小顶堆</span></span><br></pre></td></tr></table></figure>
+<p><strong>push、pop、top、size</strong> 操作类似 queue</p>
+<h2 id="泛型算法"><a class="markdownIt-Anchor" href="#泛型算法"></a> 泛型算法</h2>
+<p>标准库算法使用 begin（头元素）和 end（尾元素后一位）迭代器。泛型指的是同一个名称的算法可以应用在各种容器上面。</p>
+<p>大部分算法在 algorithm，数值相关的在 numeric。算法不依赖容器，但是依赖运算符，比如 find：==</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> sum = <span class="built_in">accumulate</span>(vec.<span class="built_in">cbegin</span>(), vec.<span class="built_in">cend</span>(), <span class="number">0</span>);  <span class="comment">// cbegin：只读版本的begin</span></span><br><span class="line"><span class="keyword">double</span> sum = <span class="built_in">accumulate</span>(vec.<span class="built_in">cbegin</span>(), vec.<span class="built_in">cend</span>(), <span class="number">0.0</span>);  <span class="comment">// 初始值也得是 double</span></span><br><span class="line"><span class="keyword">int</span> vec[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="built_in">accumulate</span>(<span class="built_in">begin</span>(vec), <span class="built_in">end</span>(vec), <span class="number">0</span>);  <span class="comment">// 标准库函数 begin、end 找到始末指针，指针也可以充当迭代器</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C++的string</title>
     <url>/posts/2635778603/</url>
     <content><![CDATA[<h3 id="string"><a class="markdownIt-Anchor" href="#string"></a> String</h3>
@@ -935,80 +1009,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p>变量一定是左值</p>
 <p><strong>左值引用：</strong> 一般的引用，一个 &amp;</p>
 <p><strong>右值引用：</strong> 绑定右值的引用，两个 &amp;&amp;</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++的STL容器</title>
-    <url>/posts/364802778/</url>
-    <content><![CDATA[<h2 id="容器"><a class="markdownIt-Anchor" href="#容器"></a> 容器</h2>
-<h3 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> stack</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line">stack&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 支持列表初始化</span></span><br><span class="line">stack&lt;A&gt; x2;</span><br><span class="line">x2.<span class="built_in">push</span>(<span class="built_in">A</span>(<span class="number">3</span>));</span><br><span class="line">x2.<span class="built_in">emplace</span>(<span class="built_in">A</span>(<span class="number">3</span>));</span><br><span class="line">x2.<span class="built_in">emplace</span>(<span class="number">3</span>);  <span class="comment">// 好的用法</span></span><br></pre></td></tr></table></figure>
-<p><strong>push：</strong> 推入元素</p>
-<p><strong>top：</strong> 获取堆顶元素</p>
-<p><strong>pop：</strong> 删除堆顶元素</p>
-<p><strong>emplace：</strong> 传入对象的时候等价 push，传入参数是调用构造函数，而不是拷贝构造函数，可以节省内存</p>
-<h3 id="queue"><a class="markdownIt-Anchor" href="#queue"></a> queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">// 没法列表初始化</span></span><br></pre></td></tr></table></figure>
-<p><strong>front：</strong> 获取第一个元素</p>
-<p><strong>pop：</strong> 第一个元素删掉</p>
-<p><strong>back：</strong> 获取最后一个元素</p>
-<p><strong>push：</strong> 尾巴加一个</p>
-<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
-<p>和 queue 的区别是，deque 是双端队列，可以从头部加元素。没有 top！</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line">deque&lt;<span class="keyword">int</span>&gt; x2&#123;x1&#125;;  <span class="comment">// 拷贝</span></span><br></pre></td></tr></table></figure>
-<p><strong>push_back：</strong> 从后面加元素</p>
-<p><strong>push_front：</strong> 从前面加元素</p>
-<p><strong>pop_back：</strong> 从后面删除元素</p>
-<p><strong>pop_front：</strong> 从前面删除元素</p>
-<p>empty、clear 也有</p>
-<h3 id="array"><a class="markdownIt-Anchor" href="#array"></a> array</h3>
-<p>类似原生数组，固定长度</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line">array&lt;<span class="keyword">int</span>, 3&gt; x1;  <span class="comment">// 1D</span></span><br><span class="line">array&lt;array&lt;<span class="keyword">int</span>, 3&gt;, 3&gt; x1;  <span class="comment">// 2D</span></span><br></pre></td></tr></table></figure>
-<h3 id="list"><a class="markdownIt-Anchor" href="#list"></a> list</h3>
-<p>支持插入和移除的链表，不支持随机访问（因为链表内存是不连续的）。list 的优势是插入操作不会导致扩容，也就不会有 vector 因为扩容发生的拷贝。所以 list 适合存放复杂的数据。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line">std::list&lt;<span class="keyword">int</span>&gt; l = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">l.<span class="built_in">push_back</span>(<span class="number">3</span>);</span><br><span class="line">l.<span class="built_in">front</span>();</span><br><span class="line">l.<span class="built_in">back</span>();</span><br><span class="line">l.<span class="built_in">pop_back</span>();</span><br></pre></td></tr></table></figure>
-<h3 id="pair"><a class="markdownIt-Anchor" href="#pair"></a> pair</h3>
-<p>pair 是 tuple 的特例，只有一对元素，类型可以不同</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line">std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; p1 &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="function">std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line">p1.first;</span><br></pre></td></tr></table></figure>
-<p><strong>first、second：</strong> 可以修改元素<br>
-<strong>std::get&lt;0&gt;：</strong> 也可以通过 std::get&lt;下标&gt; 来访问</p>
-<h4 id="作为函数返回值"><a class="markdownIt-Anchor" href="#作为函数返回值"></a> 作为函数返回值</h4>
-<p>使用 tie 解开 pair</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">std::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">int</span> x, y;</span><br><span class="line">std::<span class="built_in">tie</span>(x, y) = <span class="built_in">get</span>();</span><br></pre></td></tr></table></figure>
-<h3 id="tuple"><a class="markdownIt-Anchor" href="#tuple"></a> tuple</h3>
-<p>和 pair 差不多，元素数目不受限，获取元素只能通过 std::get&lt;0&gt;。</p>
-<h3 id="unordered_map"><a class="markdownIt-Anchor" href="#unordered_map"></a> unordered_map</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; x1;</span><br><span class="line">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; x2 &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;&#125;;  <span class="comment">// 列表初始化</span></span><br><span class="line"><span class="function">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">x3</span><span class="params">(x2)</span></span>;</span><br><span class="line"><span class="function">unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; <span class="title">x3</span><span class="params">(x2.begin(), x2.end())</span></span>;</span><br><span class="line">x2[<span class="number">1</span>] = <span class="number">500</span>;  <span class="comment">// 方括号可以访问赋值</span></span><br></pre></td></tr></table></figure>
-<p><strong>insert：</strong> 插入，但不会覆盖已有的 value<br>
-<strong>first、second：</strong> key 和 value</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p: x1) cout &lt;&lt; p.second;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p = x1.<span class="built_in">begin</span>(); p != x1.<span class="built_in">end</span>(); ++p) cout &lt;&lt; p-&gt;second;</span><br></pre></td></tr></table></figure>
-<p><strong>begin()、end()：</strong> 迭代器</p>
-<h5 id="查找-key"><a class="markdownIt-Anchor" href="#查找-key"></a> 查找 key</h5>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">x1.<span class="built_in">find</span>(key) != x1.<span class="built_in">end</span>()  <span class="comment">// 表示找到一个key</span></span><br></pre></td></tr></table></figure>
-<h4 id="自定义-key"><a class="markdownIt-Anchor" href="#自定义-key"></a> 自定义 key</h4>
-<p>如果想用自己的类作为 key，需要为 key 指定 <strong>hash 函数</strong> 和 <strong>相等运算</strong></p>
-<p>unordered_map 默认调用 std::hash 作为哈希函数，std::string 拥有自己的 std::hash 重载版本，所以可以直接作为 key。</p>
-<p>感觉很麻烦，也可以直接用类指针作为 key</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">A a;</span><br><span class="line">unordered_map&lt;A*, <span class="keyword">int</span>&gt; dict &#123;&#123;&amp;a, <span class="number">3</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="unordered_set"><a class="markdownIt-Anchor" href="#unordered_set"></a> unordered_set</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line">unordered_set&lt;<span class="keyword">int</span>&gt; s1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 列表初始化</span></span><br></pre></td></tr></table></figure>
-<p>用法类似 vector</p>
-<h3 id="priority_queue"><a class="markdownIt-Anchor" href="#priority_queue"></a> priority_queue</h3>
-<p><strong>优先队列：</strong> 任何时候弹出的都是优先级最高的元素（有点抽象）其实就是最大元素最先出来，即使他不是最早进去的</p>
-<p><strong>堆：</strong> 采用树形结构实现优先队列的手段，大顶堆的插入只需要 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>N</mi></mrow><annotation encoding="application/x-tex">log_2N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 次交换即可选出最大元素</p>
-<p>使用堆实现优先队列包含两个问题（1）插入元素如何重新堆化（2）弹出元素如何重新堆化</p>
-<p>（1）在尾部加入元素，往上不断的比较他的父结点（下标 (i - 1) / 2），比到合适的交换即可。（不一定要一次次交换上去）</p>
-<p>（2）删除头部元素：把末尾元素放到堆顶，然后从头部做一次向下筛选即可。（除了头部以外，其他保留着堆序）</p>
-<p>C++里面优先队列当做堆使用就行，默认大顶堆</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; q1;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, less&lt;<span class="keyword">int</span>&gt; &gt; big;  <span class="comment">// 大顶堆，默认</span></span><br><span class="line">priority_queue &lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; small;  <span class="comment">// 小顶堆</span></span><br></pre></td></tr></table></figure>
-<p><strong>push、pop、top、size</strong> 操作类似 queue</p>
-<h2 id="泛型算法"><a class="markdownIt-Anchor" href="#泛型算法"></a> 泛型算法</h2>
-<p>标准库算法使用 begin（头元素）和 end（尾元素后一位）迭代器。泛型指的是同一个名称的算法可以应用在各种容器上面。</p>
-<p>大部分算法在 algorithm，数值相关的在 numeric。算法不依赖容器，但是依赖运算符，比如 find：==</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> sum = <span class="built_in">accumulate</span>(vec.<span class="built_in">cbegin</span>(), vec.<span class="built_in">cend</span>(), <span class="number">0</span>);  <span class="comment">// cbegin：只读版本的begin</span></span><br><span class="line"><span class="keyword">double</span> sum = <span class="built_in">accumulate</span>(vec.<span class="built_in">cbegin</span>(), vec.<span class="built_in">cend</span>(), <span class="number">0.0</span>);  <span class="comment">// 初始值也得是 double</span></span><br><span class="line"><span class="keyword">int</span> vec[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="built_in">accumulate</span>(<span class="built_in">begin</span>(vec), <span class="built_in">end</span>(vec), <span class="number">0</span>);  <span class="comment">// 标准库函数 begin、end 找到始末指针，指针也可以充当迭代器</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -1432,6 +1432,12 @@ bt查看</p>
       </categories>
   </entry>
   <entry>
+    <title>Rmarkdown里面的表格</title>
+    <url>/posts/1527658047/</url>
+    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
+]]></content>
+  </entry>
+  <entry>
     <title>XGBoost相关</title>
     <url>/posts/3238586417/</url>
     <content><![CDATA[<h3 id="xgboost"><a class="markdownIt-Anchor" href="#xgboost"></a> Xgboost</h3>
@@ -1497,12 +1503,6 @@ Loss^{(t)} &amp; = \sum_{i=1}^{n}[\varepsilon_i^{(t-1)}-f^{(t)}(x_i)]^2 + \Omega
       <categories>
         <category>机器学习</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Rmarkdown里面的表格</title>
-    <url>/posts/1527658047/</url>
-    <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
-]]></content>
   </entry>
   <entry>
     <title>jupyter服务器配置</title>
@@ -1832,39 +1832,6 @@ f(x) &amp;=\sum_{i=1}^{n} \alpha\left(x, x_{i}\right) y_{i} \\
       </categories>
   </entry>
   <entry>
-    <title>二叉树的遍历</title>
-    <url>/posts/3930489296/</url>
-    <content><![CDATA[<h3 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h3>
-<p>广度优先，就跟看文章一样遍历。使用队列模拟层的概念</p>
-<p>第一层：根结点</p>
-<p>第二层：根结点的左右子结点</p>
-<p>第三层：根结点的孙子结点们…</p>
-<p><strong>注意：</strong> 因为取出当前层的结点的同时，会有后续层的结点加入队列，所以每次取的数目需要事先固定。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelOrderBottom</span>(TreeNode* root) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;  <span class="comment">// 先进先出</span></span><br><span class="line">    q.<span class="built_in">push</span>(root);  <span class="comment">// 第一层是根结点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> n = q.<span class="built_in">size</span>();  <span class="comment">// 取出当前层的结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            TreeNode* cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            tmp.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;left);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="前中后序遍历"><a class="markdownIt-Anchor" href="#前中后序遍历"></a> 前中后序遍历</h3>
-<p>区分前中后：根结点（中）的位置，前序遍历：中左右；中序遍历：左中右；后序遍历：左右中</p>
-<p>这个规则对二叉树的任何子树（子结构）都是有效的，举例来说中序遍历，起点是二叉树左的不能再左的那个结点；后序遍历也是左的不能再左；前序遍历起点是根的不能再根（就是根结点）</p>
-<p>三种方法的递归版本区别就是：递归左右子树的顺序、插入 result 的顺序</p>
-<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
-<p>顺序左右中，递归法，用一个共享 vector 存放路径</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;left);  <span class="comment">// 左子树</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;right);  <span class="comment">// 右子树</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);  <span class="comment">// 中间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> path;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="迭代遍历"><a class="markdownIt-Anchor" href="#迭代遍历"></a> 迭代遍历</h3>
-<p>三种深度优先遍历都是建立栈，区别在于什么时候提取结点的 value</p>
-<h4 id="前序遍历"><a class="markdownIt-Anchor" href="#前序遍历"></a> 前序遍历</h4>
-<p>从栈里面取出来的结点可以立刻提取 value，因为 <strong>中左右</strong> 里面中的优先级最高，不存在回溯的情况</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = [root]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        res.append(cur.val)</span><br><span class="line">        <span class="keyword">if</span> cur.right:</span><br><span class="line">            stack.append(cur.right)</span><br><span class="line">        <span class="keyword">if</span> cur.left:</span><br><span class="line">            stack.append(cur.left)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h3 id="中序遍历"><a class="markdownIt-Anchor" href="#中序遍历"></a> 中序遍历</h3>
-<p>中序遍历比前序遍历复杂，因为中序遍历并不是边遍历边存储 value，而是尽可能跑到最左边才回溯 <strong>中结点</strong> 取值。</p>
-<ol>
-<li>没有左子树的结点可以立刻存储值</li>
-<li>有左子树的结点需要在栈里留下记号，这样在它的 <strong>左子树</strong> 遍历结束，开始遍历 <strong>中结点</strong> 和 <strong>右子树</strong> 的阶段开始时可以顺利把结点的值取出来。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>不简单的排序</title>
     <url>/posts/1704803221/</url>
     <content><![CDATA[<p>本篇包含：</p>
@@ -1984,18 +1951,33 @@ heapify 一次，然后不断的把最小元素挪到 List 尾巴，并收缩 si
       </categories>
   </entry>
   <entry>
-    <title>剑指 Offer 36. 二叉搜索树与双向链表</title>
-    <url>/posts/618589901/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
-<img src="/posts/618589901/bstdlloriginalbst.png" alt="img" style="zoom:50%;">
-<p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p>
-<p>下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。</p>
-<img src="/posts/618589901/bstdllreturndll.png" alt="img" style="zoom:50%;">
-<p>特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。</p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>中序遍历返回排好序的数组，使用双指针法：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">treeToDoublyList</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="comment">// 最后别忘了接上头尾</span></span><br><span class="line">        pre-&gt;right = head;</span><br><span class="line">        head-&gt;left = pre;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    Node* pre = <span class="literal">nullptr</span>;</span><br><span class="line">    Node* head = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="literal">nullptr</span>) &#123;  <span class="comment">// 最左边的作为返回值</span></span><br><span class="line">            head = root;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// pre 会尽可能向左搜索</span></span><br><span class="line">            <span class="comment">// 接上上一个子树和当前结点</span></span><br><span class="line">            pre-&gt;right = root;  </span><br><span class="line">            root-&gt;left = pre;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = root;  <span class="comment">// 更新 pre</span></span><br><span class="line">        <span class="built_in">dfs</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    <title>二叉树的遍历</title>
+    <url>/posts/3930489296/</url>
+    <content><![CDATA[<h3 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h3>
+<p>广度优先，就跟看文章一样遍历。使用队列模拟层的概念</p>
+<p>第一层：根结点</p>
+<p>第二层：根结点的左右子结点</p>
+<p>第三层：根结点的孙子结点们…</p>
+<p><strong>注意：</strong> 因为取出当前层的结点的同时，会有后续层的结点加入队列，所以每次取的数目需要事先固定。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelOrderBottom</span>(TreeNode* root) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;  <span class="comment">// 先进先出</span></span><br><span class="line">    q.<span class="built_in">push</span>(root);  <span class="comment">// 第一层是根结点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> n = q.<span class="built_in">size</span>();  <span class="comment">// 取出当前层的结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            TreeNode* cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            tmp.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;left);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="前中后序遍历"><a class="markdownIt-Anchor" href="#前中后序遍历"></a> 前中后序遍历</h3>
+<p>区分前中后：根结点（中）的位置，前序遍历：中左右；中序遍历：左中右；后序遍历：左右中</p>
+<p>这个规则对二叉树的任何子树（子结构）都是有效的，举例来说中序遍历，起点是二叉树左的不能再左的那个结点；后序遍历也是左的不能再左；前序遍历起点是根的不能再根（就是根结点）</p>
+<p>三种方法的递归版本区别就是：递归左右子树的顺序、插入 result 的顺序</p>
+<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
+<p>顺序左右中，递归法，用一个共享 vector 存放路径</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;left);  <span class="comment">// 左子树</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;right);  <span class="comment">// 右子树</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);  <span class="comment">// 中间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> path;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="迭代遍历"><a class="markdownIt-Anchor" href="#迭代遍历"></a> 迭代遍历</h3>
+<p>三种深度优先遍历都是建立栈，区别在于什么时候提取结点的 value</p>
+<h4 id="前序遍历"><a class="markdownIt-Anchor" href="#前序遍历"></a> 前序遍历</h4>
+<p>从栈里面取出来的结点可以立刻提取 value，因为 <strong>中左右</strong> 里面中的优先级最高，不存在回溯的情况</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = [root]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        res.append(cur.val)</span><br><span class="line">        <span class="keyword">if</span> cur.right:</span><br><span class="line">            stack.append(cur.right)</span><br><span class="line">        <span class="keyword">if</span> cur.left:</span><br><span class="line">            stack.append(cur.left)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="中序遍历"><a class="markdownIt-Anchor" href="#中序遍历"></a> 中序遍历</h3>
+<p>中序遍历比前序遍历复杂，因为中序遍历并不是边遍历边存储 value，而是尽可能跑到最左边才回溯 <strong>中结点</strong> 取值。</p>
+<ol>
+<li>没有左子树的结点可以立刻存储值</li>
+<li>有左子树的结点需要在栈里留下记号，这样在它的 <strong>左子树</strong> 遍历结束，开始遍历 <strong>中结点</strong> 和 <strong>右子树</strong> 的阶段开始时可以顺利把结点的值取出来。</li>
+</ol>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -2092,6 +2074,24 @@ H_{gini}(Q_m, \theta)
       </categories>
   </entry>
   <entry>
+    <title>剑指 Offer 36. 二叉搜索树与双向链表</title>
+    <url>/posts/618589901/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
+<img src="/posts/618589901/bstdlloriginalbst.png" alt="img" style="zoom:50%;">
+<p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p>
+<p>下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。</p>
+<img src="/posts/618589901/bstdllreturndll.png" alt="img" style="zoom:50%;">
+<p>特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>中序遍历返回排好序的数组，使用双指针法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">treeToDoublyList</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root);</span><br><span class="line">        <span class="comment">// 最后别忘了接上头尾</span></span><br><span class="line">        pre-&gt;right = head;</span><br><span class="line">        head-&gt;left = pre;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    Node* pre = <span class="literal">nullptr</span>;</span><br><span class="line">    Node* head = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(root-&gt;left);</span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="literal">nullptr</span>) &#123;  <span class="comment">// 最左边的作为返回值</span></span><br><span class="line">            head = root;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// pre 会尽可能向左搜索</span></span><br><span class="line">            <span class="comment">// 接上上一个子树和当前结点</span></span><br><span class="line">            pre-&gt;right = root;  </span><br><span class="line">            root-&gt;left = pre;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = root;  <span class="comment">// 更新 pre</span></span><br><span class="line">        <span class="built_in">dfs</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>剑指 Offer 48. 最长不含重复字符的子字符串</title>
     <url>/posts/2263724427/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -2167,11 +2167,6 @@ H_{gini}(Q_m, \theta)
       <categories>
         <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>循环神经网络基础</title>
-    <url>/posts/295151543/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>剑指 Offer 53 - I. 在排序数组中查找数字 I</title>
@@ -2296,6 +2291,11 @@ H_{gini}(Q_m, \theta)
       </categories>
   </entry>
   <entry>
+    <title>循环神经网络基础</title>
+    <url>/posts/295151543/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>快排的几种写法</title>
     <url>/posts/1295475365/</url>
     <content><![CDATA[<p>快速排序已然成为必考题</p>
@@ -2363,33 +2363,6 @@ H_{gini}(Q_m, \theta)
 ]]></content>
       <categories>
         <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>机器学习编码方法</title>
-    <url>/posts/754419582/</url>
-    <content><![CDATA[<p>把之前的内容拆成一些分散到这里了</p>
-<h3 id="一些编码"><a class="markdownIt-Anchor" href="#一些编码"></a> 一些编码</h3>
-<p><strong>离散数值：</strong> 直接用 1、2、3、4 编码，适用于有大小关系的特征（低中高）</p>
-<p>pandas 版本：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mapper = &#123;i: item <span class="keyword">for</span> i, item <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">set</span>(feature))&#125;</span><br><span class="line">feature.<span class="built_in">map</span>(mapper)</span><br></pre></td></tr></table></figure>
-<p>sklearn 版本：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">label_encoder = LabelEncoder()</span><br><span class="line">new_feature = label_encoder.fit_transform(feature)</span><br></pre></td></tr></table></figure>
-<p><strong>One-Hot：</strong> pd.get_dummies，支持非数值类型</p>
-<img src="/posts/754419582/image-20220309005442788.png" alt="image-20220309005442788" style="zoom: 25%;">
-<p>解决的问题是处理 <strong>特征的距离</strong> ，树模型不依赖值的大小，所以一般不需要 one-hot 编码。</p>
-<p><strong>二进制编码：</strong> 编码属性，1-有，0-没有，维数上可以比独热编码少很多。</p>
-<p><strong>多标签和多分类的区别：</strong> multi-label 和 multi-class，多标签的属性可以并存，多分类有且只有一种类别</p>
-<p>multi-label 用二进制编码，multi-class 用独热编码</p>
-<h3 id="nnembedding"><a class="markdownIt-Anchor" href="#nnembedding"></a> nn.Embedding</h3>
-<p>可以把任何输入映射，正态分布初始化系数矩阵。可以理解成一个字典、编码器</p>
-<p>num_embeddings：字典的大小，取为类别的数目即可</p>
-<p>embedding_dim：嵌入向量大小，一般会维度小于输入，起到降维的效果。</p>
-<p>输入一个 batch，Embedding 会把每行（可能是一维向量也可能是图片、句子）理解成一组词，并且为每个词进行编码映射到 embedding_dim 维度的向量上。比如一个 5 长度的向量输入，返回一个 5 x embedding_dim 的二维数组。合起来最终输出的就是 (batch_size, 5, embedding_dim) 的 tensor</p>
-<p>如果用 one-hot 编码，维度会随着类别迅速膨胀，</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
       </categories>
   </entry>
   <entry>
@@ -2544,6 +2517,33 @@ P(Y=y_i,Z_{ik}=1)
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.special <span class="keyword">import</span> logsumexp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logSumExp</span>(<span class="params">ns</span>):</span></span><br><span class="line">    <span class="built_in">max</span> = np.<span class="built_in">max</span>(ns)</span><br><span class="line">    ds = ns - <span class="built_in">max</span></span><br><span class="line">    sumOfExp = np.exp(ds).<span class="built_in">sum</span>()</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span> + np.log(sumOfExp)</span><br></pre></td></tr></table></figure>
 <p>带约束的em</p>
 <p><a href="https://www.cnblogs.com/huangyc/p/10275131.html">https://www.cnblogs.com/huangyc/p/10275131.html</a></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>机器学习编码方法</title>
+    <url>/posts/754419582/</url>
+    <content><![CDATA[<p>把之前的内容拆成一些分散到这里了</p>
+<h3 id="一些编码"><a class="markdownIt-Anchor" href="#一些编码"></a> 一些编码</h3>
+<p><strong>离散数值：</strong> 直接用 1、2、3、4 编码，适用于有大小关系的特征（低中高）</p>
+<p>pandas 版本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mapper = &#123;i: item <span class="keyword">for</span> i, item <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">set</span>(feature))&#125;</span><br><span class="line">feature.<span class="built_in">map</span>(mapper)</span><br></pre></td></tr></table></figure>
+<p>sklearn 版本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">label_encoder = LabelEncoder()</span><br><span class="line">new_feature = label_encoder.fit_transform(feature)</span><br></pre></td></tr></table></figure>
+<p><strong>One-Hot：</strong> pd.get_dummies，支持非数值类型</p>
+<img src="/posts/754419582/image-20220309005442788.png" alt="image-20220309005442788" style="zoom: 25%;">
+<p>解决的问题是处理 <strong>特征的距离</strong> ，树模型不依赖值的大小，所以一般不需要 one-hot 编码。</p>
+<p><strong>二进制编码：</strong> 编码属性，1-有，0-没有，维数上可以比独热编码少很多。</p>
+<p><strong>多标签和多分类的区别：</strong> multi-label 和 multi-class，多标签的属性可以并存，多分类有且只有一种类别</p>
+<p>multi-label 用二进制编码，multi-class 用独热编码</p>
+<h3 id="nnembedding"><a class="markdownIt-Anchor" href="#nnembedding"></a> nn.Embedding</h3>
+<p>可以把任何输入映射，正态分布初始化系数矩阵。可以理解成一个字典、编码器</p>
+<p>num_embeddings：字典的大小，取为类别的数目即可</p>
+<p>embedding_dim：嵌入向量大小，一般会维度小于输入，起到降维的效果。</p>
+<p>输入一个 batch，Embedding 会把每行（可能是一维向量也可能是图片、句子）理解成一组词，并且为每个词进行编码映射到 embedding_dim 维度的向量上。比如一个 5 长度的向量输入，返回一个 5 x embedding_dim 的二维数组。合起来最终输出的就是 (batch_size, 5, embedding_dim) 的 tensor</p>
+<p>如果用 one-hot 编码，维度会随着类别迅速膨胀，</p>
 ]]></content>
       <categories>
         <category>机器学习</category>

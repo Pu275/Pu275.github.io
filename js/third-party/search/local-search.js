@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
   const localSearch = new LocalSearch({
-    path             : CONFIG.path,
+    // path             : CONFIG.path,
+    path             : "https://cdn.jsdelivr.net/gh/Pu275/Pu275.github.io/blob/main/search.xml",
     top_n_per_article: CONFIG.localsearch.top_n_per_article,
     unescape         : CONFIG.localsearch.unescape
   });
