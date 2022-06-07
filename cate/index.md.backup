@@ -148,6 +148,9 @@ date: 2022-03-10 17:28:56
             <a class="post-title-link" href="/posts/3426048063/"
             itemprop="url"><span itemprop="name">--  逻辑斯谛回归相关</span></a></div>
 <div class="post-meta-container">
+            <a class="post-title-link" href="/posts/698517055/"
+            itemprop="url"><span itemprop="name">--  sklearn概率校准</span></a></div>
+<div class="post-meta-container">
             <a class="post-title-link" href="/posts/3154353656/"
             itemprop="url"><span itemprop="name">--  一个仿照sklearn的SGDClassifier</span></a></div>
 <div class="post-meta-container">
