@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>108. 将有序数组转换为二叉搜索树</title>
-    <url>/posts/388202331/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
-<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
-<p><strong>109. 有序链表转换二叉搜索树</strong></p>
-<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
-<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
-<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
-<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
-<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>105. 从前序与中序遍历序列构造二叉树</title>
     <url>/posts/2058783557/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -64,6 +42,28 @@
       </categories>
   </entry>
   <entry>
+    <title>108. 将有序数组转换为二叉搜索树</title>
+    <url>/posts/388202331/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
+<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
+<p><strong>109. 有序链表转换二叉搜索树</strong></p>
+<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
+<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>111. 二叉树的最小深度</title>
     <url>/posts/4124547255/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -83,6 +83,32 @@
 <p>左右子树进行迭代，遇到无子节点的返回深度</p>
 <p><strong>注意：</strong> 迭代到只有左结点为空指针这种情况需要特别讨论，此时还不能返回深度，应该沿着右子树继续探测下去。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="built_in">minDepth</span>(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> right = <span class="built_in">minDepth</span>(root-&gt;right);</span><br><span class="line">    <span class="keyword">if</span> (root-&gt;left == <span class="literal">nullptr</span> || root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> left + right + <span class="number">1</span>;  <span class="comment">// 合并左或右结点为空，不管哪个为空，最后返回的深度都是加起来</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(left, right) + <span class="number">1</span>;  <span class="comment">// 正常情况取小的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>112.路径总和</title>
+    <url>/posts/3650164630/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
+<p>叶子节点 是指没有子节点的节点。</p>
+<p><a href="https://leetcode-cn.com/problems/path-sum/">https://leetcode-cn.com/problems/path-sum/</a></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>左右子树两个子问题，更新目标值为 <strong>target - 根结点的值</strong> 。找到叶子结点停止，返回 false。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">hasPathSum</span>(root-&gt;left, targetSum - root-&gt;val) || <span class="built_in">hasPathSum</span>(root-&gt;right, targetSum - root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
+<p>给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。</p>
+<p>叶子节点 是指没有子节点的节点。</p>
+<p><a href="https://leetcode-cn.com/problems/path-sum-ii/">https://leetcode-cn.com/problems/path-sum-ii/</a></p>
+<h3 id="解答一"><a class="markdownIt-Anchor" href="#解答一"></a> 解答一</h3>
+<p>本题要求找到所有符合要求的路径，返回一个二维 vector。</p>
+<p>所以迭代的时候记录下路径，这样的坏处是分支一多，路径就会拷贝的到处都是，占用空间。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPath</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum, vector&lt;<span class="keyword">int</span>&gt; path)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 找到符合条件的叶子结点，就加入result</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">getPath</span>(root-&gt;left, targetSum - root-&gt;val, path);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">getPath</span>(root-&gt;right, targetSum - root-&gt;val, path);</span><br><span class="line">    &#125; </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        <span class="built_in">getPath</span>(root, targetSum, vector&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解答二"><a class="markdownIt-Anchor" href="#解答二"></a> 解答二</h3>
+<p>考虑所有分支共用一个路径 vector，节约空间。每次结束分支的探索，就回溯路径。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPath</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;left-&gt;val);  <span class="comment">// 探索左分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;left, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;right-&gt;val);  <span class="comment">// 探索右分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;right, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">getPath</span>(root, targetSum);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -173,32 +199,6 @@
       </categories>
   </entry>
   <entry>
-    <title>112.路径总和</title>
-    <url>/posts/3650164630/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
-<p>叶子节点 是指没有子节点的节点。</p>
-<p><a href="https://leetcode-cn.com/problems/path-sum/">https://leetcode-cn.com/problems/path-sum/</a></p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>左右子树两个子问题，更新目标值为 <strong>target - 根结点的值</strong> 。找到叶子结点停止，返回 false。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">hasPathSum</span>(root-&gt;left, targetSum - root-&gt;val) || <span class="built_in">hasPathSum</span>(root-&gt;right, targetSum - root-&gt;val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
-<p>给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。</p>
-<p>叶子节点 是指没有子节点的节点。</p>
-<p><a href="https://leetcode-cn.com/problems/path-sum-ii/">https://leetcode-cn.com/problems/path-sum-ii/</a></p>
-<h3 id="解答一"><a class="markdownIt-Anchor" href="#解答一"></a> 解答一</h3>
-<p>本题要求找到所有符合要求的路径，返回一个二维 vector。</p>
-<p>所以迭代的时候记录下路径，这样的坏处是分支一多，路径就会拷贝的到处都是，占用空间。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPath</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum, vector&lt;<span class="keyword">int</span>&gt; path)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 找到符合条件的叶子结点，就加入result</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">getPath</span>(root-&gt;left, targetSum - root-&gt;val, path);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">getPath</span>(root-&gt;right, targetSum - root-&gt;val, path);</span><br><span class="line">    &#125; </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        <span class="built_in">getPath</span>(root, targetSum, vector&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="解答二"><a class="markdownIt-Anchor" href="#解答二"></a> 解答二</h3>
-<p>考虑所有分支共用一个路径 vector，节约空间。每次结束分支的探索，就回溯路径。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPath</span><span class="params">(TreeNode* root, <span class="keyword">int</span> targetSum)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;val == targetSum &amp;&amp; root-&gt;left == <span class="literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;left-&gt;val);  <span class="comment">// 探索左分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;left, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            path.<span class="built_in">push_back</span>(root-&gt;right-&gt;val);  <span class="comment">// 探索右分支</span></span><br><span class="line">            <span class="built_in">getPath</span>(root-&gt;right, targetSum - root-&gt;val);</span><br><span class="line">            path.<span class="built_in">pop_back</span>();  <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pathSum</span>(TreeNode* root, <span class="keyword">int</span> targetSum) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="built_in">getPath</span>(root, targetSum);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>139. 单词拆分</title>
     <url>/posts/1712133297/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -264,6 +264,21 @@
       </categories>
   </entry>
   <entry>
+    <title>23. 合并K个升序链表</title>
+    <url>/posts/2831839759/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个链表数组，每个链表都已经按升序排列。</p>
+<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>升级版的合并两个有序链表。最直观的想法是仿照两个版，每次取最小的链表头出来，判断下一个结点取哪个，但是不太好写。</p>
+<p>参考归并排序的思路，把链表 vector 细分，直到可以转化成两个两个的处理，最后合并起来</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list2;</span><br><span class="line">        <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list1;</span><br><span class="line">        <span class="keyword">if</span> (list1-&gt;val &lt; list2-&gt;val) &#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists</span>(list1-&gt;next, list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists</span>(list2-&gt;next, list1);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ListNode* <span class="title">recur</span><span class="params">(vector&lt;ListNode*&gt;&amp; lists, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">            <span class="keyword">return</span> lists[left];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">mergeTwoLists</span>(<span class="built_in">recur</span>(lists, left, mid), <span class="built_in">recur</span>(lists, mid + <span class="number">1</span>, right));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(vector&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = lists.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> lists[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">recur</span>(lists, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>300. 最长递增子序列</title>
     <url>/posts/3337128124/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -275,21 +290,6 @@
 <p>dp 的含义为：<strong>当前元素加入后最优子序列的长度</strong> 。所以每次加入新元素还是要扫描前面所有情况。最后输出的结果要考虑全部元素加入后最大的那个长度。所以求一次最大值</p>
 <h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> maxNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; nums[j]) &#123;</span><br><span class="line">                    dp[i] = <span class="built_in">max</span>(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; maxNum) maxNum = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>23. 合并K个升序链表</title>
-    <url>/posts/2831839759/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个链表数组，每个链表都已经按升序排列。</p>
-<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>升级版的合并两个有序链表。最直观的想法是仿照两个版，每次取最小的链表头出来，判断下一个结点取哪个，但是不太好写。</p>
-<p>参考归并排序的思路，把链表 vector 细分，直到可以转化成两个两个的处理，最后合并起来</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list2;</span><br><span class="line">        <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>) <span class="keyword">return</span> list1;</span><br><span class="line">        <span class="keyword">if</span> (list1-&gt;val &lt; list2-&gt;val) &#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists</span>(list1-&gt;next, list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists</span>(list2-&gt;next, list1);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ListNode* <span class="title">recur</span><span class="params">(vector&lt;ListNode*&gt;&amp; lists, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (left == right) &#123;</span><br><span class="line">            <span class="keyword">return</span> lists[left];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">mergeTwoLists</span>(<span class="built_in">recur</span>(lists, left, mid), <span class="built_in">recur</span>(lists, mid + <span class="number">1</span>, right));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(vector&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = lists.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> lists[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">recur</span>(lists, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -348,119 +348,6 @@
       <categories>
         <category>LeetCode</category>
         <category>动态规划</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>887. 鸡蛋掉落</title>
-    <url>/posts/1142963852/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。</p>
-<p>已知存在楼层 f ，满足 0 &lt;= f &lt;= n ，任何从 <strong>高于</strong> f 的楼层落下的鸡蛋都会碎，从 f 楼层或比它低的楼层落下的鸡蛋都不会破。</p>
-<p>每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 &lt;= x &lt;= n）。如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎，则可以在之后的操作中 <strong>重复使用</strong> 这枚鸡蛋。</p>
-<p>请你计算并返回要确定 f <strong>确切的值</strong> 的 <strong>最小操作次数</strong> 是多少？</p>
-<span id="more"></span>
-<h3 id="解答超时了"><a class="markdownIt-Anchor" href="#解答超时了"></a> 解答（超时了）</h3>
-<p><strong>最小操作次数：</strong> 不管 f 取多少，我们采用的选取策略可以保证 <strong>多少次</strong> 以内定位到 f 的位置。也就是我们方法最差情况下消耗的次数（最好情况当然是 f 恰巧落在第一次选取的地方）</p>
-<p>问题类似二分查找，区别在于鸡蛋如果落入临界点右区间就会碎掉，虽然二分查找效率比较高，但是我们试错的机会有限，所以必须采取保守一点的策略，确保任何 f 的取值都能顺利找到。</p>
-<p><strong>注意：</strong> 只有鸡蛋在 i 和 i+1 层分别 <strong>不碎</strong> 和 <strong>碎</strong> 才能确定 f 的值（除非是 0 层 和 n层），所以大部分时候鸡蛋碎掉了标志着 f 找到。</p>
-<h4 id="一个鸡蛋的情况"><a class="markdownIt-Anchor" href="#一个鸡蛋的情况"></a> 一个鸡蛋的情况</h4>
-<p>如果只有一次机会，那么必须从 <strong>第一层</strong> 开始试验，一层一层往上直到碎掉。否则如果鸡蛋在中间某一层碎掉了，搜索就没办法继续了。所以 <strong>最小次数=n</strong>，可以看到为了防止鸡蛋破碎，查找的效率很低。</p>
-<h4 id="两个鸡蛋的情况"><a class="markdownIt-Anchor" href="#两个鸡蛋的情况"></a> 两个鸡蛋的情况</h4>
-<p>此时第一颗鸡蛋要从哪里起投就很复杂了，但至少我们知道：不管 <strong>1-楼层数</strong> 中间的哪个位置投下，只有两种结果（1）碎了（2）没碎。</p>
-<p>（1）碎了说明投放的地方太高，我们就用剩下的一颗鸡蛋去左区间根据 <strong>一个鸡蛋的情况</strong> 搜索；</p>
-<p>（2）没碎说明高度不够，我们就用剩下的两个鸡蛋去右区间迭代 <strong>两个鸡蛋的情况</strong> 搜索。</p>
-<p>不管是（1）还是（2）都是已经解决的子问题，所以就可以转化成动态规划，最终 i 位置消耗的次数取（1）和（2）中较大的那个（因为考虑的是最坏情况）加上一（本次操作也要算上），我们需要计算 <strong>1-楼层数</strong> 间全部的可能，取次数最小的那个投放点即可。（这样导致时间消耗大）</p>
-<p><strong>定义动态规划的状态：</strong> 在 <strong>i 个鸡蛋</strong> 的情况下，解决 <strong>j 层楼层</strong> 的问题的 <strong>最小操作次数</strong></p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> minNum = n;</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// k</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// N</span></span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;  <span class="comment">// 只有一个鸡蛋</span></span><br><span class="line">                    dp[i][j] = j;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                minNum = n;  <span class="comment">// 每次恢复 minNum</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= j; ++k)&#123;  <span class="comment">// 遍历取楼层 1-j，取次数最小的那个 k</span></span><br><span class="line">                    cur = <span class="built_in">max</span>(dp[i<span class="number">-1</span>][k<span class="number">-1</span>], dp[i][j-k]) + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (cur &lt; minNum) minNum = cur;</span><br><span class="line">                &#125;</span><br><span class="line">                dp[i][j] = minNum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[k][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="解答优化版"><a class="markdownIt-Anchor" href="#解答优化版"></a> 解答（优化版）</h3>
-<p><strong>新的动态规划状态：</strong>  在 <strong>i 个鸡蛋</strong> 的情况下，解决 <strong>j 次操作</strong> 可以求解到的 <strong>最大楼层数</strong></p>
-<h4 id="以两个鸡蛋的情况为例"><a class="markdownIt-Anchor" href="#以两个鸡蛋的情况为例"></a> 以两个鸡蛋的情况为例</h4>
-<p>上个解答我们知道，投一个鸡蛋分为（1）碎了（2）没碎 两种结果，考虑在新的状态下，剩余 j 个次数，投第一个鸡蛋：</p>
-<p>（1）碎了，投太高了，剩下一个鸡蛋去探索 <strong>j-1</strong> 次最多到达多少层；</p>
-<p>（1）没碎，投太低了，剩下两个鸡蛋去探索 <strong>j-1</strong> 次最多到达多少层；</p>
-<p>那么两个鸡蛋可以覆盖的层数就是 <strong>（1）+（2）+ 1</strong></p>
-<p>不用管 <strong>第一个鸡蛋投在哪一层</strong>，可以把（1）和（2）看成是一个移动窗口，中心点在投的那层，当窗口通过移动中心点能够覆盖全部 N 层的时候，说明此时的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong> 达到要求了。我们要做的就是从最简单的情况，不断推导到题目给定的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong>。</p>
-<h3 id="代码-2"><a class="markdownIt-Anchor" href="#代码-2"></a> 代码</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// 最多 N 次肯定可以完成 N 层</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// 从一个鸡蛋考虑到k个</span></span><br><span class="line">            dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + dp[i][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[k][j] &gt;= n) <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++的vector</title>
-    <url>/posts/415903961/</url>
-    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
-<p>vector 是一个动态大小的容器，具备很多功能。</p>
-<span id="more"></span>
-<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
-<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
-<p>开头需要一行</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>
-<p>创建一个空 vector</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
-</li>
-<li>
-<p>使用一个值填充 vector：（int 默认 0）</p>
- <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
-</li>
-</ol>
-<h4 id="迭代器"><a class="markdownIt-Anchor" href="#迭代器"></a> 迭代器</h4>
-<p>定义一个迭代器</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
-<p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
-<h4 id="反向迭代器"><a class="markdownIt-Anchor" href="#反向迭代器"></a> 反向迭代器</h4>
-<p>从尾巴迭代到开头。也有 c 的常量版本</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p = v.<span class="built_in">crbegin</span>(); p != v.<span class="built_in">rend</span>(); ++p) &#123;</span><br><span class="line">    cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> reverse 迭代器也是递增运算符</p>
-<h4 id="首尾"><a class="markdownIt-Anchor" href="#首尾"></a> 首尾</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">v1.<span class="built_in">front</span>();</span><br><span class="line">v1.<span class="built_in">back</span>();</span><br></pre></td></tr></table></figure>
-<h4 id="扩容"><a class="markdownIt-Anchor" href="#扩容"></a> 扩容</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">v1.<span class="built_in">resize</span>(<span class="number">5</span>);  <span class="comment">// 把 v1 的长度扩充为 5，默认补 0</span></span><br><span class="line">v1.<span class="built_in">resize</span>(<span class="number">5</span>, <span class="number">1</span>);  <span class="comment">// 补1</span></span><br></pre></td></tr></table></figure>
-<p>vector 本身也有自动扩容（数组大小）的机制。capacity 查看当前数组大小，size 查看元素个数。可以看到 vector 的长度突破 capacity 的时候会发生扩容，capacity 变为两倍。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">cout &lt;&lt; v.<span class="built_in">capacity</span>() &lt;&lt; endl;  <span class="comment">// 3</span></span><br><span class="line">cout &lt;&lt; v.<span class="built_in">size</span>() &lt;&lt; endl;  <span class="comment">// 3</span></span><br><span class="line">v.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">cout &lt;&lt; v.<span class="built_in">capacity</span>() &lt;&lt; endl;  <span class="comment">// 6</span></span><br><span class="line">cout &lt;&lt; v.<span class="built_in">size</span>() &lt;&lt; endl;  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
-<h4 id="访问下标"><a class="markdownIt-Anchor" href="#访问下标"></a> 访问下标</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">v1[<span class="number">5</span>];  <span class="comment">// 不带范围检测, 可能输出0</span></span><br><span class="line">*(v1.<span class="built_in">cbegin</span>() + <span class="number">5</span>)  <span class="comment">// 不带范围检测, 可能输出0</span></span><br><span class="line">v1.<span class="built_in">at</span>(<span class="number">5</span>);  <span class="comment">// 带范围检测</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 方括号可以超出当前元素个数访问不报错！类似于原生数组用指针访问，即使超界仍然可以访问内存，只不过都是未定义的数据，很危险。</p>
-<p>即使 vector 已经 clear，内存里的数据还保留着，如果 clear 前用指针记录了 vector 的数据位置，便仍可以访问到。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>* p = v.<span class="built_in">data</span>();</span><br><span class="line">v.<span class="built_in">clear</span>();</span><br><span class="line">cout &lt;&lt; v[<span class="number">1</span>] &lt;&lt; endl;  <span class="comment">// 不报错 2</span></span><br><span class="line">cout &lt;&lt; p[<span class="number">1</span>] &lt;&lt; endl;  <span class="comment">// 不报错 2</span></span><br><span class="line">cout &lt;&lt; v.<span class="built_in">at</span>(<span class="number">1</span>) &lt;&lt; endl;  <span class="comment">// 报错！此时 vector 长度为 0</span></span><br></pre></td></tr></table></figure>
-<h3 id="实现一个简单-vector"><a class="markdownIt-Anchor" href="#实现一个简单-vector"></a> 实现一个简单 vector</h3>
-<ol>
-<li>vector 具有自动扩容功能 resize</li>
-<li>拷贝 vector 功能</li>
-<li>vector 可以作为任何对象的容器，push_back 新元素调用对象的拷贝构造函数并放进容器</li>
-</ol>
-<p>一个基本的框架如下，first 记录 vector 起始位置，last 记录当前长度位置，end 记录两倍初始化长度，每次容量耗尽发生扩容，end 就扩充到两倍当前长度。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> dtype&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        dtype* first_;</span><br><span class="line">        dtype* last_;</span><br><span class="line">        dtype* end_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>如果为这个 Vector 使用默认拷贝构造函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Vector&lt;<span class="keyword">int</span>&gt; <span class="title">x</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">Vector&lt;<span class="keyword">int</span>&gt; y = x;</span><br></pre></td></tr></table></figure>
-<p>x 和 y 的指针值是相同的，此时操作 y 会同时影响到 x 的数据。而真正的 vector 的效果是 x 和 y 的数据是完全独立的。</p>
-<h4 id="扩容-2"><a class="markdownIt-Anchor" href="#扩容-2"></a> 扩容</h4>
-<p>当 Vector 的元素位置到达 end 时候，触发扩容，开辟一块新的内存，并把旧的 first 看管的内存拷贝过去，释放旧的内存，最后把 first 的位置也移到新内存。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dtype* newFirst_ = <span class="keyword">new</span> dtype[maxLen * <span class="number">2</span>];</span><br><span class="line">    <span class="built_in">memmove</span>(newFirst_, first_, <span class="built_in"><span class="keyword">sizeof</span></span>(dtype) * maxLen);</span><br><span class="line">    <span class="keyword">delete</span>[] first_;</span><br><span class="line">    first_ = newFirst_;</span><br><span class="line">    end_ = first_ + maxLen * <span class="number">2</span>;</span><br><span class="line">    last_ = first_ + maxLen;</span><br><span class="line">    maxLen *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="删除元素"><a class="markdownIt-Anchor" href="#删除元素"></a> 删除元素</h4>
-<p>容器带的方法 erase，需要传入删除位置的迭代器</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">vector::iterator it = v.<span class="built_in">begin</span>();</span><br><span class="line">v.<span class="built_in">erase</span>(p);</span><br></pre></td></tr></table></figure>
-<h4 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h4>
-<p>重载类型转换函数，用一个指针去遍历自己的 Vector 类。可以实现类似重载 [] 运算符的效果</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">operator</span> <span class="keyword">const</span> <span class="keyword">double</span> *() <span class="keyword">const</span> &#123; <span class="keyword">return</span> first_; &#125;</span><br><span class="line"><span class="keyword">operator</span> <span class="keyword">double</span> *() &#123; <span class="keyword">return</span> first_; &#125;</span><br><span class="line">Vector&lt;<span class="keyword">double</span>&gt; v;</span><br><span class="line"><span class="keyword">double</span> d = v[<span class="number">0</span>];  <span class="comment">// 应该是指针操作触发了类型转换？</span></span><br><span class="line">cout &lt;&lt; d &lt;&lt; endl;</span><br><span class="line"><span class="keyword">double</span>* p = v;  <span class="comment">// p 获取了 first_ 的地址</span></span><br><span class="line">cout &lt;&lt; *p &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
       </categories>
   </entry>
   <entry>
@@ -583,6 +470,119 @@
 <p>或者在文件开头加入：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure>
 <p>常用的头文件有必要加入一个重复定义宏</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>887. 鸡蛋掉落</title>
+    <url>/posts/1142963852/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。</p>
+<p>已知存在楼层 f ，满足 0 &lt;= f &lt;= n ，任何从 <strong>高于</strong> f 的楼层落下的鸡蛋都会碎，从 f 楼层或比它低的楼层落下的鸡蛋都不会破。</p>
+<p>每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 &lt;= x &lt;= n）。如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎，则可以在之后的操作中 <strong>重复使用</strong> 这枚鸡蛋。</p>
+<p>请你计算并返回要确定 f <strong>确切的值</strong> 的 <strong>最小操作次数</strong> 是多少？</p>
+<span id="more"></span>
+<h3 id="解答超时了"><a class="markdownIt-Anchor" href="#解答超时了"></a> 解答（超时了）</h3>
+<p><strong>最小操作次数：</strong> 不管 f 取多少，我们采用的选取策略可以保证 <strong>多少次</strong> 以内定位到 f 的位置。也就是我们方法最差情况下消耗的次数（最好情况当然是 f 恰巧落在第一次选取的地方）</p>
+<p>问题类似二分查找，区别在于鸡蛋如果落入临界点右区间就会碎掉，虽然二分查找效率比较高，但是我们试错的机会有限，所以必须采取保守一点的策略，确保任何 f 的取值都能顺利找到。</p>
+<p><strong>注意：</strong> 只有鸡蛋在 i 和 i+1 层分别 <strong>不碎</strong> 和 <strong>碎</strong> 才能确定 f 的值（除非是 0 层 和 n层），所以大部分时候鸡蛋碎掉了标志着 f 找到。</p>
+<h4 id="一个鸡蛋的情况"><a class="markdownIt-Anchor" href="#一个鸡蛋的情况"></a> 一个鸡蛋的情况</h4>
+<p>如果只有一次机会，那么必须从 <strong>第一层</strong> 开始试验，一层一层往上直到碎掉。否则如果鸡蛋在中间某一层碎掉了，搜索就没办法继续了。所以 <strong>最小次数=n</strong>，可以看到为了防止鸡蛋破碎，查找的效率很低。</p>
+<h4 id="两个鸡蛋的情况"><a class="markdownIt-Anchor" href="#两个鸡蛋的情况"></a> 两个鸡蛋的情况</h4>
+<p>此时第一颗鸡蛋要从哪里起投就很复杂了，但至少我们知道：不管 <strong>1-楼层数</strong> 中间的哪个位置投下，只有两种结果（1）碎了（2）没碎。</p>
+<p>（1）碎了说明投放的地方太高，我们就用剩下的一颗鸡蛋去左区间根据 <strong>一个鸡蛋的情况</strong> 搜索；</p>
+<p>（2）没碎说明高度不够，我们就用剩下的两个鸡蛋去右区间迭代 <strong>两个鸡蛋的情况</strong> 搜索。</p>
+<p>不管是（1）还是（2）都是已经解决的子问题，所以就可以转化成动态规划，最终 i 位置消耗的次数取（1）和（2）中较大的那个（因为考虑的是最坏情况）加上一（本次操作也要算上），我们需要计算 <strong>1-楼层数</strong> 间全部的可能，取次数最小的那个投放点即可。（这样导致时间消耗大）</p>
+<p><strong>定义动态规划的状态：</strong> 在 <strong>i 个鸡蛋</strong> 的情况下，解决 <strong>j 层楼层</strong> 的问题的 <strong>最小操作次数</strong></p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">int</span> minNum = n;</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// k</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// N</span></span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;  <span class="comment">// 只有一个鸡蛋</span></span><br><span class="line">                    dp[i][j] = j;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                minNum = n;  <span class="comment">// 每次恢复 minNum</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= j; ++k)&#123;  <span class="comment">// 遍历取楼层 1-j，取次数最小的那个 k</span></span><br><span class="line">                    cur = <span class="built_in">max</span>(dp[i<span class="number">-1</span>][k<span class="number">-1</span>], dp[i][j-k]) + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (cur &lt; minNum) minNum = cur;</span><br><span class="line">                &#125;</span><br><span class="line">                dp[i][j] = minNum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[k][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解答优化版"><a class="markdownIt-Anchor" href="#解答优化版"></a> 解答（优化版）</h3>
+<p><strong>新的动态规划状态：</strong>  在 <strong>i 个鸡蛋</strong> 的情况下，解决 <strong>j 次操作</strong> 可以求解到的 <strong>最大楼层数</strong></p>
+<h4 id="以两个鸡蛋的情况为例"><a class="markdownIt-Anchor" href="#以两个鸡蛋的情况为例"></a> 以两个鸡蛋的情况为例</h4>
+<p>上个解答我们知道，投一个鸡蛋分为（1）碎了（2）没碎 两种结果，考虑在新的状态下，剩余 j 个次数，投第一个鸡蛋：</p>
+<p>（1）碎了，投太高了，剩下一个鸡蛋去探索 <strong>j-1</strong> 次最多到达多少层；</p>
+<p>（1）没碎，投太低了，剩下两个鸡蛋去探索 <strong>j-1</strong> 次最多到达多少层；</p>
+<p>那么两个鸡蛋可以覆盖的层数就是 <strong>（1）+（2）+ 1</strong></p>
+<p>不用管 <strong>第一个鸡蛋投在哪一层</strong>，可以把（1）和（2）看成是一个移动窗口，中心点在投的那层，当窗口通过移动中心点能够覆盖全部 N 层的时候，说明此时的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong> 达到要求了。我们要做的就是从最简单的情况，不断推导到题目给定的 <strong>鸡蛋数目</strong> 和 <strong>操作次数</strong>。</p>
+<h3 id="代码-2"><a class="markdownIt-Anchor" href="#代码-2"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">superEggDrop</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(k + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;  <span class="comment">// 最多 N 次肯定可以完成 N 层</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k + <span class="number">1</span>; ++i) &#123;  <span class="comment">// 从一个鸡蛋考虑到k个</span></span><br><span class="line">            dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + dp[i][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[k][j] &gt;= n) <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++的vector</title>
+    <url>/posts/415903961/</url>
+    <content><![CDATA[<h3 id="什么是-vector"><a class="markdownIt-Anchor" href="#什么是-vector"></a> 什么是 vector</h3>
+<p>vector 是一个动态大小的容器，具备很多功能。</p>
+<span id="more"></span>
+<h3 id="基本方法"><a class="markdownIt-Anchor" href="#基本方法"></a> 基本方法</h3>
+<h4 id="创建一个-vector"><a class="markdownIt-Anchor" href="#创建一个-vector"></a> 创建一个 vector</h4>
+<p>开头需要一行</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>创建一个空 vector</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从已有的 vector 创建拷贝：（两种方法等价）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = v2;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(v2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>原型：<code>vector(const vector&amp;)</code>，复制构造函数</p>
+</li>
+<li>
+<p>使用一个值填充 vector：（int 默认 0）</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v1</span><span class="params">(<span class="number">5</span>, <span class="number">6</span>)</span></span>;  <span class="comment">// 把初始值设置成 6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>传入数组的首尾指针：（v2 只是拷贝 v1 的值，地址是新开辟的）</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(&amp;v1[<span class="number">0</span>], &amp;v1[v1.size()])</span></span>;</span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">v2</span><span class="params">(v1.begin(), v1.end())</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 这里的首尾是左闭右开区间：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>b</mi><mi>e</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo separator="true">,</mo><mi>e</mi><mi>n</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[begin, end)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">b</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mclose">)</span></span></span></span>，所以第二个参数实际使用是 <strong>右边界+1</strong>。而且 <code>v.end()</code> 指向的是 vector 最后一个元素后面一位，所以正好是 <strong>右边界+1</strong>。</p>
+</li>
+</ol>
+<h4 id="迭代器"><a class="markdownIt-Anchor" href="#迭代器"></a> 迭代器</h4>
+<p>定义一个迭代器</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">auto</span> iv = v.<span class="built_in">begin</span>();</span><br><span class="line"><span class="comment">// vector&lt;int&gt;::iterator iv = v.begin();</span></span><br><span class="line"><span class="keyword">for</span> (; iv &lt; v.<span class="built_in">end</span>(); iv++)</span><br><span class="line">  cout &lt;&lt; *iv &lt;&lt; <span class="string">&quot; &quot;</span>;  <span class="comment">// 结果是：1 2 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 终止条件可以是小于 &lt; <code>v.end()</code>，也可以是不等于 <code>!= v.end()</code>。因为 end 指向的是 vector 最后一个元素还要后面的元素，所以当迭代器指向 end 的时候说明 vector 已经遍历结束了。</p>
+<p>循环里面使用了迭代器，就不要给 vector 添加元素了（不然容器扩容会导致迭代器失效）</p>
+<h4 id="反向迭代器"><a class="markdownIt-Anchor" href="#反向迭代器"></a> 反向迭代器</h4>
+<p>从尾巴迭代到开头。也有 c 的常量版本</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p = v.<span class="built_in">crbegin</span>(); p != v.<span class="built_in">rend</span>(); ++p) &#123;</span><br><span class="line">    cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> reverse 迭代器也是递增运算符</p>
+<h4 id="首尾"><a class="markdownIt-Anchor" href="#首尾"></a> 首尾</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">v1.<span class="built_in">front</span>();</span><br><span class="line">v1.<span class="built_in">back</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="扩容"><a class="markdownIt-Anchor" href="#扩容"></a> 扩容</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">v1.<span class="built_in">resize</span>(<span class="number">5</span>);  <span class="comment">// 把 v1 的长度扩充为 5，默认补 0</span></span><br><span class="line">v1.<span class="built_in">resize</span>(<span class="number">5</span>, <span class="number">1</span>);  <span class="comment">// 补1</span></span><br></pre></td></tr></table></figure>
+<p>vector 本身也有自动扩容（数组大小）的机制。capacity 查看当前数组大小，size 查看元素个数。可以看到 vector 的长度突破 capacity 的时候会发生扩容，capacity 变为两倍。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">cout &lt;&lt; v.<span class="built_in">capacity</span>() &lt;&lt; endl;  <span class="comment">// 3</span></span><br><span class="line">cout &lt;&lt; v.<span class="built_in">size</span>() &lt;&lt; endl;  <span class="comment">// 3</span></span><br><span class="line">v.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">cout &lt;&lt; v.<span class="built_in">capacity</span>() &lt;&lt; endl;  <span class="comment">// 6</span></span><br><span class="line">cout &lt;&lt; v.<span class="built_in">size</span>() &lt;&lt; endl;  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<h4 id="访问下标"><a class="markdownIt-Anchor" href="#访问下标"></a> 访问下标</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v1 &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">v1[<span class="number">5</span>];  <span class="comment">// 不带范围检测, 可能输出0</span></span><br><span class="line">*(v1.<span class="built_in">cbegin</span>() + <span class="number">5</span>)  <span class="comment">// 不带范围检测, 可能输出0</span></span><br><span class="line">v1.<span class="built_in">at</span>(<span class="number">5</span>);  <span class="comment">// 带范围检测</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 方括号可以超出当前元素个数访问不报错！类似于原生数组用指针访问，即使超界仍然可以访问内存，只不过都是未定义的数据，很危险。</p>
+<p>即使 vector 已经 clear，内存里的数据还保留着，如果 clear 前用指针记录了 vector 的数据位置，便仍可以访问到。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>* p = v.<span class="built_in">data</span>();</span><br><span class="line">v.<span class="built_in">clear</span>();</span><br><span class="line">cout &lt;&lt; v[<span class="number">1</span>] &lt;&lt; endl;  <span class="comment">// 不报错 2</span></span><br><span class="line">cout &lt;&lt; p[<span class="number">1</span>] &lt;&lt; endl;  <span class="comment">// 不报错 2</span></span><br><span class="line">cout &lt;&lt; v.<span class="built_in">at</span>(<span class="number">1</span>) &lt;&lt; endl;  <span class="comment">// 报错！此时 vector 长度为 0</span></span><br></pre></td></tr></table></figure>
+<h3 id="实现一个简单-vector"><a class="markdownIt-Anchor" href="#实现一个简单-vector"></a> 实现一个简单 vector</h3>
+<ol>
+<li>vector 具有自动扩容功能 resize</li>
+<li>拷贝 vector 功能</li>
+<li>vector 可以作为任何对象的容器，push_back 新元素调用对象的拷贝构造函数并放进容器</li>
+</ol>
+<p>一个基本的框架如下，first 记录 vector 起始位置，last 记录当前长度位置，end 记录两倍初始化长度，每次容量耗尽发生扩容，end 就扩充到两倍当前长度。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> dtype&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        dtype* first_;</span><br><span class="line">        dtype* last_;</span><br><span class="line">        dtype* end_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果为这个 Vector 使用默认拷贝构造函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Vector&lt;<span class="keyword">int</span>&gt; <span class="title">x</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">Vector&lt;<span class="keyword">int</span>&gt; y = x;</span><br></pre></td></tr></table></figure>
+<p>x 和 y 的指针值是相同的，此时操作 y 会同时影响到 x 的数据。而真正的 vector 的效果是 x 和 y 的数据是完全独立的。</p>
+<h4 id="扩容-2"><a class="markdownIt-Anchor" href="#扩容-2"></a> 扩容</h4>
+<p>当 Vector 的元素位置到达 end 时候，触发扩容，开辟一块新的内存，并把旧的 first 看管的内存拷贝过去，释放旧的内存，最后把 first 的位置也移到新内存。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dtype* newFirst_ = <span class="keyword">new</span> dtype[maxLen * <span class="number">2</span>];</span><br><span class="line">    <span class="built_in">memmove</span>(newFirst_, first_, <span class="built_in"><span class="keyword">sizeof</span></span>(dtype) * maxLen);</span><br><span class="line">    <span class="keyword">delete</span>[] first_;</span><br><span class="line">    first_ = newFirst_;</span><br><span class="line">    end_ = first_ + maxLen * <span class="number">2</span>;</span><br><span class="line">    last_ = first_ + maxLen;</span><br><span class="line">    maxLen *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除元素"><a class="markdownIt-Anchor" href="#删除元素"></a> 删除元素</h4>
+<p>容器带的方法 erase，需要传入删除位置的迭代器</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">vector::iterator it = v.<span class="built_in">begin</span>();</span><br><span class="line">v.<span class="built_in">erase</span>(p);</span><br></pre></td></tr></table></figure>
+<h4 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h4>
+<p>重载类型转换函数，用一个指针去遍历自己的 Vector 类。可以实现类似重载 [] 运算符的效果</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">operator</span> <span class="keyword">const</span> <span class="keyword">double</span> *() <span class="keyword">const</span> &#123; <span class="keyword">return</span> first_; &#125;</span><br><span class="line"><span class="keyword">operator</span> <span class="keyword">double</span> *() &#123; <span class="keyword">return</span> first_; &#125;</span><br><span class="line">Vector&lt;<span class="keyword">double</span>&gt; v;</span><br><span class="line"><span class="keyword">double</span> d = v[<span class="number">0</span>];  <span class="comment">// 应该是指针操作触发了类型转换？</span></span><br><span class="line">cout &lt;&lt; d &lt;&lt; endl;</span><br><span class="line"><span class="keyword">double</span>* p = v;  <span class="comment">// p 获取了 first_ 的地址</span></span><br><span class="line">cout &lt;&lt; *p &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -1038,27 +1038,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
-    <title>C++的迭代器</title>
-    <url>/posts/4162503842/</url>
-    <content><![CDATA[<h3 id="迭代器类别"><a class="markdownIt-Anchor" href="#迭代器类别"></a> 迭代器类别：</h3>
-<h4 id="输入迭代器-input-iterator"><a class="markdownIt-Anchor" href="#输入迭代器-input-iterator"></a> 输入迭代器 input iterator</h4>
-<p>只能按顺序访问，不能任意访问</p>
-<h3 id="怎么自定义迭代器"><a class="markdownIt-Anchor" href="#怎么自定义迭代器"></a> 怎么自定义迭代器</h3>
-<h4 id="重载运算符"><a class="markdownIt-Anchor" href="#重载运算符"></a> 重载运算符</h4>
-<p><strong>递增运算符++：</strong> 前置版本返回 *this 的引用，后置版本创建一个拷贝，再执行一次 ++，最后返回拷贝。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">  	A&amp; <span class="keyword">operator</span>++();  <span class="comment">// 前置</span></span><br><span class="line">  	A <span class="keyword">operator</span>++(<span class="keyword">int</span>);  <span class="comment">// 后置，通过 int 形参区分</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>==运算符：</strong></p>
-<p><strong>箭头运算符：</strong> 箭头重载是特殊的重载，他是一个类似如下的过程（和指针的箭头不太一样）</p>
-<p>A-&gt;x()：（A-&gt;y-&gt;z）-&gt;x()</p>
-<p>重载的箭头运算符会返回一个 A 的成员，然后对这个成员继续调用 -&gt;，直到返回一个指针。然后才是原生的指针箭头运算符，调用 x 方法。</p>
-<p>箭头运算符的终点一定是指针</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">x</span><span class="params">()</span> <span class="keyword">const</span></span>;  <span class="comment">// 因为 A 的箭头返回的是常量指针，不能调用成员函数</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    B* b;</span><br><span class="line">    B <span class="keyword">const</span>* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">A a;</span><br><span class="line">a-&gt;<span class="built_in">x</span>();  <span class="comment">// 根据重载函数抵达一个指针，并且调用指针的 x 方法</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C++的类</title>
     <url>/posts/2545696309/</url>
     <content><![CDATA[<p>c++类的一些基本用法</p>
@@ -1230,6 +1209,148 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
+    <title>C++的迭代器</title>
+    <url>/posts/4162503842/</url>
+    <content><![CDATA[<h3 id="迭代器类别"><a class="markdownIt-Anchor" href="#迭代器类别"></a> 迭代器类别：</h3>
+<h4 id="输入迭代器-input-iterator"><a class="markdownIt-Anchor" href="#输入迭代器-input-iterator"></a> 输入迭代器 input iterator</h4>
+<p>只能按顺序访问，不能任意访问</p>
+<h3 id="怎么自定义迭代器"><a class="markdownIt-Anchor" href="#怎么自定义迭代器"></a> 怎么自定义迭代器</h3>
+<h4 id="重载运算符"><a class="markdownIt-Anchor" href="#重载运算符"></a> 重载运算符</h4>
+<p><strong>递增运算符++：</strong> 前置版本返回 *this 的引用，后置版本创建一个拷贝，再执行一次 ++，最后返回拷贝。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">  	A&amp; <span class="keyword">operator</span>++();  <span class="comment">// 前置</span></span><br><span class="line">  	A <span class="keyword">operator</span>++(<span class="keyword">int</span>);  <span class="comment">// 后置，通过 int 形参区分</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>==运算符：</strong></p>
+<p><strong>箭头运算符：</strong> 箭头重载是特殊的重载，他是一个类似如下的过程（和指针的箭头不太一样）</p>
+<p>A-&gt;x()：（A-&gt;y-&gt;z）-&gt;x()</p>
+<p>重载的箭头运算符会返回一个 A 的成员，然后对这个成员继续调用 -&gt;，直到返回一个指针。然后才是原生的指针箭头运算符，调用 x 方法。</p>
+<p>箭头运算符的终点一定是指针</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">x</span><span class="params">()</span> <span class="keyword">const</span></span>;  <span class="comment">// 因为 A 的箭头返回的是常量指针，不能调用成员函数</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    B* b;</span><br><span class="line">    B <span class="keyword">const</span>* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">A a;</span><br><span class="line">a-&gt;<span class="built_in">x</span>();  <span class="comment">// 根据重载函数抵达一个指针，并且调用指针的 x 方法</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Python引用计数（及其他）</title>
+    <url>/posts/3617097176/</url>
+    <content><![CDATA[<h3 id="python-的引用"><a class="markdownIt-Anchor" href="#python-的引用"></a> Python 的引用</h3>
+<h4 id="常量们"><a class="markdownIt-Anchor" href="#常量们"></a> 常量们</h4>
+<p>Python 有一个小整数池 [-5, 256] 提前在内存中分配好，任何变量赋值同一个小整数，都是对小整数池的引用。</p>
+<p>新建了一个大整数，会在大整数池添加，如果之后再用这个变量赋值给其他变量，也是赋值引用。</p>
+<p>字符串、浮点也和大整数池一样，如果重新赋值就是引用。</p>
+<h4 id="可变对象们"><a class="markdownIt-Anchor" href="#可变对象们"></a> 可变对象们</h4>
+<p>赋值都是引用，传参也都是引用。Python 对象大部分都是引用</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = []</span><br><span class="line"><span class="built_in">id</span>(x)</span><br><span class="line">x.append(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">id</span>(x)  <span class="comment"># 不会变</span></span><br><span class="line">y = x</span><br><span class="line"><span class="built_in">id</span>(y)  <span class="comment"># 一样</span></span><br></pre></td></tr></table></figure>
+<h4 id="切片情况变得复杂"><a class="markdownIt-Anchor" href="#切片情况变得复杂"></a> 切片，情况变得复杂</h4>
+<p>总体上列表的切片可以看作 <strong>浅拷贝</strong> 。可是虽然 <strong>列表的切片</strong> 产生了新的对象，但它的元素是对原列表元素的引用！而且对切片的修改不会作用到本体上</p>
+<p><strong>是这样一个思路：</strong> 切片产生的是原列表元素的引用，类似函数传参，如果是可变对象（列表、字典），修改会作用在本体上；如果是不可变对象，修改不会影响到本体，只是拷贝的元素地址发生变动。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">y = x[<span class="number">1</span>:]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">1</span>]), <span class="built_in">id</span>(y[<span class="number">0</span>]))  <span class="comment"># 4487295424 4487295424</span></span><br></pre></td></tr></table></figure>
+<p><strong>总结一下：</strong> 对于列表、元组、字典来说，直接拷贝赋值是 <strong>浅拷贝</strong> 。对于切片，</p>
+<p>另外，numpy 的切片（view）的修改可以传导到本体上（详见后文）</p>
+<h3 id="什么是引用计数"><a class="markdownIt-Anchor" href="#什么是引用计数"></a> 什么是引用计数</h3>
+<p>知道了常量的引用规则，可以看一个最简单的引用计数例子了。Python 分配的内存上会统计指向该内存变量的个数，变量指向其他内存，计数减一；新变量指向这块内存，计数加一。如果计数归零，说明内存没用了，即可释放。</p>
+<p>引用计数的目的就是清理垃圾，腾出没用的内存空间。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1.2321</span></span><br><span class="line">sys.getrefcount(x)  <span class="comment"># 2</span></span><br><span class="line">y = x  <span class="comment"># id(y) == id(x)</span></span><br><span class="line">sys.getrefcount(x)  <span class="comment"># 3, 多了一个对 x 的引用</span></span><br><span class="line"><span class="keyword">del</span> y  <span class="comment"># 或者重新赋值 y = 3.21</span></span><br><span class="line">sys.getrefcount(x)  <span class="comment"># 2, 引用减一</span></span><br></pre></td></tr></table></figure>
+<p>本来为 x = 1.2321 分配的内存在 x 删除以后，依然会保留下来（因为 y 还在引用它）。如果最后删除 y，这块内存会 <strong>无人看管吗</strong> ？不会，因为此时它的引用计数归零了，Python 的自动回收机制避免了内存泄露的问题。</p>
+<h3 id="不可变对象"><a class="markdownIt-Anchor" href="#不可变对象"></a> 不可变对象</h3>
+<p>“不可变” 指的到底是什么？对象引用的内存里的值不可变。不可变对象也是传递引用，之所以副本的改动不会影响本体，是因为，不可变对象的赋值和传参，会在内存重新发生构造，并且传递新引用。（而不是在原位直接修改）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1.2321</span></span><br><span class="line">y = x</span><br><span class="line"><span class="built_in">id</span>(x)  <span class="comment"># 140495516826512</span></span><br><span class="line">x = x + <span class="number">1</span></span><br><span class="line"><span class="built_in">id</span>(x)  <span class="comment"># 140495473039568</span></span><br><span class="line"><span class="built_in">id</span>(y)  <span class="comment"># 140495516826512</span></span><br></pre></td></tr></table></figure>
+<h4 id="不可变对象传参传的什么"><a class="markdownIt-Anchor" href="#不可变对象传参传的什么"></a> 不可变对象传参传的什么</h4>
+<p>不可变对象 y，确实是把 y 的引用传入了函数 add，但是发生了赋值操作以后，y 就绑定到新的整数地址上去了。结果上，传进去的 y 本体没有发生改变。虽然在函数内部它的值变了，只是因为它临时指向了另一块地方</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">y = <span class="number">30</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336960</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">y</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336960</span></span><br><span class="line">    y += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336992</span></span><br><span class="line">add(y)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336960</span></span><br></pre></td></tr></table></figure>
+<p>不可变对象 x 的重新赋值，先为 x + 1 的值在内存腾出空间，然后 x 改成引用这块内存。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">y = (x, x)  <span class="comment"># tuple, x的引用+2 = 4</span></span><br><span class="line">y[<span class="number">0</span>].append(<span class="number">3</span>)  <span class="comment"># 可以修改引用的值，([1, 2, 3, 3], [1, 2, 3, 3])</span></span><br><span class="line">x  <span class="comment"># [1,2,3,3]</span></span><br><span class="line"><span class="keyword">del</span> x  <span class="comment"># 只是删除了引用 x！因为 x 的内存还在被引用</span></span><br><span class="line">y  <span class="comment"># 不受 x 的影响，还是 ([1, 2, 3, 3], [1, 2, 3, 3])</span></span><br><span class="line">sys.getrefcount(y[<span class="number">0</span>])  <span class="comment"># 因为 y 还在引用 x 活着之前的内存，所以是 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 比较恶心的是，本例子为 tuple 里面的 list 添加对象使用 append 是合法的。如果换成这样：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">y[<span class="number">0</span>] += [<span class="number">3</span>]  <span class="comment"># 会报错！但是 x 依然会加入元素 3 ！</span></span><br></pre></td></tr></table></figure>
+<p>可能是 += 运算触发了 tuple 不可以修改元素的限制了？？</p>
+<p>浅拷贝和深拷贝</p>
+<p>copy：浅拷贝，deepcopy：深拷贝。二者的区别在于，浅拷贝只拷贝“指针值”，导致副本可以修改“指针对象”，而深拷贝会把指针的内容进行拷贝，导致副本和本体彻底独立</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> copy, deepcopy</span><br><span class="line">x = [[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">y = copy(x)  <span class="comment"># 浅拷贝</span></span><br><span class="line">z = deepcopy(x)  <span class="comment"># 浅拷贝</span></span><br><span class="line">y.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># 1,2,3,4</span></span><br><span class="line"><span class="built_in">print</span>(z)  <span class="comment"># 1,2,3  和 x 和 y 独立了</span></span><br></pre></td></tr></table></figure>
+<h4 id="一个例子"><a class="markdownIt-Anchor" href="#一个例子"></a> 一个例子</h4>
+<p>下面的例子说明了，浅拷贝的范围只限一层，第二层列表只是把引用放了过去，所以改动还是共享的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">path = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m)]  <span class="comment"># 二维列表</span></span><br><span class="line">result.append(path.copy())</span><br><span class="line">path[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>  <span class="comment"># 改动会作用到 result 里面！</span></span><br></pre></td></tr></table></figure>
+<h4 id="两个例子"><a class="markdownIt-Anchor" href="#两个例子"></a> 两个例子</h4>
+<p>列表生成式的坑：乘号是对列表产生引用拷贝</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [[<span class="number">1</span>] * m <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]  <span class="comment"># 正确</span></span><br><span class="line">y = [[<span class="number">1</span>] * m] * n  <span class="comment"># 错误</span></span><br><span class="line">y[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">2</span>  <span class="comment">#  1 这一列全部变成 2 了</span></span><br></pre></td></tr></table></figure>
+<h4 id="列表的数据结构"><a class="markdownIt-Anchor" href="#列表的数据结构"></a> 列表的数据结构</h4>
+<p>用一个二级指针管理元素对象，也就是说 List 里面保存的其实是一串指针，而且统一是 PyObject 的指针。这也就是为什么一些行为会导致产生 list 的引用而不是拷贝，下面的例子</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">y = [x] * <span class="number">10</span>  <span class="comment"># 其实是把 x 的指针拷贝了 10 遍</span></span><br><span class="line">z = [x.copy()] * <span class="number">10</span>  <span class="comment"># 还是错误的做法，x.copy() 只会调用一遍</span></span><br><span class="line">w = [x.copy() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]  <span class="comment"># 必须强制制造拷贝</span></span><br></pre></td></tr></table></figure>
+<p>虽然 List 也有扩容机制，但是 id(list) 是不会改变的（因为存进 list 只是指针），分配内存的大小根据 sizeof(PyObject* ) ，所以如果不创建新的对象，那么 list 还是挺省内存的。。</p>
+<p>切片必定产生拷贝，事实上 copy 方法就是通过一个切片实现的</p>
+<h3 id="命名空间和作用域"><a class="markdownIt-Anchor" href="#命名空间和作用域"></a> 命名空间和作用域</h3>
+<h4 id="命名空间"><a class="markdownIt-Anchor" href="#命名空间"></a> 命名空间</h4>
+<p><strong>局部命名空间：</strong> 函数内变量、参数，优先级最高</p>
+<p><strong>全局命名空间：</strong> 函数外（模块内）变量，包含其他文件导入的模块内变量，优先级中</p>
+<p><strong>内置命名空间：</strong> 内置方法、名称，优先级最低</p>
+<h4 id="作用域"><a class="markdownIt-Anchor" href="#作用域"></a> 作用域</h4>
+<p><strong>Local：</strong> 最内层的函数，优先级最高</p>
+<p><strong>Enclosing：</strong> 内层和全局中间的作用域</p>
+<p><strong>Global：</strong> 函数或者类的外部</p>
+<p><strong>Built-in：</strong> 内建变量，优先级最低</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># global</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>():</span></span><br><span class="line">    <span class="comment"># enclosing</span></span><br><span class="line">    x = <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>():</span></span><br><span class="line">        <span class="comment"># local</span></span><br><span class="line">        x = <span class="number">1</span></span><br><span class="line">        inner2()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner2</span>():</span></span><br><span class="line">        <span class="comment"># local</span></span><br><span class="line">        <span class="built_in">print</span>(x)</span><br><span class="line">    inner() <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+<p>模块、类、函数会创建新的作用域。比如说，函数内部的作用域（local）变量，在函数外部（global）就没有权限获得</p>
+<p>上面的例子，inner 就是 outer 作用域里面的，outer 外部没有权限获得；inner 内部的 x 优先级高于 outer 内的，所以 Python 会优先使用内部版本的</p>
+<p><strong>注意：</strong> inner2 是一个比较复杂的情况，它虽然在 inner 里面调用，但函数的作用域其实是和 inner 平级的，平级的作用域之间是不可见的，所以 inner2 对于 x 的搜索范围是在 outer 里面。</p>
+<h4 id="全局变量"><a class="markdownIt-Anchor" href="#全局变量"></a> 全局变量</h4>
+<p>对于不可变对象，函数内部的修改不会作用到外部</p>
+<p>对于可变对象，函数内部的，作用在内存上的修改可以影响到外部</p>
+<p>赋值操作会导致对外部对象的引用丢失。除非函数加上 global 关键字声明</p>
+<h4 id="一个例子-2"><a class="markdownIt-Anchor" href="#一个例子-2"></a> 一个例子</h4>
+<p>列表 x 传参进函数内部，变成了 <strong>局部变量</strong> 并且是对全局变量 x 的引用。如果对 x 重新赋值，那么 Python 就认为函数内部的 <strong>x 的类型</strong> 不再是对外部的 x 的引用了，因此之后就影响不到外部的 x 了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">x</span>):</span></span><br><span class="line">    x = <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span>(<span class="params">x</span>):</span></span><br><span class="line">    x.append(<span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span>():</span></span><br><span class="line">    x.append(<span class="number">4</span>)</span><br><span class="line">f1(x)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># [1,2,3] 无修改</span></span><br><span class="line">f2(x)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># [1,2,3,1] 有修改</span></span><br><span class="line">f3()</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># [1,2,3,1,4] 有修改</span></span><br></pre></td></tr></table></figure>
+<p>如果用 C 的指针来看，比较好理解 f3 ：局部可以获取到外部的引用，也就是指针，因为 x 是可变对象，所以 f3 内部根据指针进行的修改是可以影响内存，从而传递到函数外部。</p>
+<h4 id="两个例子-2"><a class="markdownIt-Anchor" href="#两个例子-2"></a> 两个例子</h4>
+<p>为什么实例化类以后，调用 t 没有 f 的权限呢，是因为 self 吗</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>(<span class="params">self</span>):</span></span><br><span class="line">        f()</span><br><span class="line">a = A()</span><br><span class="line">a.t()  <span class="comment"># t 没有 f 的权限</span></span><br></pre></td></tr></table></figure>
+<h4 id="三个例子"><a class="markdownIt-Anchor" href="#三个例子"></a> 三个例子</h4>
+<p>报错：UnboundLocalError: local variable ‘x’ referenced before assignment</p>
+<p>因为函数 t 里面存在 x 的赋值。x 被解释成了作用域 t 内的 local 的变量。如果子函数存在赋值，那么整个作用域的 x 都会被解释为局部的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    x = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>():</span></span><br><span class="line">        <span class="keyword">if</span> x &gt; <span class="number">1</span>:</span><br><span class="line">            x = <span class="number">3</span></span><br><span class="line">    t()</span><br><span class="line">f()  <span class="comment"># 报错</span></span><br></pre></td></tr></table></figure>
+<p>解决方案：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    x = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>():</span></span><br><span class="line">        <span class="keyword">nonlocal</span> x</span><br><span class="line">        <span class="keyword">if</span> x &gt; <span class="number">1</span>:</span><br><span class="line">            x = <span class="number">3</span></span><br><span class="line">    t()</span><br></pre></td></tr></table></figure>
+<p>这个故事告诉我们，不要在没有声明之前函数里面修改外部变量，内部对外部默认是只读的。</p>
+<h4 id="三个例子续"><a class="markdownIt-Anchor" href="#三个例子续"></a> 三个例子（续）</h4>
+<p>nonlocal 和 global 作用的区域是不同的，nonlocal 指的是 enclosing 的那块，global 指的是最外层</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">123</span>  <span class="comment"># global</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    x = <span class="number">1</span>  <span class="comment"># nonlocal</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>():</span></span><br><span class="line">        <span class="keyword">global</span> x</span><br><span class="line">        <span class="keyword">if</span> x &gt; <span class="number">1</span>:</span><br><span class="line">            x = <span class="number">3</span></span><br><span class="line">    t()</span><br><span class="line">f()  <span class="comment"># t 修改的是最外层的 x</span></span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
+<h4 id="timeit-的例子"><a class="markdownIt-Anchor" href="#timeit-的例子"></a> timeit 的例子</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = []</span><br><span class="line">%%timeit  # ipython</span><br><span class="line"># global x</span><br><span class="line">x += [1]</span><br></pre></td></tr></table></figure>
+<p>这里会报错 local variable ‘x’ referenced before assignment。大概 timeit 魔法方法也是一个新的作用域，所以没有对 global 的 x 的修改权限</p>
+<h4 id="解引用函数"><a class="markdownIt-Anchor" href="#解引用函数"></a> 解引用函数</h4>
+<p>两种方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> _ctypes <span class="keyword">import</span> PyObj_FromPtr  <span class="comment"># 1</span></span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">ctypes.cast(<span class="built_in">id</span>(a), ctypes.py_object).value  <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+<h4 id="查看全部对象"><a class="markdownIt-Anchor" href="#查看全部对象"></a> 查看全部对象</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> gc</span><br><span class="line">gc.get_objects()  <span class="comment"># 返回一个全部对象的列表</span></span><br></pre></td></tr></table></figure>
+<h3 id="对象占用的字节数"><a class="markdownIt-Anchor" href="#对象占用的字节数"></a> 对象占用的字节数</h3>
+<p>sys.getsizeof 可以获得对象占用的字节数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.getsizeof(<span class="number">1</span>)  <span class="comment"># 28</span></span><br><span class="line">sys.getsizeof(<span class="number">1.0</span>)  <span class="comment"># 24</span></span><br><span class="line">sys.getsizeof(<span class="number">2</span>**<span class="number">30</span>-<span class="number">1</span>)  <span class="comment"># 28</span></span><br><span class="line">sys.getsizeof(<span class="number">2</span>**<span class="number">30</span>)  <span class="comment"># 32</span></span><br></pre></td></tr></table></figure>
+<p>C++ 里面 int 只有 4 字节。一个字节 8 bit，所以 C++ int 的范围是 -2^31 到 +2^31。为什么 Python 的 int 反而比 float 占用更多？而且这么多。据说是因为 Python 的 int 没有上下限，可以不断扩容。可以看到在 2^30 的分界线发生了扩容 4 字节（为什么不是 2^31 呢）</p>
+<h4 id="del-和-__del__-的区别"><a class="markdownIt-Anchor" href="#del-和-__del__-的区别"></a> del 和 __del__ 的区别</h4>
+<p>del 是将对象的引用计数 -1，__del__ 是定义了这个方法的类在引用计数归零的时候调用的方法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;A is deleted&quot;</span>)</span><br><span class="line">a = A()</span><br><span class="line"><span class="keyword">del</span> a</span><br><span class="line">A()  <span class="comment"># 没有触发 __del__</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 在 Python 交互式窗口里面，如果创建一个临时对象 A()，那么对象不会马上销毁，而是赋值给下划线变量 _ ，上一行的输出（下划线）可以在下一个命令行语句中暂时使用</p>
+<h3 id="numpy-相关"><a class="markdownIt-Anchor" href="#numpy-相关"></a> numpy 相关</h3>
+<p>代码路径：numpy/numpy/core/src/multiarray/</p>
+<p>ndarray 原型：numpy/numpy/lib/user_array.py</p>
+<p>numpy.core.multiarray 的代码在 numpy/core/src/multiarray/*.c ，实现核心数组功能。</p>
+<p>numpy.core.umath 的代码在 numpy/core/src/umath/*.c ，实现 ufunc。</p>
+<p>下面的例子每次从 numpy 数组 x 里面取数的地址都不一样呢。说明 numpy 取数的过程是产生了新的不可变对象 x[0] 了。但是 list 不会有这个问题，因为 list 存放的是 PyObject，有 id 函数，而 numpy 数组存放的不是 PyObject，下标取数其实是隐含了转化成 PyObject 的过程了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.ones(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">0</span>]))  <span class="comment"># 4745885200</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">0</span>]))  <span class="comment"># 4745884016</span></span><br><span class="line">y = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y[<span class="number">0</span>]))  <span class="comment"># 4748826096</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y[<span class="number">0</span>]))	 <span class="comment"># 4748826096</span></span><br></pre></td></tr></table></figure>
+<p>而且这个临时的不可变对象如果没有赋值的对象承接，就会因为引用计数归零销毁。下面的例子说明，x[0] 销毁后腾出的地址马上被 y[1] 的临时对象填充上了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.ones(<span class="number">3</span>)</span><br><span class="line">y = np.zeros(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">0</span>]), <span class="built_in">id</span>(y[<span class="number">1</span>]))  <span class="comment"># 4748827280 4748827280</span></span><br></pre></td></tr></table></figure>
+<p>解决这个的办法是使用列表推导式，可以看到每个内存地址隔了 32 字节。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">id</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br></pre></td></tr></table></figure>
+<h4 id="view"><a class="markdownIt-Anchor" href="#view"></a> view</h4>
+<p>view 类似浅拷贝，但又不是浅拷贝。不仅元素的地址被拷贝过去，而且 view 对元素的修改也会同步在本体上。另一方面，view 也会使得本体变量的引用计数 +1，所以只有在 view 和本体都没了以后内存才会释放</p>
+<h4 id="把-ndarray-包装起来"><a class="markdownIt-Anchor" href="#把-ndarray-包装起来"></a> 把 ndarray 包装起来</h4>
+<p>一些重载运算符，参考：<a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#customization">https://docs.python.org/zh-cn/3/reference/datamodel.html#customization</a></p>
+<p><strong>__add__：</strong> 加法，右边的输入参数会被转化成 array</p>
+<p><strong>_rc：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_rc</span>(<span class="params">self, a</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(shape(a)) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> self.__class__(a)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__add__</span>(<span class="params">self, other</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._rc(self.array + asarray(other))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._rc(self.array[index])</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span>(<span class="params">self, index, value</span>):</span></span><br><span class="line">    self.array[index] = asarray(value, self.dtype)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Linux基本操作</title>
     <url>/posts/961111574/</url>
     <content><![CDATA[<h3 id="user"><a class="markdownIt-Anchor" href="#user"></a> user</h3>
@@ -1369,127 +1490,6 @@ cpulimit -z -l 20 -p pid &amp;</p>
 bt查看</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line">--eviction-hard=memory.available&lt;<span class="number">500</span>Mi,nodefs.available&lt;<span class="number">10</span>%</span><br></pre></td></tr></table></figure>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Python引用计数（及其他）</title>
-    <url>/posts/3617097176/</url>
-    <content><![CDATA[<h3 id="python-的引用"><a class="markdownIt-Anchor" href="#python-的引用"></a> Python 的引用</h3>
-<h4 id="常量们"><a class="markdownIt-Anchor" href="#常量们"></a> 常量们</h4>
-<p>Python 有一个小整数池 [-5, 256] 提前在内存中分配好，任何变量赋值同一个小整数，都是对小整数池的引用。</p>
-<p>新建了一个大整数，会在大整数池添加，如果之后再用这个变量赋值给其他变量，也是赋值引用。</p>
-<p>字符串、浮点也和大整数池一样，如果重新赋值就是引用。</p>
-<h4 id="可变对象们"><a class="markdownIt-Anchor" href="#可变对象们"></a> 可变对象们</h4>
-<p>赋值都是引用，传参也都是引用。Python 对象大部分都是引用</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = []</span><br><span class="line"><span class="built_in">id</span>(x)</span><br><span class="line">x.append(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">id</span>(x)  <span class="comment"># 不会变</span></span><br><span class="line">y = x</span><br><span class="line"><span class="built_in">id</span>(y)  <span class="comment"># 一样</span></span><br></pre></td></tr></table></figure>
-<h4 id="切片情况变得复杂"><a class="markdownIt-Anchor" href="#切片情况变得复杂"></a> 切片，情况变得复杂</h4>
-<p>总体上列表的切片可以看作 <strong>浅拷贝</strong> 。可是虽然 <strong>列表的切片</strong> 产生了新的对象，但它的元素是对原列表元素的引用！而且对切片的修改不会作用到本体上</p>
-<p><strong>是这样一个思路：</strong> 切片产生的是原列表元素的引用，类似函数传参，如果是可变对象（列表、字典），修改会作用在本体上；如果是不可变对象，修改不会影响到本体，只是拷贝的元素地址发生变动。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">y = x[<span class="number">1</span>:]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">1</span>]), <span class="built_in">id</span>(y[<span class="number">0</span>]))  <span class="comment"># 4487295424 4487295424</span></span><br></pre></td></tr></table></figure>
-<p><strong>总结一下：</strong> 对于列表、元组、字典来说，直接拷贝赋值是 <strong>浅拷贝</strong> 。对于切片，</p>
-<p>另外，numpy 的切片（view）的修改可以传导到本体上（详见后文）</p>
-<h3 id="什么是引用计数"><a class="markdownIt-Anchor" href="#什么是引用计数"></a> 什么是引用计数</h3>
-<p>知道了常量的引用规则，可以看一个最简单的引用计数例子了。Python 分配的内存上会统计指向该内存变量的个数，变量指向其他内存，计数减一；新变量指向这块内存，计数加一。如果计数归零，说明内存没用了，即可释放。</p>
-<p>引用计数的目的就是清理垃圾，腾出没用的内存空间。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1.2321</span></span><br><span class="line">sys.getrefcount(x)  <span class="comment"># 2</span></span><br><span class="line">y = x  <span class="comment"># id(y) == id(x)</span></span><br><span class="line">sys.getrefcount(x)  <span class="comment"># 3, 多了一个对 x 的引用</span></span><br><span class="line"><span class="keyword">del</span> y  <span class="comment"># 或者重新赋值 y = 3.21</span></span><br><span class="line">sys.getrefcount(x)  <span class="comment"># 2, 引用减一</span></span><br></pre></td></tr></table></figure>
-<p>本来为 x = 1.2321 分配的内存在 x 删除以后，依然会保留下来（因为 y 还在引用它）。如果最后删除 y，这块内存会 <strong>无人看管吗</strong> ？不会，因为此时它的引用计数归零了，Python 的自动回收机制避免了内存泄露的问题。</p>
-<h3 id="不可变对象"><a class="markdownIt-Anchor" href="#不可变对象"></a> 不可变对象</h3>
-<p>“不可变” 指的到底是什么？对象引用的内存里的值不可变。不可变对象也是传递引用，之所以副本的改动不会影响本体，是因为，不可变对象的赋值和传参，会在内存重新发生构造，并且传递新引用。（而不是在原位直接修改）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">1.2321</span></span><br><span class="line">y = x</span><br><span class="line"><span class="built_in">id</span>(x)  <span class="comment"># 140495516826512</span></span><br><span class="line">x = x + <span class="number">1</span></span><br><span class="line"><span class="built_in">id</span>(x)  <span class="comment"># 140495473039568</span></span><br><span class="line"><span class="built_in">id</span>(y)  <span class="comment"># 140495516826512</span></span><br></pre></td></tr></table></figure>
-<h4 id="不可变对象传参传的什么"><a class="markdownIt-Anchor" href="#不可变对象传参传的什么"></a> 不可变对象传参传的什么</h4>
-<p>不可变对象 y，确实是把 y 的引用传入了函数 add，但是发生了赋值操作以后，y 就绑定到新的整数地址上去了。结果上，传进去的 y 本体没有发生改变。虽然在函数内部它的值变了，只是因为它临时指向了另一块地方</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">y = <span class="number">30</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336960</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">y</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336960</span></span><br><span class="line">    y += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336992</span></span><br><span class="line">add(y)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y))  <span class="comment"># 4516336960</span></span><br></pre></td></tr></table></figure>
-<p>不可变对象 x 的重新赋值，先为 x + 1 的值在内存腾出空间，然后 x 改成引用这块内存。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">y = (x, x)  <span class="comment"># tuple, x的引用+2 = 4</span></span><br><span class="line">y[<span class="number">0</span>].append(<span class="number">3</span>)  <span class="comment"># 可以修改引用的值，([1, 2, 3, 3], [1, 2, 3, 3])</span></span><br><span class="line">x  <span class="comment"># [1,2,3,3]</span></span><br><span class="line"><span class="keyword">del</span> x  <span class="comment"># 只是删除了引用 x！因为 x 的内存还在被引用</span></span><br><span class="line">y  <span class="comment"># 不受 x 的影响，还是 ([1, 2, 3, 3], [1, 2, 3, 3])</span></span><br><span class="line">sys.getrefcount(y[<span class="number">0</span>])  <span class="comment"># 因为 y 还在引用 x 活着之前的内存，所以是 3</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 比较恶心的是，本例子为 tuple 里面的 list 添加对象使用 append 是合法的。如果换成这样：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">y[<span class="number">0</span>] += [<span class="number">3</span>]  <span class="comment"># 会报错！但是 x 依然会加入元素 3 ！</span></span><br></pre></td></tr></table></figure>
-<p>可能是 += 运算触发了 tuple 不可以修改元素的限制了？？</p>
-<p>浅拷贝和深拷贝</p>
-<p>copy：浅拷贝，deepcopy：深拷贝。二者的区别在于，浅拷贝只拷贝“指针值”，导致副本可以修改“指针对象”，而深拷贝会把指针的内容进行拷贝，导致副本和本体彻底独立</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> copy, deepcopy</span><br><span class="line">x = [[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">y = copy(x)  <span class="comment"># 浅拷贝</span></span><br><span class="line">z = deepcopy(x)  <span class="comment"># 浅拷贝</span></span><br><span class="line">y.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># 1,2,3,4</span></span><br><span class="line"><span class="built_in">print</span>(z)  <span class="comment"># 1,2,3  和 x 和 y 独立了</span></span><br></pre></td></tr></table></figure>
-<h4 id="一个例子"><a class="markdownIt-Anchor" href="#一个例子"></a> 一个例子</h4>
-<p>下面的例子说明了，浅拷贝的范围只限一层，第二层列表只是把引用放了过去，所以改动还是共享的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">path = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m)]  <span class="comment"># 二维列表</span></span><br><span class="line">result.append(path.copy())</span><br><span class="line">path[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>  <span class="comment"># 改动会作用到 result 里面！</span></span><br></pre></td></tr></table></figure>
-<h4 id="两个例子"><a class="markdownIt-Anchor" href="#两个例子"></a> 两个例子</h4>
-<p>列表生成式的坑：乘号是对列表产生引用拷贝</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [[<span class="number">1</span>] * m <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]  <span class="comment"># 正确</span></span><br><span class="line">y = [[<span class="number">1</span>] * m] * n  <span class="comment"># 错误</span></span><br><span class="line">y[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">2</span>  <span class="comment">#  1 这一列全部变成 2 了</span></span><br></pre></td></tr></table></figure>
-<h4 id="列表的数据结构"><a class="markdownIt-Anchor" href="#列表的数据结构"></a> 列表的数据结构</h4>
-<p>用一个二级指针管理元素对象，也就是说 List 里面保存的其实是一串指针，而且统一是 PyObject 的指针。这也就是为什么一些行为会导致产生 list 的引用而不是拷贝，下面的例子</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">y = [x] * <span class="number">10</span>  <span class="comment"># 其实是把 x 的指针拷贝了 10 遍</span></span><br><span class="line">z = [x.copy()] * <span class="number">10</span>  <span class="comment"># 还是错误的做法，x.copy() 只会调用一遍</span></span><br><span class="line">w = [x.copy() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]  <span class="comment"># 必须强制制造拷贝</span></span><br></pre></td></tr></table></figure>
-<p>虽然 List 也有扩容机制，但是 id(list) 是不会改变的（因为存进 list 只是指针），分配内存的大小根据 sizeof(PyObject* ) ，所以如果不创建新的对象，那么 list 还是挺省内存的。。</p>
-<p>切片必定产生拷贝，事实上 copy 方法就是通过一个切片实现的</p>
-<h3 id="命名空间和作用域"><a class="markdownIt-Anchor" href="#命名空间和作用域"></a> 命名空间和作用域</h3>
-<h4 id="命名空间"><a class="markdownIt-Anchor" href="#命名空间"></a> 命名空间</h4>
-<p><strong>局部命名空间：</strong> 函数内变量、参数，优先级最高</p>
-<p><strong>全局命名空间：</strong> 函数外（模块内）变量，包含其他文件导入的模块内变量，优先级中</p>
-<p><strong>内置命名空间：</strong> 内置方法、名称，优先级最低</p>
-<h4 id="作用域"><a class="markdownIt-Anchor" href="#作用域"></a> 作用域</h4>
-<p><strong>Local：</strong> 最内层的函数，优先级最高</p>
-<p><strong>Enclosing：</strong> 内层和全局中间的作用域</p>
-<p><strong>Global：</strong> 函数或者类的外部</p>
-<p><strong>Built-in：</strong> 内建变量，优先级最低</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># global</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span>():</span></span><br><span class="line">    <span class="comment"># enclosing</span></span><br><span class="line">    x = <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span>():</span></span><br><span class="line">        <span class="comment"># local</span></span><br><span class="line">        x = <span class="number">1</span></span><br><span class="line">        inner2()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner2</span>():</span></span><br><span class="line">        <span class="comment"># local</span></span><br><span class="line">        <span class="built_in">print</span>(x)</span><br><span class="line">    inner() <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
-<p>模块、类、函数会创建新的作用域。比如说，函数内部的作用域（local）变量，在函数外部（global）就没有权限获得</p>
-<p>上面的例子，inner 就是 outer 作用域里面的，outer 外部没有权限获得；inner 内部的 x 优先级高于 outer 内的，所以 Python 会优先使用内部版本的</p>
-<p><strong>注意：</strong> inner2 是一个比较复杂的情况，它虽然在 inner 里面调用，但函数的作用域其实是和 inner 平级的，平级的作用域之间是不可见的，所以 inner2 对于 x 的搜索范围是在 outer 里面。</p>
-<h4 id="全局变量"><a class="markdownIt-Anchor" href="#全局变量"></a> 全局变量</h4>
-<p>对于不可变对象，函数内部的修改不会作用到外部</p>
-<p>对于可变对象，函数内部的，作用在内存上的修改可以影响到外部</p>
-<p>赋值操作会导致对外部对象的引用丢失。除非函数加上 global 关键字声明</p>
-<h4 id="一个例子-2"><a class="markdownIt-Anchor" href="#一个例子-2"></a> 一个例子</h4>
-<p>列表 x 传参进函数内部，变成了 <strong>局部变量</strong> 并且是对全局变量 x 的引用。如果对 x 重新赋值，那么 Python 就认为函数内部的 <strong>x 的类型</strong> 不再是对外部的 x 的引用了，因此之后就影响不到外部的 x 了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">x</span>):</span></span><br><span class="line">    x = <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span>(<span class="params">x</span>):</span></span><br><span class="line">    x.append(<span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span>():</span></span><br><span class="line">    x.append(<span class="number">4</span>)</span><br><span class="line">f1(x)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># [1,2,3] 无修改</span></span><br><span class="line">f2(x)</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># [1,2,3,1] 有修改</span></span><br><span class="line">f3()</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># [1,2,3,1,4] 有修改</span></span><br></pre></td></tr></table></figure>
-<p>如果用 C 的指针来看，比较好理解 f3 ：局部可以获取到外部的引用，也就是指针，因为 x 是可变对象，所以 f3 内部根据指针进行的修改是可以影响内存，从而传递到函数外部。</p>
-<h4 id="两个例子-2"><a class="markdownIt-Anchor" href="#两个例子-2"></a> 两个例子</h4>
-<p>为什么实例化类以后，调用 t 没有 f 的权限呢，是因为 self 吗</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>(<span class="params">self</span>):</span></span><br><span class="line">        f()</span><br><span class="line">a = A()</span><br><span class="line">a.t()  <span class="comment"># t 没有 f 的权限</span></span><br></pre></td></tr></table></figure>
-<h4 id="三个例子"><a class="markdownIt-Anchor" href="#三个例子"></a> 三个例子</h4>
-<p>报错：UnboundLocalError: local variable ‘x’ referenced before assignment</p>
-<p>因为函数 t 里面存在 x 的赋值。x 被解释成了作用域 t 内的 local 的变量。如果子函数存在赋值，那么整个作用域的 x 都会被解释为局部的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    x = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>():</span></span><br><span class="line">        <span class="keyword">if</span> x &gt; <span class="number">1</span>:</span><br><span class="line">            x = <span class="number">3</span></span><br><span class="line">    t()</span><br><span class="line">f()  <span class="comment"># 报错</span></span><br></pre></td></tr></table></figure>
-<p>解决方案：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    x = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>():</span></span><br><span class="line">        <span class="keyword">nonlocal</span> x</span><br><span class="line">        <span class="keyword">if</span> x &gt; <span class="number">1</span>:</span><br><span class="line">            x = <span class="number">3</span></span><br><span class="line">    t()</span><br></pre></td></tr></table></figure>
-<p>这个故事告诉我们，不要在没有声明之前函数里面修改外部变量，内部对外部默认是只读的。</p>
-<h4 id="三个例子续"><a class="markdownIt-Anchor" href="#三个例子续"></a> 三个例子（续）</h4>
-<p>nonlocal 和 global 作用的区域是不同的，nonlocal 指的是 enclosing 的那块，global 指的是最外层</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="number">123</span>  <span class="comment"># global</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>():</span></span><br><span class="line">    x = <span class="number">1</span>  <span class="comment"># nonlocal</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">t</span>():</span></span><br><span class="line">        <span class="keyword">global</span> x</span><br><span class="line">        <span class="keyword">if</span> x &gt; <span class="number">1</span>:</span><br><span class="line">            x = <span class="number">3</span></span><br><span class="line">    t()</span><br><span class="line">f()  <span class="comment"># t 修改的是最外层的 x</span></span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
-<h4 id="timeit-的例子"><a class="markdownIt-Anchor" href="#timeit-的例子"></a> timeit 的例子</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x = []</span><br><span class="line">%%timeit  # ipython</span><br><span class="line"># global x</span><br><span class="line">x += [1]</span><br></pre></td></tr></table></figure>
-<p>这里会报错 local variable ‘x’ referenced before assignment。大概 timeit 魔法方法也是一个新的作用域，所以没有对 global 的 x 的修改权限</p>
-<h4 id="解引用函数"><a class="markdownIt-Anchor" href="#解引用函数"></a> 解引用函数</h4>
-<p>两种方法</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> _ctypes <span class="keyword">import</span> PyObj_FromPtr  <span class="comment"># 1</span></span><br><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">ctypes.cast(<span class="built_in">id</span>(a), ctypes.py_object).value  <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
-<h4 id="查看全部对象"><a class="markdownIt-Anchor" href="#查看全部对象"></a> 查看全部对象</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> gc</span><br><span class="line">gc.get_objects()  <span class="comment"># 返回一个全部对象的列表</span></span><br></pre></td></tr></table></figure>
-<h3 id="对象占用的字节数"><a class="markdownIt-Anchor" href="#对象占用的字节数"></a> 对象占用的字节数</h3>
-<p>sys.getsizeof 可以获得对象占用的字节数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.getsizeof(<span class="number">1</span>)  <span class="comment"># 28</span></span><br><span class="line">sys.getsizeof(<span class="number">1.0</span>)  <span class="comment"># 24</span></span><br><span class="line">sys.getsizeof(<span class="number">2</span>**<span class="number">30</span>-<span class="number">1</span>)  <span class="comment"># 28</span></span><br><span class="line">sys.getsizeof(<span class="number">2</span>**<span class="number">30</span>)  <span class="comment"># 32</span></span><br></pre></td></tr></table></figure>
-<p>C++ 里面 int 只有 4 字节。一个字节 8 bit，所以 C++ int 的范围是 -2^31 到 +2^31。为什么 Python 的 int 反而比 float 占用更多？而且这么多。据说是因为 Python 的 int 没有上下限，可以不断扩容。可以看到在 2^30 的分界线发生了扩容 4 字节（为什么不是 2^31 呢）</p>
-<h4 id="del-和-__del__-的区别"><a class="markdownIt-Anchor" href="#del-和-__del__-的区别"></a> del 和 __del__ 的区别</h4>
-<p>del 是将对象的引用计数 -1，__del__ 是定义了这个方法的类在引用计数归零的时候调用的方法。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;A is deleted&quot;</span>)</span><br><span class="line">a = A()</span><br><span class="line"><span class="keyword">del</span> a</span><br><span class="line">A()  <span class="comment"># 没有触发 __del__</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 在 Python 交互式窗口里面，如果创建一个临时对象 A()，那么对象不会马上销毁，而是赋值给下划线变量 _ ，上一行的输出（下划线）可以在下一个命令行语句中暂时使用</p>
-<h3 id="numpy-相关"><a class="markdownIt-Anchor" href="#numpy-相关"></a> numpy 相关</h3>
-<p>代码路径：numpy/numpy/core/src/multiarray/</p>
-<p>ndarray 原型：numpy/numpy/lib/user_array.py</p>
-<p>numpy.core.multiarray 的代码在 numpy/core/src/multiarray/*.c ，实现核心数组功能。</p>
-<p>numpy.core.umath 的代码在 numpy/core/src/umath/*.c ，实现 ufunc。</p>
-<p>下面的例子每次从 numpy 数组 x 里面取数的地址都不一样呢。说明 numpy 取数的过程是产生了新的不可变对象 x[0] 了。但是 list 不会有这个问题，因为 list 存放的是 PyObject，有 id 函数，而 numpy 数组存放的不是 PyObject，下标取数其实是隐含了转化成 PyObject 的过程了</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.ones(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">0</span>]))  <span class="comment"># 4745885200</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">0</span>]))  <span class="comment"># 4745884016</span></span><br><span class="line">y = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y[<span class="number">0</span>]))  <span class="comment"># 4748826096</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(y[<span class="number">0</span>]))	 <span class="comment"># 4748826096</span></span><br></pre></td></tr></table></figure>
-<p>而且这个临时的不可变对象如果没有赋值的对象承接，就会因为引用计数归零销毁。下面的例子说明，x[0] 销毁后腾出的地址马上被 y[1] 的临时对象填充上了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = np.ones(<span class="number">3</span>)</span><br><span class="line">y = np.zeros(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(x[<span class="number">0</span>]), <span class="built_in">id</span>(y[<span class="number">1</span>]))  <span class="comment"># 4748827280 4748827280</span></span><br></pre></td></tr></table></figure>
-<p>解决这个的办法是使用列表推导式，可以看到每个内存地址隔了 32 字节。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">id</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> x]</span><br></pre></td></tr></table></figure>
-<h4 id="view"><a class="markdownIt-Anchor" href="#view"></a> view</h4>
-<p>view 类似浅拷贝，但又不是浅拷贝。不仅元素的地址被拷贝过去，而且 view 对元素的修改也会同步在本体上。另一方面，view 也会使得本体变量的引用计数 +1，所以只有在 view 和本体都没了以后内存才会释放</p>
-<h4 id="把-ndarray-包装起来"><a class="markdownIt-Anchor" href="#把-ndarray-包装起来"></a> 把 ndarray 包装起来</h4>
-<p>一些重载运算符，参考：<a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#customization">https://docs.python.org/zh-cn/3/reference/datamodel.html#customization</a></p>
-<p><strong>__add__：</strong> 加法，右边的输入参数会被转化成 array</p>
-<p><strong>_rc：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_rc</span>(<span class="params">self, a</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(shape(a)) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> self.__class__(a)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__add__</span>(<span class="params">self, other</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._rc(self.array + asarray(other))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._rc(self.array[index])</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span>(<span class="params">self, index, value</span>):</span></span><br><span class="line">    self.array[index] = asarray(value, self.dtype)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
   </entry>
   <entry>
     <title>Rmarkdown里面的表格</title>
