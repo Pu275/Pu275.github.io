@@ -42,6 +42,28 @@
       </categories>
   </entry>
   <entry>
+    <title>108. 将有序数组转换为二叉搜索树</title>
+    <url>/posts/388202331/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
+<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
+<p><strong>109. 有序链表转换二叉搜索树</strong></p>
+<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
+<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>111. 二叉树的最小深度</title>
     <url>/posts/4124547255/</url>
     <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
@@ -61,28 +83,6 @@
 <p>左右子树进行迭代，遇到无子节点的返回深度</p>
 <p><strong>注意：</strong> 迭代到只有左结点为空指针这种情况需要特别讨论，此时还不能返回深度，应该沿着右子树继续探测下去。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="built_in">minDepth</span>(root-&gt;left);</span><br><span class="line">    <span class="keyword">int</span> right = <span class="built_in">minDepth</span>(root-&gt;right);</span><br><span class="line">    <span class="keyword">if</span> (root-&gt;left == <span class="literal">nullptr</span> || root-&gt;right == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> left + right + <span class="number">1</span>;  <span class="comment">// 合并左或右结点为空，不管哪个为空，最后返回的深度都是加起来</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(left, right) + <span class="number">1</span>;  <span class="comment">// 正常情况取小的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>108. 将有序数组转换为二叉搜索树</title>
-    <url>/posts/388202331/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
-<p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>直接选取数组中心作为 <strong>当前根结点</strong> 即可，这样左右子树的长度是大致相等的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt; right) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(nums[mid]);  <span class="comment">// 每次选中心点</span></span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(nums, left, mid<span class="number">-1</span>);</span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(nums, mid+<span class="number">1</span>, right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedArrayToBST</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
-<p><strong>109. 有序链表转换二叉搜索树</strong></p>
-<p><a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
-<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
-<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
-<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
-<p>区别在于，本题给的是链表，采用快慢双指针取得中间位置，快指针指到尾巴的时候，慢指针指到中位数。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">getBST</span><span class="params">(ListNode* head, ListNode* end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == end) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* quick = head;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        <span class="keyword">int</span> slowCount = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (quick != end) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slowCount == <span class="number">2</span>) &#123;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">                slowCount = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            quick = quick-&gt;next;</span><br><span class="line">            ++slowCount;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* root = <span class="keyword">new</span> <span class="built_in">TreeNode</span>(slow-&gt;val);</span><br><span class="line">        root-&gt;left = <span class="built_in">getBST</span>(head, slow);  <span class="comment">// slow 取不到的，左闭右开</span></span><br><span class="line">        root-&gt;right = <span class="built_in">getBST</span>(slow-&gt;next, end);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">sortedListToBST</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">getBST</span>(head, <span class="literal">nullptr</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -320,34 +320,6 @@
 ]]></content>
       <categories>
         <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>474. 一和零</title>
-    <url>/posts/600333799/</url>
-    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
-<p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
-<p>请你找出并返回 strs 的最大子集的长度，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
-<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/ones-and-zeroes/">https://leetcode-cn.com/problems/ones-and-zeroes/</a></p>
-<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>特殊的背包问题</p>
-<h4 id="回顾经典背包问题"><a class="markdownIt-Anchor" href="#回顾经典背包问题"></a> 回顾经典背包问题</h4>
-<p>二维 dp：两个维度，物品、重量，格子里的值为价值。首先考虑第一种物品，一件、两件。。。遍历重量，有匹配的填上获得的价值。然后考虑加上第二种物品的情况，依然遍历重量，此时的价格基于（1）物品一二都有，但是可以利用物品一的结论（2）只用物品二（3）不用物品二，沿用物品一的结论</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bag</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; weights, vector&lt;<span class="keyword">int</span>&gt;&amp; values)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = weights.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> n = BAG_SIZE;  <span class="comment">// 背包大小</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(m + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (weights[i - <span class="number">1</span>] &gt; j) &#123;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j];  <span class="comment">// 放不进当前物品</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 要么放当前物品，要么用之前的结论</span></span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[m][n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>压缩为一维 dp：遍历一遍重量，每个重量值再遍历一遍物品，即可得到当前重量最大的价值了。</p>
-<p><strong>注意：</strong> 此时必须先遍历物品，再遍历重量，也必须从后往前遍历重量。想象一下，如果从前往后，后面的价值可能会重复放当前物品多次！先遍历重量也是一样的道理。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bag2</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; weights, vector&lt;<span class="keyword">int</span>&gt;&amp; values)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = weights.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> n = BAG_SIZE;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (weights[i] &lt;= j) &#123;</span><br><span class="line">                dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weights[i]] + values[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br></pre></td></tr></table></figure>
-<h4 id="回到本题"><a class="markdownIt-Anchor" href="#回到本题"></a> 回到本题</h4>
-<p>本题有两个重量维度，0 的个数、1 的个数。可以看成一维数组背包问题的升级版</p>
-<p>首先遍历物品，从大重量（用完配额）到小重量，更新 dp 矩阵</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(vector&lt;string&gt;&amp; strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(m + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (string str: strs) &#123;</span><br><span class="line">            <span class="keyword">int</span> zeroNum = <span class="number">0</span>, oneNum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c: str) &#123;</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>) ++zeroNum;</span><br><span class="line">                <span class="keyword">else</span> ++oneNum;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &gt;= zeroNum; --i) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= oneNum; --j) &#123;</span><br><span class="line">                    dp[i][j] = <span class="built_in">max</span>(dp[i][j], dp[i - zeroNum][j - oneNum] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="另外一种类型"><a class="markdownIt-Anchor" href="#另外一种类型"></a> 另外一种类型</h4>
-<p>爬楼梯这种物品（上一步、上两步）是可以重复用的，那么遍历重量（楼层）就要从小到大了</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>动态规划</category>
       </categories>
   </entry>
   <entry>
@@ -872,6 +844,34 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
       </categories>
   </entry>
   <entry>
+    <title>474. 一和零</title>
+    <url>/posts/600333799/</url>
+    <content><![CDATA[<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的长度，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/ones-and-zeroes/">https://leetcode-cn.com/problems/ones-and-zeroes/</a></p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>特殊的背包问题</p>
+<h4 id="回顾经典背包问题"><a class="markdownIt-Anchor" href="#回顾经典背包问题"></a> 回顾经典背包问题</h4>
+<p>二维 dp：两个维度，物品、重量，格子里的值为价值。首先考虑第一种物品，一件、两件。。。遍历重量，有匹配的填上获得的价值。然后考虑加上第二种物品的情况，依然遍历重量，此时的价格基于（1）物品一二都有，但是可以利用物品一的结论（2）只用物品二（3）不用物品二，沿用物品一的结论</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bag</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; weights, vector&lt;<span class="keyword">int</span>&gt;&amp; values)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = weights.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> n = BAG_SIZE;  <span class="comment">// 背包大小</span></span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(m + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (weights[i - <span class="number">1</span>] &gt; j) &#123;</span><br><span class="line">                dp[i][j] = dp[i - <span class="number">1</span>][j];  <span class="comment">// 放不进当前物品</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 要么放当前物品，要么用之前的结论</span></span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[m][n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>压缩为一维 dp：遍历一遍重量，每个重量值再遍历一遍物品，即可得到当前重量最大的价值了。</p>
+<p><strong>注意：</strong> 此时必须先遍历物品，再遍历重量，也必须从后往前遍历重量。想象一下，如果从前往后，后面的价值可能会重复放当前物品多次！先遍历重量也是一样的道理。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bag2</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; weights, vector&lt;<span class="keyword">int</span>&gt;&amp; values)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = weights.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> n = BAG_SIZE;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (weights[i] &lt;= j) &#123;</span><br><span class="line">                dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weights[i]] + values[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br></pre></td></tr></table></figure>
+<h4 id="回到本题"><a class="markdownIt-Anchor" href="#回到本题"></a> 回到本题</h4>
+<p>本题有两个重量维度，0 的个数、1 的个数。可以看成一维数组背包问题的升级版</p>
+<p>首先遍历物品，从大重量（用完配额）到小重量，更新 dp 矩阵</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(vector&lt;string&gt;&amp; strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">dp</span>(m + <span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (string str: strs) &#123;</span><br><span class="line">            <span class="keyword">int</span> zeroNum = <span class="number">0</span>, oneNum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> c: str) &#123;</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>) ++zeroNum;</span><br><span class="line">                <span class="keyword">else</span> ++oneNum;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &gt;= zeroNum; --i) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= oneNum; --j) &#123;</span><br><span class="line">                    dp[i][j] = <span class="built_in">max</span>(dp[i][j], dp[i - zeroNum][j - oneNum] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="另外一种类型"><a class="markdownIt-Anchor" href="#另外一种类型"></a> 另外一种类型</h4>
+<p>爬楼梯这种物品（上一步、上两步）是可以重复用的，那么遍历重量（楼层）就要从小到大了</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+        <category>动态规划</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C++的STL容器</title>
     <url>/posts/364802778/</url>
     <content><![CDATA[<h2 id="容器"><a class="markdownIt-Anchor" href="#容器"></a> 容器</h2>
@@ -940,79 +940,6 @@ p = &amp;x[<span class="hljs-number">1</span>]  <span class="hljs-comment">// �
 <p>标准库算法使用 begin（头元素）和 end（尾元素后一位）迭代器。泛型指的是同一个名称的算法可以应用在各种容器上面。</p>
 <p>大部分算法在 algorithm，数值相关的在 numeric。算法不依赖容器，但是依赖运算符，比如 find：==</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> sum = <span class="built_in">accumulate</span>(vec.<span class="built_in">cbegin</span>(), vec.<span class="built_in">cend</span>(), <span class="number">0</span>);  <span class="comment">// cbegin：只读版本的begin</span></span><br><span class="line"><span class="keyword">double</span> sum = <span class="built_in">accumulate</span>(vec.<span class="built_in">cbegin</span>(), vec.<span class="built_in">cend</span>(), <span class="number">0.0</span>);  <span class="comment">// 初始值也得是 double</span></span><br><span class="line"><span class="keyword">int</span> vec[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="built_in">accumulate</span>(<span class="built_in">begin</span>(vec), <span class="built_in">end</span>(vec), <span class="number">0</span>);  <span class="comment">// 标准库函数 begin、end 找到始末指针，指针也可以充当迭代器</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++的string</title>
-    <url>/posts/2635778603/</url>
-    <content><![CDATA[<h3 id="string"><a class="markdownIt-Anchor" href="#string"></a> String</h3>
-<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::string</span><br></pre></td></tr></table></figure>
-<h3 id="初始化"><a class="markdownIt-Anchor" href="#初始化"></a> 初始化</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;abc&quot;</span>;  <span class="comment">// char* 自动转换，这是 string 定义的转换</span></span><br><span class="line">string s3 = s2;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(s3)</span></span>;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(<span class="number">5</span>, <span class="string">&#x27;a&#x27;</span>)</span></span>;  <span class="comment">// n 个重复的 char</span></span><br></pre></td></tr></table></figure>
-<p><strong>拷贝初始化：</strong> 用等于号初始化，右边的 string 是先初始化出来，再赋值拷贝给左边的。</p>
-<p><strong>直接初始化：</strong> 直接括号初始化。</p>
-<h3 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s[n];</span><br><span class="line">s1 + s2;  <span class="comment">// 合并</span></span><br><span class="line">s.<span class="built_in">empty</span>();</span><br><span class="line">s.<span class="built_in">length</span>();</span><br><span class="line">s1 == s2;   <span class="comment">// 判断值相等</span></span><br><span class="line"><span class="built_in">getline</span>(is, s);  <span class="comment">// is: in stream, \n</span></span><br><span class="line">is &gt;&gt; s;  <span class="comment">// \s</span></span><br></pre></td></tr></table></figure>
-<h3 id="切片"><a class="markdownIt-Anchor" href="#切片"></a> 切片</h3>
-<p><strong>substr(n, m) ：</strong> 从下标 n 出发，切片 m 个长度的字符串</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s = <span class="string">&quot;012345678&quot;</span>;</span><br><span class="line">s.<span class="built_in">substr</span>(<span class="number">3</span>,<span class="number">3</span>);  <span class="comment">// &quot;345&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="添加-char"><a class="markdownIt-Anchor" href="#添加-char"></a> 添加 char</h3>
-<p><strong>push_back：</strong> 在最后一位添加一个 char，效率比较高</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s = <span class="string">&quot;012&quot;</span>;</span><br><span class="line">s.<span class="built_in">push_back</span>(<span class="string">&#x27;3&#x27;</span>);  <span class="comment">// &quot;0123&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="转换"><a class="markdownIt-Anchor" href="#转换"></a> 转换</h3>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">stoi  <span class="regexp">//</span> 转成 int</span><br><span class="line">stof  <span class="regexp">//</span> 转成 float</span><br><span class="line">stod  <span class="regexp">//</span> 转成 float</span><br><span class="line">to_string  <span class="regexp">//</span> 其他类型转成 string</span><br><span class="line">(char*)string.data();  <span class="regexp">//</span> string转化成char数组</span><br><span class="line">(char*)string.c_str();  <span class="regexp">//</span> 同上</span><br></pre></td></tr></table></figure>
-<h3 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h3>
-<p><strong>split：</strong> string 没有提供 split</p>
-<p><strong>std::string::npos：</strong> 和 string.find 配套使用，如果没找到返回的就是 npos。如果 using 了 std 命名空间，那么只需要 string::pos 即可。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">split</span><span class="params">(<span class="keyword">const</span> string &amp;s, string delimiter)</span> </span>&#123;</span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    string to_split = s;  <span class="comment">// 拷贝</span></span><br><span class="line">    <span class="keyword">int</span> pos = to_split.<span class="built_in">find</span>(delimiter);  <span class="comment">// find找到的是最前面的delimiter位置</span></span><br><span class="line">    <span class="keyword">int</span> delimiter_size = delimiter.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">while</span> (pos != std::string::npos) &#123;  <span class="comment">// npos，一般是 -1</span></span><br><span class="line">        res.<span class="built_in">push_back</span>(to_split.<span class="built_in">substr</span>(<span class="number">0</span>, pos));</span><br><span class="line">        to_split = to_split.<span class="built_in">substr</span>(pos + delimiter_size, to_split.<span class="built_in">length</span>() - <span class="number">1</span>);</span><br><span class="line">        pos = to_split.<span class="built_in">find</span>(delimiter);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="built_in">push_back</span>(to_split);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">split</span>(<span class="string">&quot;123,234&quot;</span>, <span class="string">&quot;,&quot;</span>);  <span class="comment">// char* 会被自动转化成string</span></span><br></pre></td></tr></table></figure>
-<p>如果 delimiter 是单个字符，把字符串转换成 stringstream，然后用 getline 也可以。不过 getline 的第三个参数 delimiter 需要是 char。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="function">stringstream <span class="title">is</span><span class="params">(str_to_split)</span></span>;</span><br><span class="line">string s;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(is, s, <span class="string">&#x27;,&#x27;</span>)) &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="string作为参数"><a class="markdownIt-Anchor" href="#string作为参数"></a> string作为参数</h3>
-<p>即使调用函数给的是 “123212” 这种，也会自动识别转换为 string。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(string x)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">func</span>(<span class="string">&quot;1234&quot;</span>);  <span class="comment">// 这样是可以的</span></span><br></pre></td></tr></table></figure>
-<p>但是如果形参是这样的，又不行了</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fuc</span><span class="params">(string&amp; x)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; x;</span><br><span class="line">&#125;  </span><br><span class="line"><span class="built_in">func</span>(<span class="string">&quot;1234&quot;</span>);  <span class="comment">// 报错 const char [4] 不能自动转成 string</span></span><br></pre></td></tr></table></figure>
-<p>看来，“1232” 这种实际上是 <strong>const char []</strong> 类型的</p>
-<h3 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h3>
-<h4 id="输入运算符"><a class="markdownIt-Anchor" href="#输入运算符"></a> &gt;&gt; 输入运算符</h4>
-<p>前面的输入 is 一直到空格停止，赋值给后面的变量 s</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cin &gt;&gt; s1 &gt;&gt; s2;</span><br></pre></td></tr></table></figure>
-<p>一个输入运算符赋值一次，所以如果 cin 是 “Hello World”，那么 s1 和 s2 分别被赋值 “Hello” 和 “World”。</p>
-<p>cin 读入失败以后，自动转换成布尔值 false，退出循环</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (cin &gt;&gt; s) &#123;&#125;  \\ 每次读取一个单词</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;&#125;  \\ 每次读取一行</span><br></pre></td></tr></table></figure>
-<h4 id="cin"><a class="markdownIt-Anchor" href="#cin"></a> cin</h4>
-<p>cin 可以把字符串转化成数字类型的变量。遇到空格、回车结束</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line">cin &gt;&gt; a &gt;&gt; b;</span><br></pre></td></tr></table></figure>
-<h4 id="getline"><a class="markdownIt-Anchor" href="#getline"></a> getline</h4>
-<p>string 的方法，不能用来给 char 赋值</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s;</span><br><span class="line"><span class="built_in">getline</span>(cin, s);</span><br><span class="line"><span class="built_in">getline</span>(cin, s, <span class="string">&#x27; &#x27;</span>);  <span class="comment">// 读取直到 delimiter char 为止</span></span><br></pre></td></tr></table></figure>
-<h3 id="char"><a class="markdownIt-Anchor" href="#char"></a> char</h3>
-<p>稍微学一下 char</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>* x;  <span class="comment">// 声明一个 char</span></span><br><span class="line">x = (<span class="keyword">char</span>*) <span class="built_in">malloc</span>(<span class="number">7</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(x, <span class="string">&quot;1232321&quot;</span>);  <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">strcmp</span>(x, <span class="string">&quot;123&quot;</span>) == <span class="number">0</span>  <span class="comment">// true表示二者相等</span></span><br><span class="line"><span class="keyword">char</span> x[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">char</span> x[<span class="number">10</span>] = <span class="string">&quot;12345&quot;</span>;</span><br><span class="line"><span class="built_in">free</span>(x);</span><br></pre></td></tr></table></figure>
-<h4 id="char-的尾巴"><a class="markdownIt-Anchor" href="#char-的尾巴"></a> char 的尾巴</h4>
-<p>char 数组可容纳的元素比定义时候的长度小 1。因为 char 的最后一个元素为 ‘\0’ ，用来判断字符串的结尾。</p>
-<h4 id="cingetline"><a class="markdownIt-Anchor" href="#cingetline"></a> cin.getline</h4>
-<p>处理 char 的几个没什么用的函数</p>
-<p>cin.get、cin.getline 的唯一区别就是 getline 把换行符扔掉了，gets 也没啥区别，而且不推荐用</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> s[<span class="number">7</span>];</span><br><span class="line">cin &gt;&gt; s;</span><br><span class="line">cin.<span class="built_in">get</span>(s, <span class="number">6</span>);  <span class="comment">// 只读取前5个到s里面，</span></span><br><span class="line">cin.<span class="built_in">getline</span>(s, <span class="number">6</span>);  <span class="comment">// 读取一行前5个</span></span><br><span class="line"><span class="built_in">gets</span>(s);  <span class="comment">// 读取一行</span></span><br></pre></td></tr></table></figure>
-<h4 id="strcpy"><a class="markdownIt-Anchor" href="#strcpy"></a> strcpy</h4>
-<p>处理 char 的赋值</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> x[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(x, <span class="string">&quot;hello&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="strdup"><a class="markdownIt-Anchor" href="#strdup"></a> strdup</h4>
-<p>接受一个 char*，拷贝这个字符串的内容，返回一个 char 指针</p>
-<p>因为 char 一般是用指针作为参数传参，不会像 std::string 一样发生拷贝，如果需要拷贝得手动调用 strdup</p>
-<h4 id="string-和-char-的区别"><a class="markdownIt-Anchor" href="#string-和-char-的区别"></a> string 和 char* 的区别</h4>
-<p>string 即插即用，是封装了 char* 的容器，具备拷贝、扩充的功能，还提供了很多方法（除了 split…）</p>
-<p>要实现一个 char 拷贝的函数，就很啰嗦了：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">strdup</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> len = <span class="built_in">strlen</span>(s);</span><br><span class="line">    <span class="keyword">void</span>* <span class="keyword">new</span> = <span class="built_in">malloc</span>(len);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">char</span>*) <span class="built_in">memcpy</span>(<span class="keyword">new</span>, s, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>首先 char* 的 len 是首指针到 ‘\0’ 为止，用函数 strlen 可以得到，然后再新建一个指针 new，把就字符串的内容拷贝 len 长度的字节过去。最后把 new 转化成 char* 格式。</p>
-<h4 id="printf"><a class="markdownIt-Anchor" href="#printf"></a> printf</h4>
-<p>char 指针要 format 一下才能 printf？</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> s[<span class="number">5</span>] = <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -1492,6 +1419,79 @@ bt查看</p>
       </categories>
   </entry>
   <entry>
+    <title>C++的string</title>
+    <url>/posts/2635778603/</url>
+    <content><![CDATA[<h3 id="string"><a class="markdownIt-Anchor" href="#string"></a> String</h3>
+<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> std::string</span><br></pre></td></tr></table></figure>
+<h3 id="初始化"><a class="markdownIt-Anchor" href="#初始化"></a> 初始化</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">string s1;</span><br><span class="line">string s2 = <span class="string">&quot;abc&quot;</span>;  <span class="comment">// char* 自动转换，这是 string 定义的转换</span></span><br><span class="line">string s3 = s2;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(s3)</span></span>;</span><br><span class="line"><span class="function">string <span class="title">s4</span><span class="params">(<span class="number">5</span>, <span class="string">&#x27;a&#x27;</span>)</span></span>;  <span class="comment">// n 个重复的 char</span></span><br></pre></td></tr></table></figure>
+<p><strong>拷贝初始化：</strong> 用等于号初始化，右边的 string 是先初始化出来，再赋值拷贝给左边的。</p>
+<p><strong>直接初始化：</strong> 直接括号初始化。</p>
+<h3 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s[n];</span><br><span class="line">s1 + s2;  <span class="comment">// 合并</span></span><br><span class="line">s.<span class="built_in">empty</span>();</span><br><span class="line">s.<span class="built_in">length</span>();</span><br><span class="line">s1 == s2;   <span class="comment">// 判断值相等</span></span><br><span class="line"><span class="built_in">getline</span>(is, s);  <span class="comment">// is: in stream, \n</span></span><br><span class="line">is &gt;&gt; s;  <span class="comment">// \s</span></span><br></pre></td></tr></table></figure>
+<h3 id="切片"><a class="markdownIt-Anchor" href="#切片"></a> 切片</h3>
+<p><strong>substr(n, m) ：</strong> 从下标 n 出发，切片 m 个长度的字符串</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s = <span class="string">&quot;012345678&quot;</span>;</span><br><span class="line">s.<span class="built_in">substr</span>(<span class="number">3</span>,<span class="number">3</span>);  <span class="comment">// &quot;345&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加-char"><a class="markdownIt-Anchor" href="#添加-char"></a> 添加 char</h3>
+<p><strong>push_back：</strong> 在最后一位添加一个 char，效率比较高</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s = <span class="string">&quot;012&quot;</span>;</span><br><span class="line">s.<span class="built_in">push_back</span>(<span class="string">&#x27;3&#x27;</span>);  <span class="comment">// &quot;0123&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="转换"><a class="markdownIt-Anchor" href="#转换"></a> 转换</h3>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">stoi  <span class="regexp">//</span> 转成 int</span><br><span class="line">stof  <span class="regexp">//</span> 转成 float</span><br><span class="line">stod  <span class="regexp">//</span> 转成 float</span><br><span class="line">to_string  <span class="regexp">//</span> 其他类型转成 string</span><br><span class="line">(char*)string.data();  <span class="regexp">//</span> string转化成char数组</span><br><span class="line">(char*)string.c_str();  <span class="regexp">//</span> 同上</span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h3>
+<p><strong>split：</strong> string 没有提供 split</p>
+<p><strong>std::string::npos：</strong> 和 string.find 配套使用，如果没找到返回的就是 npos。如果 using 了 std 命名空间，那么只需要 string::pos 即可。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">split</span><span class="params">(<span class="keyword">const</span> string &amp;s, string delimiter)</span> </span>&#123;</span><br><span class="line">    vector&lt;string&gt; res;</span><br><span class="line">    string to_split = s;  <span class="comment">// 拷贝</span></span><br><span class="line">    <span class="keyword">int</span> pos = to_split.<span class="built_in">find</span>(delimiter);  <span class="comment">// find找到的是最前面的delimiter位置</span></span><br><span class="line">    <span class="keyword">int</span> delimiter_size = delimiter.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">while</span> (pos != std::string::npos) &#123;  <span class="comment">// npos，一般是 -1</span></span><br><span class="line">        res.<span class="built_in">push_back</span>(to_split.<span class="built_in">substr</span>(<span class="number">0</span>, pos));</span><br><span class="line">        to_split = to_split.<span class="built_in">substr</span>(pos + delimiter_size, to_split.<span class="built_in">length</span>() - <span class="number">1</span>);</span><br><span class="line">        pos = to_split.<span class="built_in">find</span>(delimiter);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="built_in">push_back</span>(to_split);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">split</span>(<span class="string">&quot;123,234&quot;</span>, <span class="string">&quot;,&quot;</span>);  <span class="comment">// char* 会被自动转化成string</span></span><br></pre></td></tr></table></figure>
+<p>如果 delimiter 是单个字符，把字符串转换成 stringstream，然后用 getline 也可以。不过 getline 的第三个参数 delimiter 需要是 char。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="function">stringstream <span class="title">is</span><span class="params">(str_to_split)</span></span>;</span><br><span class="line">string s;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(is, s, <span class="string">&#x27;,&#x27;</span>)) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="string作为参数"><a class="markdownIt-Anchor" href="#string作为参数"></a> string作为参数</h3>
+<p>即使调用函数给的是 “123212” 这种，也会自动识别转换为 string。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(string x)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">func</span>(<span class="string">&quot;1234&quot;</span>);  <span class="comment">// 这样是可以的</span></span><br></pre></td></tr></table></figure>
+<p>但是如果形参是这样的，又不行了</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fuc</span><span class="params">(string&amp; x)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; x;</span><br><span class="line">&#125;  </span><br><span class="line"><span class="built_in">func</span>(<span class="string">&quot;1234&quot;</span>);  <span class="comment">// 报错 const char [4] 不能自动转成 string</span></span><br></pre></td></tr></table></figure>
+<p>看来，“1232” 这种实际上是 <strong>const char []</strong> 类型的</p>
+<h3 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h3>
+<h4 id="输入运算符"><a class="markdownIt-Anchor" href="#输入运算符"></a> &gt;&gt; 输入运算符</h4>
+<p>前面的输入 is 一直到空格停止，赋值给后面的变量 s</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cin &gt;&gt; s1 &gt;&gt; s2;</span><br></pre></td></tr></table></figure>
+<p>一个输入运算符赋值一次，所以如果 cin 是 “Hello World”，那么 s1 和 s2 分别被赋值 “Hello” 和 “World”。</p>
+<p>cin 读入失败以后，自动转换成布尔值 false，退出循环</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (cin &gt;&gt; s) &#123;&#125;  \\ 每次读取一个单词</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, s)) &#123;&#125;  \\ 每次读取一行</span><br></pre></td></tr></table></figure>
+<h4 id="cin"><a class="markdownIt-Anchor" href="#cin"></a> cin</h4>
+<p>cin 可以把字符串转化成数字类型的变量。遇到空格、回车结束</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line">cin &gt;&gt; a &gt;&gt; b;</span><br></pre></td></tr></table></figure>
+<h4 id="getline"><a class="markdownIt-Anchor" href="#getline"></a> getline</h4>
+<p>string 的方法，不能用来给 char 赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s;</span><br><span class="line"><span class="built_in">getline</span>(cin, s);</span><br><span class="line"><span class="built_in">getline</span>(cin, s, <span class="string">&#x27; &#x27;</span>);  <span class="comment">// 读取直到 delimiter char 为止</span></span><br></pre></td></tr></table></figure>
+<h3 id="char"><a class="markdownIt-Anchor" href="#char"></a> char</h3>
+<p>稍微学一下 char</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>* x;  <span class="comment">// 声明一个 char</span></span><br><span class="line">x = (<span class="keyword">char</span>*) <span class="built_in">malloc</span>(<span class="number">7</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(x, <span class="string">&quot;1232321&quot;</span>);  <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">strcmp</span>(x, <span class="string">&quot;123&quot;</span>) == <span class="number">0</span>  <span class="comment">// true表示二者相等</span></span><br><span class="line"><span class="keyword">char</span> x[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">char</span> x[<span class="number">10</span>] = <span class="string">&quot;12345&quot;</span>;</span><br><span class="line"><span class="built_in">free</span>(x);</span><br></pre></td></tr></table></figure>
+<h4 id="char-的尾巴"><a class="markdownIt-Anchor" href="#char-的尾巴"></a> char 的尾巴</h4>
+<p>char 数组可容纳的元素比定义时候的长度小 1。因为 char 的最后一个元素为 ‘\0’ ，用来判断字符串的结尾。</p>
+<h4 id="cingetline"><a class="markdownIt-Anchor" href="#cingetline"></a> cin.getline</h4>
+<p>处理 char 的几个没什么用的函数</p>
+<p>cin.get、cin.getline 的唯一区别就是 getline 把换行符扔掉了，gets 也没啥区别，而且不推荐用</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> s[<span class="number">7</span>];</span><br><span class="line">cin &gt;&gt; s;</span><br><span class="line">cin.<span class="built_in">get</span>(s, <span class="number">6</span>);  <span class="comment">// 只读取前5个到s里面，</span></span><br><span class="line">cin.<span class="built_in">getline</span>(s, <span class="number">6</span>);  <span class="comment">// 读取一行前5个</span></span><br><span class="line"><span class="built_in">gets</span>(s);  <span class="comment">// 读取一行</span></span><br></pre></td></tr></table></figure>
+<h4 id="strcpy"><a class="markdownIt-Anchor" href="#strcpy"></a> strcpy</h4>
+<p>处理 char 的赋值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> x[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(x, <span class="string">&quot;hello&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="strdup"><a class="markdownIt-Anchor" href="#strdup"></a> strdup</h4>
+<p>接受一个 char*，拷贝这个字符串的内容，返回一个 char 指针</p>
+<p>因为 char 一般是用指针作为参数传参，不会像 std::string 一样发生拷贝，如果需要拷贝得手动调用 strdup</p>
+<h4 id="string-和-char-的区别"><a class="markdownIt-Anchor" href="#string-和-char-的区别"></a> string 和 char* 的区别</h4>
+<p>string 即插即用，是封装了 char* 的容器，具备拷贝、扩充的功能，还提供了很多方法（除了 split…）</p>
+<p>要实现一个 char 拷贝的函数，就很啰嗦了：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">strdup</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> len = <span class="built_in">strlen</span>(s);</span><br><span class="line">    <span class="keyword">void</span>* <span class="keyword">new</span> = <span class="built_in">malloc</span>(len);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">char</span>*) <span class="built_in">memcpy</span>(<span class="keyword">new</span>, s, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先 char* 的 len 是首指针到 ‘\0’ 为止，用函数 strlen 可以得到，然后再新建一个指针 new，把就字符串的内容拷贝 len 长度的字节过去。最后把 new 转化成 char* 格式。</p>
+<h4 id="printf"><a class="markdownIt-Anchor" href="#printf"></a> printf</h4>
+<p>char 指针要 format 一下才能 printf？</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> s[<span class="number">5</span>] = <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Rmarkdown里面的表格</title>
     <url>/posts/1527658047/</url>
     <content><![CDATA[<h2 id><a class="markdownIt-Anchor" href="#"></a> </h2>
@@ -1746,148 +1746,6 @@ Loss^{(t)} &amp; = \sum_{i=1}^{n}[\varepsilon_i^{(t-1)}-f^{(t)}(x_i)]^2 + \Omega
       </categories>
   </entry>
   <entry>
-    <title>python备忘录</title>
-    <url>/posts/505932064/</url>
-    <content><![CDATA[<p>杂七杂八的内容记录在这里吧</p>
-<h3 id="os"><a class="markdownIt-Anchor" href="#os"></a> os</h3>
-<p>os.path.expanduser：把 ~ 解析为 /home/user</p>
-<p>os.path.abspath：绝对路径</p>
-<h3 id="re"><a class="markdownIt-Anchor" href="#re"></a> re</h3>
-<p>re.sub：表达式、替换内容、输入字符串</p>
-<p>re.findall：返回所有匹配的字符串列表</p>
-<p>re.match：匹配成功返回 True</p>
-<p>re.search：返回匹配到的位置下标</p>
-<h3 id="字符串处理"><a class="markdownIt-Anchor" href="#字符串处理"></a> 字符串处理</h3>
-<p>str.replace：替换</p>
-<p>str.partiton：提供一个字符串，匹配到就进行一次 split（split 会寻找全部，partition 找到一个就停止）</p>
-<p>str.strip：剪掉两侧的，默认空格和换行符</p>
-<p>str.lower：小写。大写 upper</p>
-<p>str.split：有一个 num 参数，默认 = -1 表示分割全部间隔符，也可以设置 = 1 表示从开头开始最多进行一次分割。举例：“1,2,3”.split(’,’, 1) == [‘1’, ‘2,3’]</p>
-<h3 id="输入输出"><a class="markdownIt-Anchor" href="#输入输出"></a> 输入输出</h3>
-<p>input：获取一行的输入字符串，不包含换行符</p>
-<p>sys.stdin</p>
-<h3 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h3>
-<h4 id="继承"><a class="markdownIt-Anchor" href="#继承"></a> 继承</h4>
-<ol>
-<li>父类的变量更新会影响到（1）子类（2）实例化的子类。但是实例化的子类一旦重写了对象，那父类的改动就不会在上面生效了（子类继承来的对象和父类的对象的内存地址是相同的）。子类内部更新对象不会影响父类</li>
-<li>super的目的是，子类实例化的时候，执行父类的初始化</li>
-</ol>
-<h4 id="魔法方法"><a class="markdownIt-Anchor" href="#魔法方法"></a> 魔法方法</h4>
-<ol>
-<li>dir()，查看类全部成员，返回 List，包括继承过来的</li>
-<li>vars()，调用 __dict__  方法，返回 Dict，不包括继承过来的（和 dir 的区别）</li>
-<li>__slots__ ：限定类里面允许实例添加的成员名称。除非在子类中也定义__slots__，这样，子类实例允许定义的属性就是自身的__slots__加上父类的__slots__。</li>
-</ol>
-<h4 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h4>
-<ol>
-<li>@staticmethod：静态方法，不需要实例化，不会读取第一个参数作为self（不需要self）看成类命名空间下面的函数即可。同样的，因为不读取 self，所以没有 self 对象的权限。其他成员函数调用静态方法需要加 self，因为静态方法的作用域是在类里面。</li>
-</ol>
-<p>@classmethod：类方法，不需要实例化，读取第一个参数作为cls本身，可以调用cls的成员</p>
-<p>@property：get 方法，需要实例化，不需要括号调用方法，返回值</p>
-<h3 id="itertools"><a class="markdownIt-Anchor" href="#itertools"></a> itertools</h3>
-<p>chain：可变参数数目，串联多个迭代器，按顺序输出他们</p>
-<p>product：笛卡尔积，返回 m x n 种的一一配对</p>
-<h4 id="groupby"><a class="markdownIt-Anchor" href="#groupby"></a> groupby</h4>
-<p>接收一个可迭代对象，用户给定规则，每个元素的 key。如果没有给定，这个元素就设为 key</p>
-<p>对于一连串的重复 key，groupby 会为这个 key 对应的元素创建一个迭代器 _grouper。最后生成的总的迭代器类似这样的：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[(<span class="string">&#x27;key1&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb553ac790</span>&gt;),</span><br><span class="line"> (<span class="string">&#x27;key2&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb550a4c50</span>&gt;),</span><br><span class="line"> (<span class="string">&#x27;key3&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb550a4bd0</span>&gt;),</span><br><span class="line"> (<span class="string">&#x27;key1&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb550a4c10</span>&gt;)]</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong> 可以看到不给定 key 的默认情况，元素自己作为 key，groupby 就变成一个局部去重器。</p>
-<p>和 SQL 的 groupby 有所区别，这个 groupby 处理重复的范围只限于相邻的行，要想实现 SQL 的效果首先的排序 key。</p>
-<h3 id="collections"><a class="markdownIt-Anchor" href="#collections"></a> collections</h3>
-<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
-<p>哈希表，set 不支持索引，没办法取元素。适合查找。</p>
-<p>set.intersection：交集</p>
-<p>set.union：并集</p>
-<p>set.add / set.remove：加入、删除元素</p>
-<h3 id="内置函数"><a class="markdownIt-Anchor" href="#内置函数"></a> 内置函数</h3>
-<h4 id="all"><a class="markdownIt-Anchor" href="#all"></a> all</h4>
-<p>判断可迭代对象内所有元素是不是都是 True。类似 np.all</p>
-<h4 id="dict"><a class="markdownIt-Anchor" href="#dict"></a> dict</h4>
-<ol>
-<li>只有可哈希对象可以作为 key</li>
-<li>列表是不可哈希对象，但是自定义类是可哈希对象</li>
-</ol>
-<h4 id="zip"><a class="markdownIt-Anchor" href="#zip"></a> zip</h4>
-<p>输入多个可迭代对象，把他们的元素打包成 tuple。新迭代器的长度取决于输入最短的那个</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), <span class="built_in">range</span>(<span class="number">4</span>))</span><br><span class="line"><span class="comment"># [(0, 0), (1, 1), (2, 2)]</span></span><br></pre></td></tr></table></figure>
-<h4 id="list"><a class="markdownIt-Anchor" href="#list"></a> List</h4>
-<p><strong>index：</strong> 类似 find，查找元素所在第一个位置</p>
-<h4 id="列表推导式"><a class="markdownIt-Anchor" href="#列表推导式"></a> 列表推导式</h4>
-<p>为什么列表推导式比 append 快呢。下面的例子推导式快了大概 5 倍</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = []</span><br><span class="line">b = []</span><br><span class="line">r = <span class="built_in">range</span>(<span class="number">10000</span>)</span><br><span class="line">%timeit a = [i <span class="keyword">for</span> i <span class="keyword">in</span> r]</span><br><span class="line">%%timeit</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> r:</span><br><span class="line">    b.append(i)</span><br></pre></td></tr></table></figure>
-<p>时间浪费在解析 b 的方法 append 上了，如果预先把 append 方法保存，那么速度就会加快（虽然这个例子没有太大的实际意义，但是说明了 Python 类的 LOAD_METHOD 也会带来开销）</p>
-<h4 id="切片"><a class="markdownIt-Anchor" href="#切片"></a> 切片</h4>
-<p>规则如下：i 起点，j 终点，k 步长</p>
-<p>负数的 i 和 j 被转成 n + i 和 n + j，负数的 k 就是反向</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line">x[i:j:k] </span><br><span class="line">x[<span class="number">0</span>::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-<h3 id="argparse"><a class="markdownIt-Anchor" href="#argparse"></a> argparse</h3>
-<p>解析 sys.argv 的参数，基本的结构如下。其实 parser 的作用就是把命令行的参数解析给一个 args 类</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line">parser = argparse.ArgumentParser()  <span class="comment"># 创建一个解析器</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">中间是注册参数的过程，见后文</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">args = parser.parse_args()   <span class="comment"># 解析参数</span></span><br></pre></td></tr></table></figure>
-<h4 id="注册参数"><a class="markdownIt-Anchor" href="#注册参数"></a> 注册参数</h4>
-<p>下面的内容填充在注册参数的地方</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;passwd&quot;</span>)  <span class="comment"># 1</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>)  <span class="comment"># 2</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;--passwd&quot;</span>)  <span class="comment"># 3</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--passwd&quot;</span>)  <span class="comment"># 4</span></span><br><span class="line">args = parser.parse_args()   <span class="comment"># 解析参数</span></span><br><span class="line"><span class="built_in">print</span>(args.p)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>顺序型参数，命令行不能指定形参名称，第一个注册就要对应命令行的 sys.argv[1]</li>
-<li>必须显式指出形参，可以不按照注册的顺序。例子：-passwd 123 -username 234</li>
-<li>同 2，多一个减号</li>
-<li>可以兼容 2、3 的形式，两种写法解析为同一个变量</li>
-</ol>
-<h4 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--passwd&quot;</span>, dest=passwd)  <span class="comment"># 1</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--passwd&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>)  <span class="comment"># 2</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-o&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>)  <span class="comment"># 3</span></span><br><span class="line"><span class="built_in">print</span>(args.passwd) </span><br></pre></td></tr></table></figure>
-<ol>
-<li>通过指定的 dest 访问传入的参数（不然注册到 args 的是默认第一位 “p”）</li>
-<li>把 str 转换成指定的类型</li>
-<li>设置开关，如果添加了该参数，就会注册一个 True 到 args 里面。否则默认是 False。本例子表示 “-output 需要输出”</li>
-<li>3 反过来，默认是 True，添加了变成 False</li>
-</ol>
-<h3 id="joblib"><a class="markdownIt-Anchor" href="#joblib"></a> joblib</h3>
-<p>简单的并行 for。for 的内容放到 delayed 里面即可，n_jobs 表示进程数量，-1 为电脑的最大 cpu 个数。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> joblib <span class="keyword">import</span> Parallel, delayed</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>(<span class="params">i</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">func = (delayed(worker)(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>))</span><br><span class="line">parallel = Parallel(n_jobs=-<span class="number">1</span>)</span><br><span class="line">parallel(func)</span><br></pre></td></tr></table></figure>
-<h3 id="yield-和-yield-from"><a class="markdownIt-Anchor" href="#yield-和-yield-from"></a> yield 和 yield from</h3>
-<p>带有 yield 的函数变成了一个 generator。里面的返回值变成惰性求解，只有在迭代的时候才会执行语句</p>
-<h4 id="yield-from"><a class="markdownIt-Anchor" href="#yield-from"></a> yield from</h4>
-<p>用于展开嵌套生成器，如果用生成器生成生成器，会是这样的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen1</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen2</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> gen1()</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> gen1()</span><br><span class="line">g = gen2()</span><br><span class="line"><span class="built_in">next</span>(g)  <span class="comment"># &lt;generator object gen1 at 0x7fc7a5f644d0&gt;</span></span><br><span class="line"><span class="built_in">next</span>(g)	 <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
-<p>第一次展开返回的是迭代器，第二次返回的是对迭代器执行迭代的结果（如果 gen1 再调用别的迭代器，还是要用 from 来展开）</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;gen1 need from&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen1</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> gen()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen2</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> gen1()</span><br><span class="line">g = gen2()</span><br><span class="line"><span class="built_in">next</span>(g)  <span class="comment"># 3</span></span><br><span class="line"><span class="built_in">next</span>(g)  <span class="comment"># &quot;gen1 need from&quot;</span></span><br></pre></td></tr></table></figure>
-<h4 id="一个快速-flatten-方法"><a class="markdownIt-Anchor" href="#一个快速-flatten-方法"></a> 一个快速 flatten 方法</h4>
-<p>yield from 最大的用途就是展开嵌套数组</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">ll</span>):</span></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> ll:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(l, <span class="built_in">list</span>):</span><br><span class="line">            <span class="keyword">yield</span> l</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span>(flatten(l))</span><br><span class="line"><span class="built_in">list</span>(flatten([<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,[<span class="number">7</span>,<span class="number">8</span>],[<span class="number">9</span>,[<span class="number">10</span>]]]])) </span><br></pre></td></tr></table></figure>
-<h3 id="pandas"><a class="markdownIt-Anchor" href="#pandas"></a> pandas</h3>
-<p>1、nan != nan，所以 query 中这个语句可以筛选空值。</p>
-<p>2、pandas 的均值分母是忽略缺失值的。如果一列全是缺失值，中位数和平均值都是NaN</p>
-<p>3、遍历行的办法：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">zip</span>(df[col1], df[col2])  <span class="comment"># zip</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> df.itertuples()  <span class="comment"># 带成员的 tuple，第一位是 index</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> df.iterrows()  <span class="comment">#  行变成二元素 tuple，里面是 index 和 行 Series</span></span><br></pre></td></tr></table></figure>
-<p>4、某一列元素根据给定的顺序 list 排序：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;col&#x27;</span>]  <span class="comment"># 1, 2, 3</span></span><br><span class="line">order_list = [<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">df[<span class="string">&#x27;col&#x27;</span>].astype(<span class="string">&#x27;category&#x27;</span>)</span><br><span class="line">df[<span class="string">&#x27;col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].cat.reorder_categories(order_list)</span><br><span class="line">df.sort_values(<span class="string">&#x27;col&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>cat.reorder_categories 给 category 列分配了顺序，接下来排序即可</p>
-<h3 id="numpy"><a class="markdownIt-Anchor" href="#numpy"></a> numpy</h3>
-<ol>
-<li>
-<p>一般的切片 x[:3] 产生 view，view 的修改会作用在源数组上。但是 id(view) 和 id(orig) 是不一样的。</p>
-</li>
-<li>
-<p>numpy 的传参是引用，可以在函数内部对其修改。不过如果在内部重新赋值，那么赋值的结果不会作用到外部变量</p>
- <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span>(<span class="params">x</span>):</span></span><br><span class="line">    x = <span class="number">2</span></span><br><span class="line">    x = np.arange(<span class="number">3</span>)  <span class="comment"># 即使赋值 array 也不行</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span>(<span class="params">x</span>):</span></span><br><span class="line">    x[<span class="number">1</span>] = <span class="number">100</span></span><br><span class="line">x = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">func1(x)  <span class="comment"># 不会对 x 产生影响</span></span><br><span class="line">func2(x)  <span class="comment"># 会对 x 产生影响</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="其他-2"><a class="markdownIt-Anchor" href="#其他-2"></a> 其他</h3>
-<ol>
-<li>局部（函数里面）访问全局变量，可以。局部修改已经定义的全局变量，不可以</li>
-<li>tuple里面不允许改变的是内存位置，但是可以append列表</li>
-<li>zip 逐元素打包元组，zip(*zip)解压缩还原</li>
-<li>sort：key，可以设置 lambda x: (x[0], -x[1])。第一位升序，第二位降序。tuple、list 把内容裹起来即可</li>
-<li>倒序输出：（1）reverse（2）[::-1]</li>
-<li>ord(字符串) 可以将一个基本字符映射到对应的整数；逆映射为：chr(数字/十六进制)，97-122为英文字母</li>
-<li>x &gt;&gt; 1 和 x // 2 是等价的</li>
-<li>函数下面的三冒号字符串注释（docstring）会被 Python 注册到 help(函数) 里面</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-  </entry>
-  <entry>
     <title>pytorch基础</title>
     <url>/posts/3406163397/</url>
     <content><![CDATA[<p>记录一些 pytorch 基础操作</p>
@@ -1982,39 +1840,6 @@ f(x) &amp;=\sum_{i=1}^{n} \alpha\left(x, x_{i}\right) y_{i} \\
 ]]></content>
       <categories>
         <category>机器学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>二叉树的遍历</title>
-    <url>/posts/3930489296/</url>
-    <content><![CDATA[<h3 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h3>
-<p>广度优先，就跟看文章一样遍历。使用队列模拟层的概念</p>
-<p>第一层：根结点</p>
-<p>第二层：根结点的左右子结点</p>
-<p>第三层：根结点的孙子结点们…</p>
-<p><strong>注意：</strong> 因为取出当前层的结点的同时，会有后续层的结点加入队列，所以每次取的数目需要事先固定。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelOrderBottom</span>(TreeNode* root) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;  <span class="comment">// 先进先出</span></span><br><span class="line">    q.<span class="built_in">push</span>(root);  <span class="comment">// 第一层是根结点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> n = q.<span class="built_in">size</span>();  <span class="comment">// 取出当前层的结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            TreeNode* cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            tmp.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;left);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="前中后序遍历"><a class="markdownIt-Anchor" href="#前中后序遍历"></a> 前中后序遍历</h3>
-<p>区分前中后：根结点（中）的位置，前序遍历：中左右；中序遍历：左中右；后序遍历：左右中</p>
-<p>这个规则对二叉树的任何子树（子结构）都是有效的，举例来说中序遍历，起点是二叉树左的不能再左的那个结点；后序遍历也是左的不能再左；前序遍历起点是根的不能再根（就是根结点）</p>
-<p>三种方法的递归版本区别就是：递归左右子树的顺序、插入 result 的顺序</p>
-<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
-<p>顺序左右中，递归法，用一个共享 vector 存放路径</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;left);  <span class="comment">// 左子树</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;right);  <span class="comment">// 右子树</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);  <span class="comment">// 中间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> path;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="迭代遍历"><a class="markdownIt-Anchor" href="#迭代遍历"></a> 迭代遍历</h3>
-<p>三种深度优先遍历都是建立栈，区别在于什么时候提取结点的 value</p>
-<h4 id="前序遍历"><a class="markdownIt-Anchor" href="#前序遍历"></a> 前序遍历</h4>
-<p>从栈里面取出来的结点可以立刻提取 value，因为 <strong>中左右</strong> 里面中的优先级最高，不存在回溯的情况</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = [root]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        res.append(cur.val)</span><br><span class="line">        <span class="keyword">if</span> cur.right:</span><br><span class="line">            stack.append(cur.right)</span><br><span class="line">        <span class="keyword">if</span> cur.left:</span><br><span class="line">            stack.append(cur.left)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h3 id="中序遍历"><a class="markdownIt-Anchor" href="#中序遍历"></a> 中序遍历</h3>
-<p>中序遍历比前序遍历复杂，因为中序遍历并不是边遍历边存储 value，而是尽可能跑到最左边才回溯 <strong>中结点</strong> 取值。</p>
-<ol>
-<li>没有左子树的结点可以立刻存储值</li>
-<li>有左子树的结点需要在栈里留下记号，这样在它的 <strong>左子树</strong> 遍历结束，开始遍历 <strong>中结点</strong> 和 <strong>右子树</strong> 的阶段开始时可以顺利把结点的值取出来。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
@@ -2134,6 +1959,39 @@ heapify 一次，然后不断的把最小元素挪到 List 尾巴，并收缩 si
 ]]></content>
       <categories>
         <category>排序</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>二叉树的遍历</title>
+    <url>/posts/3930489296/</url>
+    <content><![CDATA[<h3 id="层序遍历"><a class="markdownIt-Anchor" href="#层序遍历"></a> 层序遍历</h3>
+<p>广度优先，就跟看文章一样遍历。使用队列模拟层的概念</p>
+<p>第一层：根结点</p>
+<p>第二层：根结点的左右子结点</p>
+<p>第三层：根结点的孙子结点们…</p>
+<p><strong>注意：</strong> 因为取出当前层的结点的同时，会有后续层的结点加入队列，所以每次取的数目需要事先固定。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">levelOrderBottom</span>(TreeNode* root) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; result;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">    queue&lt;TreeNode*&gt; q;  <span class="comment">// 先进先出</span></span><br><span class="line">    q.<span class="built_in">push</span>(root);  <span class="comment">// 第一层是根结点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        <span class="keyword">int</span> n = q.<span class="built_in">size</span>();  <span class="comment">// 取出当前层的结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            TreeNode* cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            tmp.<span class="built_in">push_back</span>(cur-&gt;val);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;left != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;left);</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;right != <span class="literal">nullptr</span>) q.<span class="built_in">push</span>(cur-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="前中后序遍历"><a class="markdownIt-Anchor" href="#前中后序遍历"></a> 前中后序遍历</h3>
+<p>区分前中后：根结点（中）的位置，前序遍历：中左右；中序遍历：左中右；后序遍历：左右中</p>
+<p>这个规则对二叉树的任何子树（子结构）都是有效的，举例来说中序遍历，起点是二叉树左的不能再左的那个结点；后序遍历也是左的不能再左；前序遍历起点是根的不能再根（就是根结点）</p>
+<p>三种方法的递归版本区别就是：递归左右子树的顺序、插入 result 的顺序</p>
+<h3 id="后序遍历"><a class="markdownIt-Anchor" href="#后序遍历"></a> 后序遍历</h3>
+<p>顺序左右中，递归法，用一个共享 vector 存放路径</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">traversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;left != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;left);  <span class="comment">// 左子树</span></span><br><span class="line">        <span class="keyword">if</span> (root-&gt;right != <span class="literal">nullptr</span>) <span class="built_in">traversal</span>(root-&gt;right);  <span class="comment">// 右子树</span></span><br><span class="line">        path.<span class="built_in">push_back</span>(root-&gt;val);  <span class="comment">// 中间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        path.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> path;</span><br><span class="line">        <span class="built_in">traversal</span>(root);</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="迭代遍历"><a class="markdownIt-Anchor" href="#迭代遍历"></a> 迭代遍历</h3>
+<p>三种深度优先遍历都是建立栈，区别在于什么时候提取结点的 value</p>
+<h4 id="前序遍历"><a class="markdownIt-Anchor" href="#前序遍历"></a> 前序遍历</h4>
+<p>从栈里面取出来的结点可以立刻提取 value，因为 <strong>中左右</strong> 里面中的优先级最高，不存在回溯的情况</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraversal</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = [root]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        res.append(cur.val)</span><br><span class="line">        <span class="keyword">if</span> cur.right:</span><br><span class="line">            stack.append(cur.right)</span><br><span class="line">        <span class="keyword">if</span> cur.left:</span><br><span class="line">            stack.append(cur.left)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="中序遍历"><a class="markdownIt-Anchor" href="#中序遍历"></a> 中序遍历</h3>
+<p>中序遍历比前序遍历复杂，因为中序遍历并不是边遍历边存储 value，而是尽可能跑到最左边才回溯 <strong>中结点</strong> 取值。</p>
+<ol>
+<li>没有左子树的结点可以立刻存储值</li>
+<li>有左子树的结点需要在栈里留下记号，这样在它的 <strong>左子树</strong> 遍历结束，开始遍历 <strong>中结点</strong> 和 <strong>右子树</strong> 的阶段开始时可以顺利把结点的值取出来。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
       </categories>
   </entry>
   <entry>
@@ -2306,6 +2164,148 @@ H_{gini}(Q_m, \theta)
 ]]></content>
       <categories>
         <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>python备忘录</title>
+    <url>/posts/505932064/</url>
+    <content><![CDATA[<p>杂七杂八的内容记录在这里吧</p>
+<h3 id="os"><a class="markdownIt-Anchor" href="#os"></a> os</h3>
+<p>os.path.expanduser：把 ~ 解析为 /home/user</p>
+<p>os.path.abspath：绝对路径</p>
+<h3 id="re"><a class="markdownIt-Anchor" href="#re"></a> re</h3>
+<p>re.sub：表达式、替换内容、输入字符串</p>
+<p>re.findall：返回所有匹配的字符串列表</p>
+<p>re.match：匹配成功返回 True</p>
+<p>re.search：返回匹配到的位置下标</p>
+<h3 id="字符串处理"><a class="markdownIt-Anchor" href="#字符串处理"></a> 字符串处理</h3>
+<p>str.replace：替换</p>
+<p>str.partiton：提供一个字符串，匹配到就进行一次 split（split 会寻找全部，partition 找到一个就停止）</p>
+<p>str.strip：剪掉两侧的，默认空格和换行符</p>
+<p>str.lower：小写。大写 upper</p>
+<p>str.split：有一个 num 参数，默认 = -1 表示分割全部间隔符，也可以设置 = 1 表示从开头开始最多进行一次分割。举例：“1,2,3”.split(’,’, 1) == [‘1’, ‘2,3’]</p>
+<h3 id="输入输出"><a class="markdownIt-Anchor" href="#输入输出"></a> 输入输出</h3>
+<p>input：获取一行的输入字符串，不包含换行符</p>
+<p>sys.stdin</p>
+<h3 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h3>
+<h4 id="继承"><a class="markdownIt-Anchor" href="#继承"></a> 继承</h4>
+<ol>
+<li>父类的变量更新会影响到（1）子类（2）实例化的子类。但是实例化的子类一旦重写了对象，那父类的改动就不会在上面生效了（子类继承来的对象和父类的对象的内存地址是相同的）。子类内部更新对象不会影响父类</li>
+<li>super的目的是，子类实例化的时候，执行父类的初始化</li>
+</ol>
+<h4 id="魔法方法"><a class="markdownIt-Anchor" href="#魔法方法"></a> 魔法方法</h4>
+<ol>
+<li>dir()，查看类全部成员，返回 List，包括继承过来的</li>
+<li>vars()，调用 __dict__  方法，返回 Dict，不包括继承过来的（和 dir 的区别）</li>
+<li>__slots__ ：限定类里面允许实例添加的成员名称。除非在子类中也定义__slots__，这样，子类实例允许定义的属性就是自身的__slots__加上父类的__slots__。</li>
+</ol>
+<h4 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h4>
+<ol>
+<li>@staticmethod：静态方法，不需要实例化，不会读取第一个参数作为self（不需要self）看成类命名空间下面的函数即可。同样的，因为不读取 self，所以没有 self 对象的权限。其他成员函数调用静态方法需要加 self，因为静态方法的作用域是在类里面。</li>
+</ol>
+<p>@classmethod：类方法，不需要实例化，读取第一个参数作为cls本身，可以调用cls的成员</p>
+<p>@property：get 方法，需要实例化，不需要括号调用方法，返回值</p>
+<h3 id="itertools"><a class="markdownIt-Anchor" href="#itertools"></a> itertools</h3>
+<p>chain：可变参数数目，串联多个迭代器，按顺序输出他们</p>
+<p>product：笛卡尔积，返回 m x n 种的一一配对</p>
+<h4 id="groupby"><a class="markdownIt-Anchor" href="#groupby"></a> groupby</h4>
+<p>接收一个可迭代对象，用户给定规则，每个元素的 key。如果没有给定，这个元素就设为 key</p>
+<p>对于一连串的重复 key，groupby 会为这个 key 对应的元素创建一个迭代器 _grouper。最后生成的总的迭代器类似这样的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[(<span class="string">&#x27;key1&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb553ac790</span>&gt;),</span><br><span class="line"> (<span class="string">&#x27;key2&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb550a4c50</span>&gt;),</span><br><span class="line"> (<span class="string">&#x27;key3&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb550a4bd0</span>&gt;),</span><br><span class="line"> (<span class="string">&#x27;key1&#x27;</span>, &lt;itertools._grouper at <span class="number">0x7feb550a4c10</span>&gt;)]</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 可以看到不给定 key 的默认情况，元素自己作为 key，groupby 就变成一个局部去重器。</p>
+<p>和 SQL 的 groupby 有所区别，这个 groupby 处理重复的范围只限于相邻的行，要想实现 SQL 的效果首先的排序 key。</p>
+<h3 id="collections"><a class="markdownIt-Anchor" href="#collections"></a> collections</h3>
+<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
+<p>哈希表，set 不支持索引，没办法取元素。适合查找。</p>
+<p>set.intersection：交集</p>
+<p>set.union：并集</p>
+<p>set.add / set.remove：加入、删除元素</p>
+<h3 id="内置函数"><a class="markdownIt-Anchor" href="#内置函数"></a> 内置函数</h3>
+<h4 id="all"><a class="markdownIt-Anchor" href="#all"></a> all</h4>
+<p>判断可迭代对象内所有元素是不是都是 True。类似 np.all</p>
+<h4 id="dict"><a class="markdownIt-Anchor" href="#dict"></a> dict</h4>
+<ol>
+<li>只有可哈希对象可以作为 key</li>
+<li>列表是不可哈希对象，但是自定义类是可哈希对象</li>
+</ol>
+<h4 id="zip"><a class="markdownIt-Anchor" href="#zip"></a> zip</h4>
+<p>输入多个可迭代对象，把他们的元素打包成 tuple。新迭代器的长度取决于输入最短的那个</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), <span class="built_in">range</span>(<span class="number">4</span>))</span><br><span class="line"><span class="comment"># [(0, 0), (1, 1), (2, 2)]</span></span><br></pre></td></tr></table></figure>
+<h4 id="list"><a class="markdownIt-Anchor" href="#list"></a> List</h4>
+<p><strong>index：</strong> 类似 find，查找元素所在第一个位置</p>
+<h4 id="列表推导式"><a class="markdownIt-Anchor" href="#列表推导式"></a> 列表推导式</h4>
+<p>为什么列表推导式比 append 快呢。下面的例子推导式快了大概 5 倍</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = []</span><br><span class="line">b = []</span><br><span class="line">r = <span class="built_in">range</span>(<span class="number">10000</span>)</span><br><span class="line">%timeit a = [i <span class="keyword">for</span> i <span class="keyword">in</span> r]</span><br><span class="line">%%timeit</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> r:</span><br><span class="line">    b.append(i)</span><br></pre></td></tr></table></figure>
+<p>时间浪费在解析 b 的方法 append 上了，如果预先把 append 方法保存，那么速度就会加快（虽然这个例子没有太大的实际意义，但是说明了 Python 类的 LOAD_METHOD 也会带来开销）</p>
+<h4 id="切片"><a class="markdownIt-Anchor" href="#切片"></a> 切片</h4>
+<p>规则如下：i 起点，j 终点，k 步长</p>
+<p>负数的 i 和 j 被转成 n + i 和 n + j，负数的 k 就是反向</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line">x[i:j:k] </span><br><span class="line">x[<span class="number">0</span>::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="argparse"><a class="markdownIt-Anchor" href="#argparse"></a> argparse</h3>
+<p>解析 sys.argv 的参数，基本的结构如下。其实 parser 的作用就是把命令行的参数解析给一个 args 类</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line">parser = argparse.ArgumentParser()  <span class="comment"># 创建一个解析器</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">中间是注册参数的过程，见后文</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">args = parser.parse_args()   <span class="comment"># 解析参数</span></span><br></pre></td></tr></table></figure>
+<h4 id="注册参数"><a class="markdownIt-Anchor" href="#注册参数"></a> 注册参数</h4>
+<p>下面的内容填充在注册参数的地方</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;passwd&quot;</span>)  <span class="comment"># 1</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>)  <span class="comment"># 2</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;--passwd&quot;</span>)  <span class="comment"># 3</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--passwd&quot;</span>)  <span class="comment"># 4</span></span><br><span class="line">args = parser.parse_args()   <span class="comment"># 解析参数</span></span><br><span class="line"><span class="built_in">print</span>(args.p)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>顺序型参数，命令行不能指定形参名称，第一个注册就要对应命令行的 sys.argv[1]</li>
+<li>必须显式指出形参，可以不按照注册的顺序。例子：-passwd 123 -username 234</li>
+<li>同 2，多一个减号</li>
+<li>可以兼容 2、3 的形式，两种写法解析为同一个变量</li>
+</ol>
+<h4 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--passwd&quot;</span>, dest=passwd)  <span class="comment"># 1</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--passwd&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>)  <span class="comment"># 2</span></span><br><span class="line">parser.add_argument(<span class="string">&quot;-o&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>)  <span class="comment"># 3</span></span><br><span class="line"><span class="built_in">print</span>(args.passwd) </span><br></pre></td></tr></table></figure>
+<ol>
+<li>通过指定的 dest 访问传入的参数（不然注册到 args 的是默认第一位 “p”）</li>
+<li>把 str 转换成指定的类型</li>
+<li>设置开关，如果添加了该参数，就会注册一个 True 到 args 里面。否则默认是 False。本例子表示 “-output 需要输出”</li>
+<li>3 反过来，默认是 True，添加了变成 False</li>
+</ol>
+<h3 id="joblib"><a class="markdownIt-Anchor" href="#joblib"></a> joblib</h3>
+<p>简单的并行 for。for 的内容放到 delayed 里面即可，n_jobs 表示进程数量，-1 为电脑的最大 cpu 个数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> joblib <span class="keyword">import</span> Parallel, delayed</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span>(<span class="params">i</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">func = (delayed(worker)(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>))</span><br><span class="line">parallel = Parallel(n_jobs=-<span class="number">1</span>)</span><br><span class="line">parallel(func)</span><br></pre></td></tr></table></figure>
+<h3 id="yield-和-yield-from"><a class="markdownIt-Anchor" href="#yield-和-yield-from"></a> yield 和 yield from</h3>
+<p>带有 yield 的函数变成了一个 generator。里面的返回值变成惰性求解，只有在迭代的时候才会执行语句</p>
+<h4 id="yield-from"><a class="markdownIt-Anchor" href="#yield-from"></a> yield from</h4>
+<p>用于展开嵌套生成器，如果用生成器生成生成器，会是这样的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen1</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen2</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> gen1()</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> gen1()</span><br><span class="line">g = gen2()</span><br><span class="line"><span class="built_in">next</span>(g)  <span class="comment"># &lt;generator object gen1 at 0x7fc7a5f644d0&gt;</span></span><br><span class="line"><span class="built_in">next</span>(g)	 <span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
+<p>第一次展开返回的是迭代器，第二次返回的是对迭代器执行迭代的结果（如果 gen1 再调用别的迭代器，还是要用 from 来展开）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;gen1 need from&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen1</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> gen()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen2</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> gen1()</span><br><span class="line">g = gen2()</span><br><span class="line"><span class="built_in">next</span>(g)  <span class="comment"># 3</span></span><br><span class="line"><span class="built_in">next</span>(g)  <span class="comment"># &quot;gen1 need from&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="一个快速-flatten-方法"><a class="markdownIt-Anchor" href="#一个快速-flatten-方法"></a> 一个快速 flatten 方法</h4>
+<p>yield from 最大的用途就是展开嵌套数组</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">ll</span>):</span></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> ll:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(l, <span class="built_in">list</span>):</span><br><span class="line">            <span class="keyword">yield</span> l</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">from</span>(flatten(l))</span><br><span class="line"><span class="built_in">list</span>(flatten([<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,[<span class="number">7</span>,<span class="number">8</span>],[<span class="number">9</span>,[<span class="number">10</span>]]]])) </span><br></pre></td></tr></table></figure>
+<h3 id="pandas"><a class="markdownIt-Anchor" href="#pandas"></a> pandas</h3>
+<p>1、nan != nan，所以 query 中这个语句可以筛选空值。</p>
+<p>2、pandas 的均值分母是忽略缺失值的。如果一列全是缺失值，中位数和平均值都是NaN</p>
+<p>3、遍历行的办法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">zip</span>(df[col1], df[col2])  <span class="comment"># zip</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> df.itertuples()  <span class="comment"># 带成员的 tuple，第一位是 index</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> df.iterrows()  <span class="comment">#  行变成二元素 tuple，里面是 index 和 行 Series</span></span><br></pre></td></tr></table></figure>
+<p>4、某一列元素根据给定的顺序 list 排序：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;col&#x27;</span>]  <span class="comment"># 1, 2, 3</span></span><br><span class="line">order_list = [<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">df[<span class="string">&#x27;col&#x27;</span>].astype(<span class="string">&#x27;category&#x27;</span>)</span><br><span class="line">df[<span class="string">&#x27;col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].cat.reorder_categories(order_list)</span><br><span class="line">df.sort_values(<span class="string">&#x27;col&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>cat.reorder_categories 给 category 列分配了顺序，接下来排序即可</p>
+<h3 id="numpy"><a class="markdownIt-Anchor" href="#numpy"></a> numpy</h3>
+<ol>
+<li>
+<p>一般的切片 x[:3] 产生 view，view 的修改会作用在源数组上。但是 id(view) 和 id(orig) 是不一样的。</p>
+</li>
+<li>
+<p>numpy 的传参是引用，可以在函数内部对其修改。不过如果在内部重新赋值，那么赋值的结果不会作用到外部变量</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span>(<span class="params">x</span>):</span></span><br><span class="line">    x = <span class="number">2</span></span><br><span class="line">    x = np.arange(<span class="number">3</span>)  <span class="comment"># 即使赋值 array 也不行</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span>(<span class="params">x</span>):</span></span><br><span class="line">    x[<span class="number">1</span>] = <span class="number">100</span></span><br><span class="line">x = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">func1(x)  <span class="comment"># 不会对 x 产生影响</span></span><br><span class="line">func2(x)  <span class="comment"># 会对 x 产生影响</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="其他-2"><a class="markdownIt-Anchor" href="#其他-2"></a> 其他</h3>
+<ol>
+<li>局部（函数里面）访问全局变量，可以。局部修改已经定义的全局变量，不可以</li>
+<li>tuple里面不允许改变的是内存位置，但是可以append列表</li>
+<li>zip 逐元素打包元组，zip(*zip)解压缩还原</li>
+<li>sort：key，可以设置 lambda x: (x[0], -x[1])。第一位升序，第二位降序。tuple、list 把内容裹起来即可</li>
+<li>倒序输出：（1）reverse（2）[::-1]</li>
+<li>ord(字符串) 可以将一个基本字符映射到对应的整数；逆映射为：chr(数字/十六进制)，97-122为英文字母</li>
+<li>x &gt;&gt; 1 和 x // 2 是等价的</li>
+<li>函数下面的三冒号字符串注释（docstring）会被 Python 注册到 help(函数) 里面</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Python</category>
       </categories>
   </entry>
   <entry>
